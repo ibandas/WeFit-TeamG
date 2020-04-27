@@ -10,6 +10,8 @@
 		1A7E1AFD2454D03900AA6568 /* WorkoutLogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7E1AFC2454D03900AA6568 /* WorkoutLogVC.swift */; };
 		1A7E1AFF2454F41700AA6568 /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7E1AFE2454F41700AA6568 /* ExerciseCell.swift */; };
 		1A7E1B0124564BB400AA6568 /* SetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7E1B0024564BB400AA6568 /* SetCell.swift */; };
+		1A7E1B03245768B100AA6568 /* AddSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7E1B02245768B100AA6568 /* AddSetCell.swift */; };
+		1A7E1B05245769EB00AA6568 /* AddExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7E1B04245769EB00AA6568 /* AddExerciseCell.swift */; };
 		1ABEA27E2454BF5000BA97A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEA27D2454BF5000BA97A6 /* AppDelegate.swift */; };
 		1ABEA2802454BF5000BA97A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEA27F2454BF5000BA97A6 /* SceneDelegate.swift */; };
 		1ABEA2822454BF5000BA97A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEA2812454BF5000BA97A6 /* ViewController.swift */; };
@@ -23,6 +25,8 @@
 		1A7E1AFC2454D03900AA6568 /* WorkoutLogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLogVC.swift; sourceTree = "<group>"; };
 		1A7E1AFE2454F41700AA6568 /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
 		1A7E1B0024564BB400AA6568 /* SetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCell.swift; sourceTree = "<group>"; };
+		1A7E1B02245768B100AA6568 /* AddSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSetCell.swift; sourceTree = "<group>"; };
+		1A7E1B04245769EB00AA6568 /* AddExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseCell.swift; sourceTree = "<group>"; };
 		1ABEA27A2454BF5000BA97A6 /* WeFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABEA27D2454BF5000BA97A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1ABEA27F2454BF5000BA97A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +74,8 @@
 				1ABEA2912454C49100BA97A6 /* Workout.swift */,
 				1A7E1AFE2454F41700AA6568 /* ExerciseCell.swift */,
 				1A7E1B0024564BB400AA6568 /* SetCell.swift */,
+				1A7E1B02245768B100AA6568 /* AddSetCell.swift */,
+				1A7E1B04245769EB00AA6568 /* AddExerciseCell.swift */,
 				1A7E1AFC2454D03900AA6568 /* WorkoutLogVC.swift */,
 				1ABEA2832454BF5000BA97A6 /* Main.storyboard */,
 				1ABEA2862454BF5100BA97A6 /* Assets.xcassets */,
@@ -150,12 +156,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A7E1B03245768B100AA6568 /* AddSetCell.swift in Sources */,
 				1A7E1B0124564BB400AA6568 /* SetCell.swift in Sources */,
 				1A7E1AFD2454D03900AA6568 /* WorkoutLogVC.swift in Sources */,
 				1ABEA2822454BF5000BA97A6 /* ViewController.swift in Sources */,
 				1ABEA27E2454BF5000BA97A6 /* AppDelegate.swift in Sources */,
 				1ABEA2802454BF5000BA97A6 /* SceneDelegate.swift in Sources */,
 				1ABEA2922454C49100BA97A6 /* Workout.swift in Sources */,
+				1A7E1B05245769EB00AA6568 /* AddExerciseCell.swift in Sources */,
 				1A7E1AFF2454F41700AA6568 /* ExerciseCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
