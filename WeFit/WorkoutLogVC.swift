@@ -36,17 +36,32 @@ class WorkoutLog: UIViewController {
     
         return tempExercises
     }
+    
+    func addSet(indexPath: IndexPath) {
+        exercises[indexPath.section].sets.append(Set(weight: 0, reps: 0))
+        
+        let indexPath = IndexPath(row: exercises[indexPath.section].sets.count, section: indexPath.section)
+        
+        tableView.beginUpdates()
+        tableView.insertRows(at: [indexPath], with: .automatic)
+        tableView.endUpdates()
+    }
+}
+
+extension WorkoutLog: AddSetCellDelegate {
+    func didTapAddSetButton(cell: AddSetCell) {
+        let indexPath = self.tableView.indexPath(for: cell)
+        addSet(indexPath: indexPath!)
+    }
 }
 
 extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
     
-    // TODO: Eventually make it "items.count + 1" to account for the "Add Exercises" cell
     func numberOfSections(in tableView: UITableView) -> Int {
         return exercises.count + 1
     }
     
     // Total amount of exercises displayed in Table View
-    // TODO: Eventually make an if else where if it's the last section, it's one row for "Add Exercises"
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == exercises.count) {
             return 1
@@ -54,7 +69,7 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
         return exercises[section].sets.count + 2
     }
     
-    // Loaded for each cell
+    // Loaded for each cell based on indexPath.section and indexPath.row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == exercises.count) {
             let addExerciseCell = self.tableView.dequeueReusableCell(withIdentifier: "AddExerciseCell", for: indexPath) as! AddExerciseCell
@@ -66,8 +81,9 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
                 exerciseCell.setExercise(exercise: exercises[indexPath.section])
                 return exerciseCell
             }
-            else if (indexPath.row == exercises[indexPath.section].sets.count) {
+            else if (indexPath.row == exercises[indexPath.section].sets.count+1) {
                 let addSetCell = self.tableView.dequeueReusableCell(withIdentifier: "AddSetCell", for: indexPath) as! AddSetCell
+                addSetCell.delegate = self
                 return addSetCell
             }
             else {

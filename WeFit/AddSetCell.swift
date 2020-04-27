@@ -8,8 +8,14 @@
 
 import UIKit
 
-class AddSetCell: UITableViewCell {
+protocol AddSetCellDelegate {
+    func didTapAddSetButton(cell: AddSetCell)
+}
 
+class AddSetCell: UITableViewCell {
+    
+    var delegate: AddSetCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,4 +27,8 @@ class AddSetCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func AddSetButton(_ sender: Any) {
+        delegate?.didTapAddSetButton(cell: self)
+    }
 }
+
