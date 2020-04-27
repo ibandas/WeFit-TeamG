@@ -1,20 +1,22 @@
 //
-//  ExerciseCell.swift
+//  SetCell.swift
 //  WeFit
 //
-//  Created by Irinel Bandas on 4/25/20.
+//  Created by Irinel Bandas on 4/26/20.
 //  Copyright © 2020 Irinel Bandas. All rights reserved.
 //
 
 import UIKit
 
-class ExerciseCell: UITableViewCell {
-
-    @IBOutlet weak var ExerciseTitle: UILabel!
+class SetCell: UITableViewCell {
     
-    func setExercise(exercise: Exercise) {
-        ExerciseTitle.text = exercise.title
-    }
+    
+
+    @IBOutlet weak var WeightLabel: UILabel!
+    @IBOutlet weak var RepLabel: UILabel!
+    
+    @IBOutlet weak var WeightEntry: UITextField!
+    @IBOutlet weak var RepEntry: UITextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()

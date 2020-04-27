@@ -12,7 +12,7 @@ class WorkoutLog: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var exercises: [String] = []
+    var exercises: [Exercise] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,31 +22,45 @@ class WorkoutLog: UIViewController {
         tableView.dataSource = self
     }
     
-    func createArray() -> [String] {
-        var tempExercises: [String] = []
-        let exercise1 = "Bench Press"
+    func createArray() -> [Exercise] {
+        var tempExercises: [Exercise] = []
+        let set1 = Set(weight: 250, reps: 10)
+        let sets: [Set] = [set1]
+        let exercise1 = Exercise(title: "Bench Press", sets: sets)
         
         tempExercises.append(exercise1)
         
+        print(tempExercises.count)
         return tempExercises
     }
 }
 
 extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
     
-    // Total amount of exercises displayed in Table View
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    // TODO: Eventually make it "items.count + 1" to account for the "Add Exercises" cell
+    func numberOfSections(in tableView: UITableView) -> Int {
         return exercises.count
+    }
+    
+    // Total amount of exercises displayed in Table View
+    // TODO: Eventually make an if else where if it's the last section, it's one row for "Add Exercises"
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return exercises[section].sets.count + 1
     }
     
     // Loaded for each cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let exercise = exercises[indexPath.row]
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell") as! ExerciseCell
-        
-        cell.setExercise(exercise: exercise)
-        
-        return cell
+        if (indexPath.row == 0) {
+            let exerciseCell = self.tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath) as! ExerciseCell
+            exerciseCell.setExercise(exercise: exercises[indexPath.section])
+            return exerciseCell
+        }
+        else {
+            let setCell = self.tableView.dequeueReusableCell(withIdentifier: "SetCell", for: indexPath) as! SetCell
+            setCell.RepLabel.text = "Reps:"
+            setCell.WeightLabel.text = "Weight:"
+            print(setCell)
+            return setCell
+        }
     }
 }

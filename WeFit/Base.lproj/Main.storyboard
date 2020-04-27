@@ -50,63 +50,47 @@
                                             <outlet property="ExerciseTitle" destination="LY5-r6-SXO" id="O9P-I0-j7Q"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="RW1-Ag-gsx">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SetCell" id="RW1-Ag-gsx" customClass="SetCell" customModule="WeFit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="118" width="414" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RW1-Ag-gsx" id="vVj-eO-dQQ">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RW1-Ag-gsx" id="vVj-eO-dQQ" customClass="SetCell" customModule="WeFit" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TnE-EX-V4O">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weight:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TnE-EX-V4O">
                                                     <rect key="frame" x="20" y="11" width="59" height="68"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="68" id="0Zg-EQ-bVP"/>
-                                                        <constraint firstAttribute="width" constant="59" id="bJz-af-xuH"/>
-                                                    </constraints>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reps:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UOD-aW-oGy">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reps:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UOD-aW-oGy">
                                                     <rect key="frame" x="221" y="11" width="59" height="68"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="59" id="2CI-B0-pTt"/>
-                                                        <constraint firstAttribute="height" constant="68" id="wga-Rz-REH"/>
-                                                    </constraints>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ju4-fK-KBL">
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ju4-fK-KBL">
                                                     <rect key="frame" x="87" y="28" width="81" height="34"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="34" id="dzv-M7-A31"/>
-                                                        <constraint firstAttribute="width" constant="81" id="taB-TD-SHG"/>
-                                                    </constraints>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H6y-HY-Z92">
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H6y-HY-Z92">
                                                     <rect key="frame" x="288" y="28" width="81" height="34"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="81" id="8NO-bg-Ue9"/>
-                                                        <constraint firstAttribute="height" constant="34" id="mQF-CU-5MC"/>
-                                                    </constraints>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="UOD-aW-oGy" firstAttribute="leading" secondItem="ju4-fK-KBL" secondAttribute="trailing" constant="53" id="6IY-Uv-Qi1"/>
-                                                <constraint firstItem="TnE-EX-V4O" firstAttribute="centerY" secondItem="vVj-eO-dQQ" secondAttribute="centerY" id="9Jl-1v-MLt"/>
-                                                <constraint firstItem="H6y-HY-Z92" firstAttribute="leading" secondItem="UOD-aW-oGy" secondAttribute="trailing" constant="8" id="9Tr-01-z5k"/>
-                                                <constraint firstItem="ju4-fK-KBL" firstAttribute="leading" secondItem="TnE-EX-V4O" secondAttribute="trailing" constant="8" id="Eak-7a-E0C"/>
-                                                <constraint firstItem="TnE-EX-V4O" firstAttribute="leading" secondItem="vVj-eO-dQQ" secondAttribute="leadingMargin" id="StC-Nf-4MS"/>
-                                                <constraint firstItem="ju4-fK-KBL" firstAttribute="centerY" secondItem="vVj-eO-dQQ" secondAttribute="centerY" id="Vu7-e6-xqf"/>
-                                                <constraint firstItem="H6y-HY-Z92" firstAttribute="centerY" secondItem="vVj-eO-dQQ" secondAttribute="centerY" id="kdv-0w-1BZ"/>
-                                                <constraint firstItem="UOD-aW-oGy" firstAttribute="centerY" secondItem="vVj-eO-dQQ" secondAttribute="centerY" id="qGV-7X-dar"/>
-                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="RepEntry" destination="H6y-HY-Z92" id="1Dg-Eu-j3m"/>
+                                            <outlet property="RepLabel" destination="UOD-aW-oGy" id="nAS-c8-XhB"/>
+                                            <outlet property="WeightEntry" destination="ju4-fK-KBL" id="bPn-PC-WLP"/>
+                                            <outlet property="WeightLabel" destination="TnE-EX-V4O" id="e8l-wk-SCg"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
