@@ -94,4 +94,26 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
             }
         }
     }
+    
+    // Ensures the only rows that can be edited are sets
+    // TODO: Eventually allow deletion of the whole exercise
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row == 0 || indexPath.row == exercises[indexPath.section].sets.count + 1 {
+            return false
+        }
+        else {
+            return true
+        }
+    }
+    
+    // Swipe to left to delete a set
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            exercises[indexPath.section].sets.remove(at: indexPath.row - 1)
+            
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+        }
+    }
 }
