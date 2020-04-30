@@ -8,15 +8,25 @@
 
 import UIKit
 
+protocol SetCellDelegate {
+    func updateWeight(cell: SetCell)
+    func updateReps(cell: SetCell)
+}
+
 class SetCell: UITableViewCell {
     
-    
+    var delegate: SetCellDelegate?
 
     @IBOutlet weak var WeightLabel: UILabel!
     @IBOutlet weak var RepLabel: UILabel!
     
     @IBOutlet weak var WeightEntry: UITextField!
     @IBOutlet weak var RepEntry: UITextField!
+    
+    func setSets(set: Set) {
+        WeightEntry.text = String(set.weight)
+        RepEntry.text = String(set.reps)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,5 +38,9 @@ class SetCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+//    @IBAction func AddSetButton(_ sender: Any) {
+//        delegate?.SetCellDelegate(cell: self)
+//    }
 
 }

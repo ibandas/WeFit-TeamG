@@ -88,8 +88,7 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
             }
             else {
                 let setCell = self.tableView.dequeueReusableCell(withIdentifier: "SetCell", for: indexPath) as! SetCell
-                setCell.RepLabel.text = "Reps:"
-                setCell.WeightLabel.text = "Weight:"
+                setCell.setSets(set: exercises[indexPath.section].sets[indexPath.row - 1])
                 return setCell
             }
         }
