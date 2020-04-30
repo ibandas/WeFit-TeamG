@@ -46,12 +46,37 @@ class WorkoutLog: UIViewController {
         tableView.insertRows(at: [indexPath], with: .automatic)
         tableView.endUpdates()
     }
+    
+    func updateWeight(indexPath: IndexPath, cell: SetCell) {
+        if let weightNum = Int(cell.WeightEntry.text!) {
+            exercises[indexPath.section].sets[indexPath.row - 1].weight = weightNum
+        }
+    }
+    
+    func updateReps(indexPath: IndexPath, cell: SetCell) {
+        if let repsNum = Int(cell.RepEntry.text!) {
+            exercises[indexPath.section].sets[indexPath.row - 1].reps = repsNum
+        }
+    }
 }
 
+// Extension of VC for AddSetCell that allows adding another set for an exercise
 extension WorkoutLog: AddSetCellDelegate {
     func didTapAddSetButton(cell: AddSetCell) {
         let indexPath = self.tableView.indexPath(for: cell)
         addSet(indexPath: indexPath!)
+    }
+}
+
+// Extension of VC for SetCell that allows updates of weight/reps
+extension WorkoutLog: SetCellDelegate {
+    func updateWeight(cell: SetCell) {
+        let indexPath = self.tableView.indexPath(for: cell)!
+        updateWeight(indexPath: indexPath, cell: cell)
+    }
+    func updateReps(cell: SetCell) {
+        let indexPath = self.tableView.indexPath(for: cell)!
+        updateReps(indexPath: indexPath, cell: cell)
     }
 }
 
@@ -89,6 +114,7 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
             else {
                 let setCell = self.tableView.dequeueReusableCell(withIdentifier: "SetCell", for: indexPath) as! SetCell
                 setCell.setSets(set: exercises[indexPath.section].sets[indexPath.row - 1])
+                setCell.delegate = self
                 return setCell
             }
         }

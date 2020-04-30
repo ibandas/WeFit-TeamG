@@ -23,9 +23,25 @@ class SetCell: UITableViewCell {
     @IBOutlet weak var WeightEntry: UITextField!
     @IBOutlet weak var RepEntry: UITextField!
     
+    @IBAction func weightTextFieldUpdated(_ sender: Any) {
+        delegate?.updateWeight(cell: self)
+    }
+    
+    @IBAction func repsTextFieldUpdated(_ sender: Any) {
+        delegate?.updateReps(cell: self)
+    }
+    
     func setSets(set: Set) {
         WeightEntry.text = String(set.weight)
         RepEntry.text = String(set.reps)
+    }
+    
+    func setWeight(weight: Int) {
+        WeightEntry.text = String(weight)
+    }
+    
+    func setReps(reps: Int) {
+        RepEntry.text = String(reps)
     }
     
     override func awakeFromNib() {
