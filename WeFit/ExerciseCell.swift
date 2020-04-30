@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol ExerciseCellDelegate {
+    func didTapDeleteExerciseButton(cell: ExerciseCell)
+}
+
 class ExerciseCell: UITableViewCell {
 
     @IBOutlet weak var ExerciseTitle: UILabel!
+    
+    var delegate: ExerciseCellDelegate?
     
     func setExercise(exercise: Exercise) {
         ExerciseTitle.text = exercise.title
@@ -25,6 +31,10 @@ class ExerciseCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @IBAction func DeleteExercise(_ sender: Any) {
+        delegate?.didTapDeleteExerciseButton(cell: self)
     }
 
 }

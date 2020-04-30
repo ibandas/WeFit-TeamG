@@ -54,9 +54,5 @@ class SetCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-//    @IBAction func AddSetButton(_ sender: Any) {
-//        delegate?.SetCellDelegate(cell: self)
-//    }
 
 }

@@ -33,6 +33,14 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vZz-4s-Phm">
+                                                    <rect key="frame" x="349" y="30" width="45" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Delete"/>
+                                                    <connections>
+                                                        <action selector="DeleteExercise:" destination="c4X-a9-xqg" eventType="touchUpInside" id="MdU-FH-9nP"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -74,9 +82,6 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                    <connections>
-                                                        <action selector="repsTextFieldUpdated:" destination="RW1-Ag-gsx" eventType="editingDidEnd" id="teu-Ea-ZDb"/>
-                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>

@@ -13,11 +13,12 @@ class WorkoutLog: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var exercises: [Exercise] = []
+    var sectionsCount: Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         exercises = createArray()
-        
+        sectionsCount = sectionsCount + exercises.count
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -37,6 +38,7 @@ class WorkoutLog: UIViewController {
         return tempExercises
     }
     
+    // Adds set to exercise data and row to the VC
     func addSet(indexPath: IndexPath) {
         exercises[indexPath.section].sets.append(Set(weight: 0, reps: 0))
         
@@ -47,16 +49,23 @@ class WorkoutLog: UIViewController {
         tableView.endUpdates()
     }
     
+    // Updates an Exercises's Set's Weight value
     func updateWeight(indexPath: IndexPath, cell: SetCell) {
         if let weightNum = Int(cell.WeightEntry.text!) {
             exercises[indexPath.section].sets[indexPath.row - 1].weight = weightNum
         }
     }
     
+    // Updates an Exercise's Set's Reps value
     func updateReps(indexPath: IndexPath, cell: SetCell) {
         if let repsNum = Int(cell.RepEntry.text!) {
             exercises[indexPath.section].sets[indexPath.row - 1].reps = repsNum
         }
+    }
+    
+    // Deletes an Exercise
+    func deleteExercise(indexPath: IndexPath) {
+        deleteEntireExercise(indexPath: indexPath)
     }
 }
 
@@ -80,10 +89,18 @@ extension WorkoutLog: SetCellDelegate {
     }
 }
 
+// Extension of VC for ExerciseCell that allows deletion of Exercise section
+extension WorkoutLog: ExerciseCellDelegate {
+    func didTapDeleteExerciseButton(cell: ExerciseCell) {
+        let indexPath = self.tableView.indexPath(for: cell)!
+        deleteExercise(indexPath: indexPath)
+    }
+}
+
 extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return exercises.count + 1
+        return sectionsCount
     }
     
     // Total amount of exercises displayed in Table View
@@ -104,6 +121,7 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
             if (indexPath.row == 0) {
                 let exerciseCell = self.tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath) as! ExerciseCell
                 exerciseCell.setExercise(exercise: exercises[indexPath.section])
+                exerciseCell.delegate = self
                 return exerciseCell
             }
             else if (indexPath.row == exercises[indexPath.section].sets.count+1) {
@@ -120,10 +138,9 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    // Ensures the only rows that can be edited are sets
-    // TODO: Eventually allow deletion of the whole exercise
+    // Ensures the only rows that can be edited are sets and exercise cell (entire exercise section)
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.row == 0 || indexPath.row == exercises[indexPath.section].sets.count + 1 {
+        if indexPath.section == (sectionsCount-1) || indexPath.row == exercises[indexPath.section].sets.count + 1 {
             return false
         }
         else {
@@ -134,11 +151,23 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
     // Swipe to left to delete a set
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            exercises[indexPath.section].sets.remove(at: indexPath.row - 1)
-            
-            tableView.beginUpdates()
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.endUpdates()
+            if indexPath.row == 0 {
+                deleteEntireExercise(indexPath: indexPath)
+            }
+            else {
+                exercises[indexPath.section].sets.remove(at: indexPath.row - 1)
+                tableView.beginUpdates()
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.endUpdates()
+            }
         }
+    }
+    
+    func deleteEntireExercise(indexPath: IndexPath) {
+        exercises.remove(at: indexPath.section)
+        sectionsCount = sectionsCount - 1
+        tableView.beginUpdates()
+        tableView.deleteSections([indexPath.section], with: .automatic)
+        tableView.endUpdates()
     }
 }
