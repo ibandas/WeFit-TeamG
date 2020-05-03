@@ -13,12 +13,12 @@ class WorkoutLog: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var exercises: [Exercise] = []
-    var sectionsCount: Int = 1
+    var sectionsCount: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         exercises = createArray()
-        sectionsCount = sectionsCount + exercises.count
+        setSectionsCount()
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -67,6 +67,23 @@ class WorkoutLog: UIViewController {
     func deleteExercise(indexPath: IndexPath) {
         deleteEntireExercise(indexPath: indexPath)
     }
+    
+    func setSectionsCount() {
+        sectionsCount = exercises.count + 1
+    }
+    
+    
+    @IBAction func unwindFromAddExercisesVC(_ sender: UIStoryboardSegue) {
+        if sender.source is AddExercisesVC {
+            if let senderVC = sender.source as? AddExercisesVC {
+                print("Here")
+                exercises += senderVC.selectedExercises
+            }
+            setSectionsCount()
+            tableView.reloadData()
+        }
+    }
+    
 }
 
 // Extension of VC for AddSetCell that allows adding another set for an exercise
@@ -108,6 +125,8 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
         if (section == exercises.count) {
             return 1
         }
+        print(exercises.count)
+        print(section)
         return exercises[section].sets.count + 2
     }
     

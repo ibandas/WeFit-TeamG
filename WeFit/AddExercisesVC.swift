@@ -12,39 +12,28 @@ class AddExercisesVC: UIViewController {
     
     @IBOutlet weak var possibleExercisesTV: UITableView!
     
-    
-    @IBAction func AddSelectedExercises(_ sender: Any) {
-        var selectedExercises: [String] = []
-        let cells = self.possibleExercisesTV.visibleCells as! [PossibleExerciseCell]
-        for cell in cells {
-            if(cell.accessoryType == UITableViewCell.AccessoryType.checkmark) {
-                selectedExercises.append((cell.possibleExerciseTitle.text!))
-            }
-        }
-    }
+    @IBOutlet weak var addButtonPressed: UIBarButtonItem!
     
     var exercises: [String] = ["Bench Press", "Squat", "Deadlift"]
-    var sectionsCount: Int = 1
+    var selectedExercises: [Exercise] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         possibleExercisesTV.delegate = self
         possibleExercisesTV.dataSource = self
-        print("Loaded")
     }
     
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        let cells = self.possibleExercisesTV.visibleCells as! [PossibleExerciseCell]
+        for cell in cells {
+            if(cell.accessoryType == UITableViewCell.AccessoryType.checkmark) {
+                let title: String = cell.possibleExerciseTitle.text!
+                let empty_sets: [Set] = [Set(weight: 0, reps: 0)]
+                selectedExercises.append(Exercise(title: title, sets: empty_sets))
+            }
+        }
     }
-    */
-
 }
 
 extension AddExercisesVC: UITableViewDataSource, UITableViewDelegate {

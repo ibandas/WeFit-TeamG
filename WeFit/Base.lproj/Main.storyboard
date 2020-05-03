@@ -137,7 +137,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="AddExercisesButton:" destination="sy0-Mq-N0F" eventType="touchUpInside" id="21X-Pf-USz"/>
-                                                        <segue destination="RWq-38-Qvp" kind="show" identifier="toAddExercises" id="Lvi-FF-bXO"/>
+                                                        <segue destination="RWq-38-Qvp" kind="show" identifier="toWorkoutLog" id="Lvi-FF-bXO"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -217,16 +217,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
-                                    <action selector="AddSelectedExercises:" destination="RWq-38-Qvp" eventType="touchUpInside" id="ENm-O0-cOd"/>
+                                    <segue destination="pqF-fn-LJo" kind="unwind" unwindAction="unwindFromAddExercisesVC:" id="A6y-fy-GgG"/>
                                 </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButtonPressed" destination="WUw-BZ-tli" id="YL4-bw-D7R"/>
                         <outlet property="possibleExercisesTV" destination="ffv-gc-nU9" id="okY-lx-oUc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R1A-FW-Wf0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="pqF-fn-LJo" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2155.072463768116" y="101.78571428571428"/>
         </scene>
