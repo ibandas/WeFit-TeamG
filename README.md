@@ -26,7 +26,8 @@ All feature branches developed by developers will be cut from the latest test br
 2. Switch to the test branch
 3. Fetch and pull latest from remote test branch
 4. If developing, checkout a new branch from test and switch to it.
-5. Press the "Play" button on the top left of Xcode while also making sure its for the "iPhone 11 Pro Max" simulator.
+5. Open the .xcworkspace and NOT the .xcodeproj (This is so all firebase pods are used properly).
+6. Press the "Play" button on the top left of Xcode while also making sure its for the "iPhone 11 Pro Max" simulator.
 
 ----
 ## .gitignore
