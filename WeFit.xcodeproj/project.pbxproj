@@ -45,6 +45,7 @@
 		1ABEA2892454BF5100BA97A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1ABEA28B2454BF5100BA97A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1ABEA2912454C49100BA97A6 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		1AE463532462460E002759D2 /* WeFit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeFit.entitlements; sourceTree = "<group>"; };
 		1AFE50E424623858004C560A /* FacebookLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginVC.swift; sourceTree = "<group>"; };
 		239DCFAA1DD9A860441A5F7E /* Pods_WeFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F41BD77EB61A337DC227591 /* Pods-WeFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeFit.release.xcconfig"; path = "Target Support Files/Pods-WeFit/Pods-WeFit.release.xcconfig"; sourceTree = "<group>"; };
@@ -83,6 +84,7 @@
 		1ABEA27C2454BF5000BA97A6 /* WeFit */ = {
 			isa = PBXGroup;
 			children = (
+				1AE463532462460E002759D2 /* WeFit.entitlements */,
 				1A83B9032461F0CF00A7BA38 /* GoogleService-Info.plist */,
 				1ABEA27D2454BF5000BA97A6 /* AppDelegate.swift */,
 				1ABEA27F2454BF5000BA97A6 /* SceneDelegate.swift */,
@@ -393,6 +395,7 @@
 			baseConfigurationReference = 18B405C9A58AF262D179F986 /* Pods-WeFit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WeFit/WeFit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = WeFit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -411,6 +414,7 @@
 			baseConfigurationReference = 2F41BD77EB61A337DC227591 /* Pods-WeFit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WeFit/WeFit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = WeFit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
