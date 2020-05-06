@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,7 @@
 		1ABEA2872454BF5100BA97A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEA2862454BF5100BA97A6 /* Assets.xcassets */; };
 		1ABEA28A2454BF5100BA97A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEA2882454BF5100BA97A6 /* LaunchScreen.storyboard */; };
 		1ABEA2922454C49100BA97A6 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEA2912454C49100BA97A6 /* Workout.swift */; };
+		1AFE50E524623858004C560A /* FacebookLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE50E424623858004C560A /* FacebookLoginVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		1ABEA2892454BF5100BA97A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1ABEA28B2454BF5100BA97A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1ABEA2912454C49100BA97A6 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		1AFE50E424623858004C560A /* FacebookLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginVC.swift; sourceTree = "<group>"; };
 		239DCFAA1DD9A860441A5F7E /* Pods_WeFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F41BD77EB61A337DC227591 /* Pods-WeFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeFit.release.xcconfig"; path = "Target Support Files/Pods-WeFit/Pods-WeFit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,6 +99,7 @@
 				1ABEA2862454BF5100BA97A6 /* Assets.xcassets */,
 				1ABEA2882454BF5100BA97A6 /* LaunchScreen.storyboard */,
 				1ABEA28B2454BF5100BA97A6 /* Info.plist */,
+				1AFE50E424623858004C560A /* FacebookLoginVC.swift */,
 			);
 			path = WeFit;
 			sourceTree = "<group>";
@@ -115,7 +118,6 @@
 				18B405C9A58AF262D179F986 /* Pods-WeFit.debug.xcconfig */,
 				2F41BD77EB61A337DC227591 /* Pods-WeFit.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -235,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AFE50E524623858004C560A /* FacebookLoginVC.swift in Sources */,
 				1A38947D245DEF7A006DA20B /* AddExercisesVC.swift in Sources */,
 				1A7E1B03245768B100AA6568 /* AddSetCell.swift in Sources */,
 				1A7E1B0124564BB400AA6568 /* SetCell.swift in Sources */,
