@@ -23,6 +23,7 @@
 		1ABEA2872454BF5100BA97A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEA2862454BF5100BA97A6 /* Assets.xcassets */; };
 		1ABEA28A2454BF5100BA97A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEA2882454BF5100BA97A6 /* LaunchScreen.storyboard */; };
 		1ABEA2922454C49100BA97A6 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEA2912454C49100BA97A6 /* Workout.swift */; };
+		99B1E12B246347990005D8A7 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B1E12A246347990005D8A7 /* LeaderboardViewController.swift */; };
 		99D2C7982462216600C5273B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D2C7972462216600C5273B /* LoginViewController.swift */; };
 		99D2C79A2462237400C5273B /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D2C7992462237400C5273B /* MainTabController.swift */; };
 		99D2C79C24622D6A00C5273B /* NewChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D2C79B24622D6A00C5273B /* NewChallengeViewController.swift */; };
@@ -49,6 +50,7 @@
 		1ABEA2912454C49100BA97A6 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		239DCFAA1DD9A860441A5F7E /* Pods_WeFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F41BD77EB61A337DC227591 /* Pods-WeFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeFit.release.xcconfig"; path = "Target Support Files/Pods-WeFit/Pods-WeFit.release.xcconfig"; sourceTree = "<group>"; };
+		99B1E12A246347990005D8A7 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
 		99D2C7972462216600C5273B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		99D2C7992462237400C5273B /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		99D2C79B24622D6A00C5273B /* NewChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChallengeViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				1A38947E245DEFF1006DA20B /* PossibleExerciseCell.swift */,
 				1A38947C245DEF7A006DA20B /* AddExercisesVC.swift */,
 				1A7E1AFC2454D03900AA6568 /* WorkoutLogVC.swift */,
+				99B1E12A246347990005D8A7 /* LeaderboardViewController.swift */,
 				99D2C79B24622D6A00C5273B /* NewChallengeViewController.swift */,
 				99D2C7992462237400C5273B /* MainTabController.swift */,
 				1ABEA2832454BF5000BA97A6 /* Main.storyboard */,
@@ -250,6 +253,7 @@
 				99D2C79C24622D6A00C5273B /* NewChallengeViewController.swift in Sources */,
 				1A7E1AFD2454D03900AA6568 /* WorkoutLogVC.swift in Sources */,
 				1ABEA2822454BF5000BA97A6 /* ViewController.swift in Sources */,
+				99B1E12B246347990005D8A7 /* LeaderboardViewController.swift in Sources */,
 				99D2C79A2462237400C5273B /* MainTabController.swift in Sources */,
 				1ABEA27E2454BF5000BA97A6 /* AppDelegate.swift in Sources */,
 				1ABEA2802454BF5000BA97A6 /* SceneDelegate.swift in Sources */,

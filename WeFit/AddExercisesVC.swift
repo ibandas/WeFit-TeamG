@@ -14,7 +14,7 @@ class AddExercisesVC: UIViewController {
     
     @IBOutlet weak var addButtonPressed: UIBarButtonItem!
     
-    var exercises: [String] = ["Bench Press", "Squat", "Deadlift"]
+    var exercises: [String] = ["Bench Press", "Squat", "Deadlift", "Pushup"]
     var selectedExercises: [Exercise] = []
     
     override func viewDidLoad() {
