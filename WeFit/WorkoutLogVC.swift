@@ -76,7 +76,6 @@ class WorkoutLog: UIViewController {
     @IBAction func unwindFromAddExercisesVC(_ sender: UIStoryboardSegue) {
         if sender.source is AddExercisesVC {
             if let senderVC = sender.source as? AddExercisesVC {
-                print("Here")
                 exercises += senderVC.selectedExercises
             }
             setSectionsCount()
@@ -125,8 +124,6 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
         if (section == exercises.count) {
             return 1
         }
-        print(exercises.count)
-        print(section)
         return exercises[section].sets.count + 2
     }
     

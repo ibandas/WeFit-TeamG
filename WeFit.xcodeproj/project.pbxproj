@@ -96,12 +96,12 @@
 				1A7E1B04245769EB00AA6568 /* AddExerciseCell.swift */,
 				1A38947E245DEFF1006DA20B /* PossibleExerciseCell.swift */,
 				1A38947C245DEF7A006DA20B /* AddExercisesVC.swift */,
+				1AFE50E424623858004C560A /* FacebookLoginVC.swift */,
 				1A7E1AFC2454D03900AA6568 /* WorkoutLogVC.swift */,
 				1ABEA2832454BF5000BA97A6 /* Main.storyboard */,
 				1ABEA2862454BF5100BA97A6 /* Assets.xcassets */,
 				1ABEA2882454BF5100BA97A6 /* LaunchScreen.storyboard */,
 				1ABEA28B2454BF5100BA97A6 /* Info.plist */,
-				1AFE50E424623858004C560A /* FacebookLoginVC.swift */,
 			);
 			path = WeFit;
 			sourceTree = "<group>";
