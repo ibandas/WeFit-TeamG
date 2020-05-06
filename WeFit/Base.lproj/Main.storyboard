@@ -236,7 +236,7 @@
         <!--Login View Controller-->
         <scene sceneID="P0t-ic-RTc">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QIf-Cc-HuM" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QIf-Cc-HuM" customClass="LoginViewController" customModule="WeFit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZrT-lx-NUu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -267,13 +267,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S7z-V5-mNg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3372" y="40"/>
+            <point key="canvasLocation" x="-3372.4637681159425" y="39.508928571428569"/>
         </scene>
         <!--Item 2-->
         <scene sceneID="pMX-cF-EHX">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gUe-UF-fos" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="NewChallengeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Fd-Fa-Ykl" customClass="NewChallengeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewChallengeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Fd-Fa-Ykl" customClass="NewChallengeViewController" customModule="WeFit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kdi-Ee-Bfw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -296,14 +295,14 @@
                         <outlet property="metricPicker" destination="E0A-tw-jkL" id="jUH-da-Wle"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gUe-UF-fos" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-768.11594202898561" y="372.99107142857139"/>
         </scene>
         <!--Item 1-->
         <scene sceneID="E1Z-GM-dg2">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FHq-eM-cWD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <viewController id="qea-Qi-D9a" sceneMemberID="viewController">
+                <viewController id="qea-Qi-D9a" customClass="ViewController" customModule="WeFit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jxc-tq-pef">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -312,13 +311,13 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="8Qg-fG-dsH"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FHq-eM-cWD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1717" y="1090"/>
         </scene>
         <!--Main Tab Controller-->
         <scene sceneID="YCK-Bu-4vf">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5wH-Rp-rFe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController storyboardIdentifier="MainTabController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wNU-xh-MNF" customClass="MainTabController" customModule="WeFit" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6OX-hu-1wT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -331,6 +330,7 @@
                         <segue destination="vd1-SC-hiq" kind="relationship" relationship="viewControllers" id="1NR-1v-k1c"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5wH-Rp-rFe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2445" y="40"/>
         </scene>
