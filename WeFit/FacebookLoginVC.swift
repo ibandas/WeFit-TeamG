@@ -30,10 +30,11 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
             print(error ?? "")
             return
         }
-        signIn()
+        facebookSignIn()
     }
     
-    func signIn() {
+    // This logins with facebook and passes the credential to firebase
+    func facebookSignIn() {
         let accessToken = AccessToken.current
         guard let accessTokenString = accessToken?.tokenString else {return}
         let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
@@ -57,11 +58,10 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
             self.checkUserExist(json: json)
         }
     }
+    
     // Creates a user document in "users" collection in Firestore if it doesn't exist
     func checkUserExist(json: Dictionary<String, String>) -> Void {
         let uid = Auth.auth().currentUser!.uid
-        let email = json["email"]
-        let name = json["name"]
         let db = Firestore.firestore()
         
         let docRef = db.collection("users").document(uid)
@@ -70,12 +70,27 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
                 print("Document exists!")
             }
             else {
-                print("Document doesn't exist!")
                 // Add a new document with a generated ID
-                db.collection("users").document(uid).setData([
-                    "name": name!,
-                    "email": email!
-                ])
+                print("Document doesn't exist!")
+                let email = json["email"]
+                let name = json["name"]
+                var name_components = name!.components(separatedBy: " ")
+                // Conditional for first and last name
+                if name_components.count > 0 {
+                    let firstName = name_components.removeFirst()
+                    let lastName = name_components.joined(separator: " ")
+                    db.collection("users").document(uid).setData([
+                        "firstName": firstName,
+                        "lastName": lastName,
+                        "email": email!
+                    ])
+                }
+                else {
+                    db.collection("users").document(uid).setData([
+                        "firstName": name!,
+                        "email": email!
+                    ])
+                }
             }
         })
     }
