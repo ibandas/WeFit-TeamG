@@ -47,6 +47,7 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
         let accessToken = AccessToken.current
         guard let accessTokenString = accessToken?.tokenString else {return}
         let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
+        print(credentials)
         Auth.auth().signIn(with: credentials, completion: {(user, error) in
             if error != nil {
                 print("Something went wrong with our FB User: ", error ?? "")
@@ -63,7 +64,11 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
                 return
             }
             guard let json = result as? Dictionary<String, String> else {return}
-            self.checkUserExist(json: json)
+            // Check for user in system after 5 seconds to allow for previous
+            // tasks to run
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                self.checkUserExist(json: json)
+            }
         }
 
         // After successful login, sets new root controller at homepage
