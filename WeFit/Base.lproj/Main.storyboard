@@ -341,21 +341,55 @@
             </objects>
             <point key="canvasLocation" x="1042" y="402"/>
         </scene>
-        <!--Profile-->
+        <!--Profile View Controller-->
         <scene sceneID="E1Z-GM-dg2">
             <objects>
-                <viewController id="qea-Qi-D9a" customClass="ViewController" customModule="WeFit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qea-Qi-D9a" customClass="ProfileViewController" customModule="WeFit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jxc-tq-pef">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7zm-6l-eZZ">
+                                <rect key="frame" x="29" y="121" width="104" height="104"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UyS-4E-sTB">
+                                <rect key="frame" x="156" y="155" width="181" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="27"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your workouts:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uur-ps-nbp">
+                                <rect key="frame" x="29" y="304" width="414" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                                <color key="textColor" red="0.46274509800000002" green="0.70196078429999997" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Screen Shot 2020-05-08 at 7.20.32 PM" translatesAutoresizingMaskIntoConstraints="NO" id="4Ow-vF-mxR">
+                                <rect key="frame" x="-126" y="295" width="666" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="yGX-m7-8MG">
+                                <rect key="frame" x="73" y="337" width="269" height="102"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </datePicker>
+                        </subviews>
+                        <color key="backgroundColor" cyan="0.55000000000000004" magenta="0.050000000000000003" yellow="0.0" black="0.040464527030000003" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Avn-2e-DnY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" image="person.circle" catalog="system" id="8Qg-fG-dsH"/>
+                    <navigationItem key="navigationItem" id="5A8-xU-AoB"/>
+                    <connections>
+                        <outlet property="datePicker" destination="yGX-m7-8MG" id="bKj-do-sfs"/>
+                        <outlet property="label" destination="Uur-ps-nbp" id="yhR-vx-7Pr"/>
+                        <outlet property="profileName" destination="UyS-4E-sTB" id="QXj-Fo-2eK"/>
+                        <outlet property="profilePic" destination="7zm-6l-eZZ" id="qsH-Vs-mJq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FHq-eM-cWD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1717" y="1090"/>
+            <point key="canvasLocation" x="-807.24637681159425" y="1088.1696428571429"/>
         </scene>
         <!--Leaderboard-->
         <scene sceneID="kwd-nj-heC">
@@ -483,7 +517,7 @@
                     <connections>
                         <segue destination="CTX-BS-KxO" kind="relationship" relationship="viewControllers" id="qx8-VY-ldc"/>
                         <segue destination="vd1-SC-hiq" kind="relationship" relationship="viewControllers" id="1NR-1v-k1c"/>
-                        <segue destination="qea-Qi-D9a" kind="relationship" relationship="viewControllers" id="5AO-kw-Guf"/>
+                        <segue destination="pF7-wT-EK4" kind="relationship" relationship="viewControllers" id="5AO-kw-Guf"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5wH-Rp-rFe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -528,8 +562,28 @@
             </objects>
             <point key="canvasLocation" x="-703" y="403"/>
         </scene>
+        <!--Profile-->
+        <scene sceneID="5v3-oa-Dvw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pF7-wT-EK4" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.circle" catalog="system" id="8Qg-fG-dsH"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vq2-lT-UAc">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qea-Qi-D9a" kind="relationship" relationship="rootViewController" id="NHC-3Q-UgU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gGZ-Fn-aUp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1717.3913043478262" y="1089.5089285714284"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Screen Shot 2020-05-08 at 7.20.32 PM" width="916" height="94"/>
         <image name="person.3.fill" catalog="system" width="71" height="34"/>
         <image name="person.circle" catalog="system" width="64" height="60"/>
         <image name="plus" catalog="system" width="64" height="56"/>
