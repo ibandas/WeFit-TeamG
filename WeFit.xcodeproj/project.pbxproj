@@ -20,9 +20,10 @@
 		1ABEA2802454BF5000BA97A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEA27F2454BF5000BA97A6 /* SceneDelegate.swift */; };
 		1ABEA2822454BF5000BA97A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEA2812454BF5000BA97A6 /* ViewController.swift */; };
 		1ABEA2852454BF5000BA97A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEA2832454BF5000BA97A6 /* Main.storyboard */; };
-		1ABEA2872454BF5100BA97A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEA2862454BF5100BA97A6 /* Assets.xcassets */; };
 		1ABEA28A2454BF5100BA97A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEA2882454BF5100BA97A6 /* LaunchScreen.storyboard */; };
 		1ABEA2922454C49100BA97A6 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEA2912454C49100BA97A6 /* Workout.swift */; };
+		999FFA8B24663D24002AA407 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 999FFA8A24663D24002AA407 /* Assets.xcassets */; };
+		999FFA8D24664BBE002AA407 /* ExerciseProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999FFA8C24664BBE002AA407 /* ExerciseProfileCell.swift */; };
 		99B1E12B246347990005D8A7 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B1E12A246347990005D8A7 /* LeaderboardViewController.swift */; };
 		99B1E12D24661C910005D8A7 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B1E12C24661C910005D8A7 /* Profile.swift */; };
 		99B1E12F24661D6C0005D8A7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B1E12E24661D6C0005D8A7 /* ProfileViewController.swift */; };
@@ -46,12 +47,13 @@
 		1ABEA27F2454BF5000BA97A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1ABEA2812454BF5000BA97A6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1ABEA2842454BF5000BA97A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1ABEA2862454BF5100BA97A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1ABEA2892454BF5100BA97A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1ABEA28B2454BF5100BA97A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1ABEA2912454C49100BA97A6 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		239DCFAA1DD9A860441A5F7E /* Pods_WeFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F41BD77EB61A337DC227591 /* Pods-WeFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeFit.release.xcconfig"; path = "Target Support Files/Pods-WeFit/Pods-WeFit.release.xcconfig"; sourceTree = "<group>"; };
+		999FFA8A24663D24002AA407 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		999FFA8C24664BBE002AA407 /* ExerciseProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseProfileCell.swift; sourceTree = "<group>"; };
 		99B1E12A246347990005D8A7 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
 		99B1E12C24661C910005D8A7 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		99B1E12E24661D6C0005D8A7 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				1A7E1B04245769EB00AA6568 /* AddExerciseCell.swift */,
 				1A38947E245DEFF1006DA20B /* PossibleExerciseCell.swift */,
 				1A38947C245DEF7A006DA20B /* AddExercisesVC.swift */,
+				999FFA8C24664BBE002AA407 /* ExerciseProfileCell.swift */,
 				1A7E1AFC2454D03900AA6568 /* WorkoutLogVC.swift */,
 				99B1E12A246347990005D8A7 /* LeaderboardViewController.swift */,
 				99D2C79B24622D6A00C5273B /* NewChallengeViewController.swift */,
@@ -111,8 +114,8 @@
 				99B1E12C24661C910005D8A7 /* Profile.swift */,
 				1ABEA2832454BF5000BA97A6 /* Main.storyboard */,
 				99B1E12E24661D6C0005D8A7 /* ProfileViewController.swift */,
+				999FFA8A24663D24002AA407 /* Assets.xcassets */,
 				99D2C7972462216600C5273B /* LoginViewController.swift */,
-				1ABEA2862454BF5100BA97A6 /* Assets.xcassets */,
 				1ABEA2882454BF5100BA97A6 /* LaunchScreen.storyboard */,
 				1ABEA28B2454BF5100BA97A6 /* Info.plist */,
 			);
@@ -198,7 +201,7 @@
 			files = (
 				1A83B9042461F0CF00A7BA38 /* GoogleService-Info.plist in Resources */,
 				1ABEA28A2454BF5100BA97A6 /* LaunchScreen.storyboard in Resources */,
-				1ABEA2872454BF5100BA97A6 /* Assets.xcassets in Resources */,
+				999FFA8B24663D24002AA407 /* Assets.xcassets in Resources */,
 				1ABEA2852454BF5000BA97A6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,6 +264,7 @@
 				1ABEA2822454BF5000BA97A6 /* ViewController.swift in Sources */,
 				99B1E12F24661D6C0005D8A7 /* ProfileViewController.swift in Sources */,
 				99B1E12B246347990005D8A7 /* LeaderboardViewController.swift in Sources */,
+				999FFA8D24664BBE002AA407 /* ExerciseProfileCell.swift in Sources */,
 				99D2C79A2462237400C5273B /* MainTabController.swift in Sources */,
 				99B1E12D24661C910005D8A7 /* Profile.swift in Sources */,
 				1ABEA27E2454BF5000BA97A6 /* AppDelegate.swift in Sources */,

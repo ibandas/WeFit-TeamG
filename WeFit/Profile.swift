@@ -13,7 +13,7 @@ import Firebase
 struct Profile {
     var name: String = ""
     var photo: UIImage?
-    var workouts: Array = [Workout]()
+    var ExerciseList: Array = [Exercise]()
     
 }
 
