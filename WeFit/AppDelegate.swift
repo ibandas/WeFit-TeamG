@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             didFinishLaunchingWithOptions: launchOptions
         )
         
+        
         //        let db = Firestore.firestore()
         //
         //        db.collection("cities").document("LA").setData([
