@@ -19,30 +19,73 @@ class WorkoutLog: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        exercises = createArray()
-        setSectionsCount()
-        tableView.delegate = self
-        tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.loadWorkouts()
     }
     
-    func createArray() -> [Exercise] {
-        var tempExercises: [Exercise] = []
-        let set1 = Set(weight: 250, reps: 10)
-        let set2 = Set(weight: 400, reps: 6)
-        let sets1: [Set] = [set1]
-        let sets2: [Set] = [set2]
-        let exercise1 = Exercise(title: "Bench Press", sets: sets1)
-        let exercise2 = Exercise(title: "Squat", sets: sets2)
+    func loadWorkouts() {
+        let uid = Auth.auth().currentUser!.uid
+        // let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
         
-        tempExercises.append(exercise1)
-        tempExercises.append(exercise2)
-    
-        return tempExercises
+        let ref = Firestore.firestore().collection("users/\(uid)/workouts").whereField("created_at", isDateInToday: Date())
+        
+        ref.getDocuments(completion: {(snapshot, error) in
+            if error != nil {
+                print("Error")
+            }
+            else {
+                guard let snap = snapshot else {return}
+                for document in snap.documents {
+                    let id = document.documentID
+                    let data = document.data()
+                    let created_at = data["created_at"] as? Date ?? Date()
+                    let exercise_title = data["title"] as? String ?? ""
+                    print(exercise_title)
+                    var set_id: Int = 1
+                    var sets: [Set] = []
+                    while true {
+                        var set: String = "set_" + String(set_id)
+                        let setDB = data[set] as? Array<Int>
+                        if setDB != nil {
+                            sets.append(Set(set_id: set, weight: setDB![0], reps: setDB![1]))
+                            print("Set Exists")
+                            set = String(set.dropLast())
+                            set_id += 1
+                        }
+                        else {
+                            print("Breaking")
+                            break
+                        }
+                    }
+                    self.exercises.append(Exercise(exercise_id: id, title: exercise_title, sets: sets, created_at: created_at))
+                }
+            }
+            self.setSectionsCount()
+            self.tableView.reloadData()
+        })
     }
     
     // Adds set to exercise data and row to the VC
     func addSet(indexPath: IndexPath) {
-        exercises[indexPath.section].sets.append(Set(weight: 0, reps: 0))
+        let exercise_id = exercises[indexPath.section].exercise_id
+        let uid = Auth.auth().currentUser!.uid
+        let ref = Firestore.firestore().collection("users/\(uid)/workouts").document(exercise_id)
+        let id: Int = exercises[indexPath.section].sets.count
+        let set_id: String = "set_" + String(id)
+        let set: Set = Set(set_id: set_id, weight: 0, reps: 0)
+        exercises[indexPath.section].sets.append(set)
+        ref.updateData([
+            set_id: [0, 0]
+        ]) { err in
+            if let err = err {
+                print(err)
+            } else {
+                print("Success adding set")
+            }
+        }
+        
+        
         
         let indexPath = IndexPath(row: exercises[indexPath.section].sets.count, section: indexPath.section)
         
@@ -51,10 +94,30 @@ class WorkoutLog: UIViewController {
         tableView.endUpdates()
     }
     
+    func updateExerciseinFirestore(exercise_id: String, set_id: String, weight: Int, reps: Int) {
+        let uid = Auth.auth().currentUser!.uid
+        let ref = Firestore.firestore().collection("users/\(uid)/workouts").document(exercise_id)
+        ref.updateData([
+            set_id: [weight, reps]
+        ]) { err in
+            if let err = err {
+                print(err)
+            } else {
+                print("Success adding set")
+            }
+        }
+    }
+    
+    
     // Updates an Exercises's Set's Weight value
     func updateWeight(indexPath: IndexPath, cell: SetCell) {
         if let weightNum = Int(cell.WeightEntry.text!) {
             exercises[indexPath.section].sets[indexPath.row - 1].weight = weightNum
+            let setTemp: Set = exercises[indexPath.section].sets[indexPath.row - 1]
+            self.updateExerciseinFirestore(exercise_id: exercises[indexPath.section].exercise_id,
+                                           set_id: setTemp.set_id,
+                                           weight: weightNum,
+                                           reps: setTemp.reps)
         }
     }
     
@@ -62,6 +125,11 @@ class WorkoutLog: UIViewController {
     func updateReps(indexPath: IndexPath, cell: SetCell) {
         if let repsNum = Int(cell.RepEntry.text!) {
             exercises[indexPath.section].sets[indexPath.row - 1].reps = repsNum
+            let setTemp: Set = exercises[indexPath.section].sets[indexPath.row - 1]
+            self.updateExerciseinFirestore(exercise_id: exercises[indexPath.section].exercise_id,
+                                           set_id: setTemp.set_id,
+                                           weight: setTemp.weight,
+                                           reps: repsNum)
         }
     }
     
@@ -72,6 +140,7 @@ class WorkoutLog: UIViewController {
     
     func setSectionsCount() {
         sectionsCount = exercises.count + 1
+        print(exercises.count)
     }
     
     
@@ -187,5 +256,19 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
         tableView.beginUpdates()
         tableView.deleteSections([indexPath.section], with: .automatic)
         tableView.endUpdates()
+    }
+}
+
+// TODO: Make sure that its grabbing date range of the user's timezone
+extension CollectionReference {
+    func whereField(_ field: String, isDateInToday value: Date) -> Query {
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: value)
+        guard
+            let start = Calendar.current.date(from: components),
+            let end = Calendar.current.date(byAdding: .day, value: 1, to: start)
+        else {
+            fatalError("Could not find start date or calculate end date.")
+        }
+        return whereField(field, isGreaterThan: start).whereField(field, isLessThan: end)
     }
 }

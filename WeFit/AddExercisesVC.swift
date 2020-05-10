@@ -30,7 +30,7 @@ class AddExercisesVC: UIViewController {
             if(cell.accessoryType == UITableViewCell.AccessoryType.checkmark) {
                 let title: String = cell.possibleExerciseTitle.text!
                 let empty_sets: [Set] = [Set(weight: 0, reps: 0)]
-                selectedExercises.append(Exercise(title: title, sets: empty_sets))
+                selectedExercises.append(Exercise(title: title, sets: empty_sets, created_at: Date()))
             }
         }
     }
