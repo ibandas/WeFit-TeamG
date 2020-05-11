@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FBSDKLoginKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -14,10 +16,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        
+//        do {
+//            try Auth.auth().signOut()
+//        } catch let signOutError as Error {
+//          print ("Error signing out: %@", signOutError)
+//        }
+//        LoginManager().logOut()
+        
+        // Decides what the initial view controller should be based on authentication
+        if let windowScene = scene as? UIWindowScene {
+            self.window = UIWindow(windowScene: windowScene)
+            let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            if (Auth.auth().currentUser == nil) {
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: "login")
+                self.window!.rootViewController = initialViewController
+                self.window!.makeKeyAndVisible()
+            }
+            else {
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: "homeNavigation") as! UINavigationController
+                
+                self.window!.rootViewController = initialViewController
+                self.window!.makeKeyAndVisible()
+            }
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

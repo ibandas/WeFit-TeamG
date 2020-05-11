@@ -19,7 +19,9 @@ struct Exercise {
 }
 
 struct Set {
+    var set_id: String
     var weight: Int = 0
     var reps: Int = 0
+    var created_at: Date = Date()
 }
 
