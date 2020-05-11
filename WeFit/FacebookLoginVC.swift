@@ -47,7 +47,6 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
         let accessToken = AccessToken.current
         guard let accessTokenString = accessToken?.tokenString else {return}
         let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
-        print(credentials)
         Auth.auth().signIn(with: credentials, completion: {(user, error) in
             if error != nil {
                 print("Something went wrong with our FB User: ", error ?? "")
@@ -72,9 +71,11 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
         }
 
         // After successful login, sets new root controller at homepage
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let homePage = storyBoard.instantiateViewController(withIdentifier: "homeNavigation") as! UINavigationController
-        UIApplication.shared.windows.first?.rootViewController = homePage
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let homePage = storyBoard.instantiateViewController(withIdentifier: "homeNavigation") as! UINavigationController
+            UIApplication.shared.windows.first?.rootViewController = homePage
+        }
     }
 
     // Creates a user document in "users" collection in Firestore if it doesn't exist

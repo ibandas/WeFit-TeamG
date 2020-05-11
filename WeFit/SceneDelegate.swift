@@ -24,6 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //          print ("Error signing out: %@", signOutError)
 //        }
 //        LoginManager().logOut()
+        
         // Decides what the initial view controller should be based on authentication
         if let windowScene = scene as? UIWindowScene {
             self.window = UIWindow(windowScene: windowScene)
