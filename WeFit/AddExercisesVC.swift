@@ -15,7 +15,7 @@ class AddExercisesVC: UIViewController {
     @IBOutlet weak var addButtonPressed: UIBarButtonItem!
     
     var exercises: [String] = ["Bench Press", "Squat", "Deadlift"]
-    var selectedExercises: [Exercise] = []
+    var selectedExercises: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +29,7 @@ class AddExercisesVC: UIViewController {
         for cell in cells {
             if(cell.accessoryType == UITableViewCell.AccessoryType.checkmark) {
                 let title: String = cell.possibleExerciseTitle.text!
-                let empty_sets: [Set] = [Set(weight: 0, reps: 0)]
-                selectedExercises.append(Exercise(title: title, sets: empty_sets, created_at: Date()))
+                selectedExercises.append(title)
             }
         }
     }

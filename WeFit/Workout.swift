@@ -14,15 +14,14 @@ struct Workout {
 }
 
 struct Exercise {
-    var exercise_id: String = ""
     var title: String = ""
     var sets: Array = [Set]()
-    var created_at: Date
 }
 
 struct Set {
-    var set_id: String = ""
+    var set_id: String
     var weight: Int = 0
     var reps: Int = 0
+    var created_at: Date = Date()
 }
 

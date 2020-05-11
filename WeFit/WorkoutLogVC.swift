@@ -16,6 +16,7 @@ class WorkoutLog: UIViewController {
     
     var exercises: [Exercise] = []
     var sectionsCount: Int = 0
+    let uid = Auth.auth().currentUser!.uid
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,42 +26,40 @@ class WorkoutLog: UIViewController {
     }
     
     func loadWorkouts() {
-        let uid = Auth.auth().currentUser!.uid
         // let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
-        
-        let ref = Firestore.firestore().collection("users/\(uid)/workouts").whereField("created_at", isDateInToday: Date())
-        
+
+        let ref = Firestore.firestore().collection("users/\(self.uid)/workouts").whereField("created_at", isDateInToday: Date()).order(by: "created_at")
+
         ref.getDocuments(completion: {(snapshot, error) in
             if error != nil {
                 print("Error")
             }
             else {
+                var workoutDict = [String: [Set]]()
                 guard let snap = snapshot else {return}
                 for document in snap.documents {
                     let id = document.documentID
                     let data = document.data()
-                    let created_at = data["created_at"] as? Date ?? Date()
+                    let created_at_ts = data["created_at"] as? Timestamp
+                    let created_at = created_at_ts?.dateValue()
                     let exercise_title = data["title"] as? String ?? ""
-                    print(exercise_title)
-                    var set_id: Int = 1
-                    var sets: [Set] = []
-                    while true {
-                        var set: String = "set_" + String(set_id)
-                        let setDB = data[set] as? Array<Int>
-                        if setDB != nil {
-                            sets.append(Set(set_id: set, weight: setDB![0], reps: setDB![1]))
-                            print("Set Exists")
-                            set = String(set.dropLast())
-                            set_id += 1
-                        }
-                        else {
-                            print("Breaking")
-                            break
-                        }
+                    let weight = data["weight"] as? Int
+                    let reps = data["reps"] as? Int
+                    var exercise_sets = workoutDict[exercise_title]
+                    let set = Set(set_id: id, weight: weight!, reps: reps!, created_at: created_at!)
+                    if exercise_sets == nil {
+                        workoutDict[exercise_title] = [set]
                     }
-                    self.exercises.append(Exercise(exercise_id: id, title: exercise_title, sets: sets, created_at: created_at))
+                    else {
+                        exercise_sets?.append(set)
+                        workoutDict[exercise_title] = exercise_sets
+                    }
+                }
+                for (key, value) in workoutDict {
+                    self.exercises.append(Exercise(title: key, sets: value))
                 }
             }
+            self.exercises.sort(by: {$0.sets[0].created_at < $1.sets[0].created_at})
             self.setSectionsCount()
             self.tableView.reloadData()
         })
@@ -68,25 +67,18 @@ class WorkoutLog: UIViewController {
     
     // Adds set to exercise data and row to the VC
     func addSet(indexPath: IndexPath) {
-        let exercise_id = exercises[indexPath.section].exercise_id
-        let uid = Auth.auth().currentUser!.uid
-        let ref = Firestore.firestore().collection("users/\(uid)/workouts").document(exercise_id)
-        let id: Int = exercises[indexPath.section].sets.count
-        let set_id: String = "set_" + String(id)
-        let set: Set = Set(set_id: set_id, weight: 0, reps: 0)
+        let exercise_title = exercises[indexPath.section].title
+        let created_at = Date()
+        let weight = 0
+        let reps = 0
+        let set_id = Firestore.firestore().collection("users/\(self.uid)/workouts").addDocument(data: [
+            "title": exercise_title,
+            "weight": weight,
+            "reps": reps,
+            "created_at": created_at])
+        let set = Set(set_id: set_id.documentID, weight: 0, reps: 0, created_at: created_at)
         exercises[indexPath.section].sets.append(set)
-        ref.updateData([
-            set_id: [0, 0]
-        ]) { err in
-            if let err = err {
-                print(err)
-            } else {
-                print("Success adding set")
-            }
-        }
-        
-        
-        
+
         let indexPath = IndexPath(row: exercises[indexPath.section].sets.count, section: indexPath.section)
         
         tableView.beginUpdates()
@@ -94,16 +86,16 @@ class WorkoutLog: UIViewController {
         tableView.endUpdates()
     }
     
-    func updateExerciseinFirestore(exercise_id: String, set_id: String, weight: Int, reps: Int) {
-        let uid = Auth.auth().currentUser!.uid
-        let ref = Firestore.firestore().collection("users/\(uid)/workouts").document(exercise_id)
+    func updateExerciseinFirestore(set_id: String, weight: Int, reps: Int) {
+        let ref = Firestore.firestore().collection("users/\(uid)/workouts").document(set_id)
         ref.updateData([
-            set_id: [weight, reps]
+            "weight": weight,
+            "reps": reps
         ]) { err in
             if let err = err {
                 print(err)
             } else {
-                print("Success adding set")
+                print("Success updating set")
             }
         }
     }
@@ -114,8 +106,7 @@ class WorkoutLog: UIViewController {
         if let weightNum = Int(cell.WeightEntry.text!) {
             exercises[indexPath.section].sets[indexPath.row - 1].weight = weightNum
             let setTemp: Set = exercises[indexPath.section].sets[indexPath.row - 1]
-            self.updateExerciseinFirestore(exercise_id: exercises[indexPath.section].exercise_id,
-                                           set_id: setTemp.set_id,
+            self.updateExerciseinFirestore(set_id: setTemp.set_id,
                                            weight: weightNum,
                                            reps: setTemp.reps)
         }
@@ -126,8 +117,7 @@ class WorkoutLog: UIViewController {
         if let repsNum = Int(cell.RepEntry.text!) {
             exercises[indexPath.section].sets[indexPath.row - 1].reps = repsNum
             let setTemp: Set = exercises[indexPath.section].sets[indexPath.row - 1]
-            self.updateExerciseinFirestore(exercise_id: exercises[indexPath.section].exercise_id,
-                                           set_id: setTemp.set_id,
+            self.updateExerciseinFirestore(set_id: setTemp.set_id,
                                            weight: setTemp.weight,
                                            reps: repsNum)
         }
@@ -140,14 +130,21 @@ class WorkoutLog: UIViewController {
     
     func setSectionsCount() {
         sectionsCount = exercises.count + 1
-        print(exercises.count)
     }
     
     
     @IBAction func unwindFromAddExercisesVC(_ sender: UIStoryboardSegue) {
         if sender.source is AddExercisesVC {
             if let senderVC = sender.source as? AddExercisesVC {
-                exercises += senderVC.selectedExercises
+                let created_at = Date()
+                for exercise in senderVC.selectedExercises {
+                    let exercise_doc = Firestore.firestore().collection("users/\(self.uid)/workouts").addDocument(data: [
+                        "created_at": created_at,
+                        "title": exercise,
+                        "weight": 0,
+                        "reps": 0])
+                    self.exercises.append(Exercise(title: exercise, sets: [Set(set_id: exercise_doc.documentID, weight: 0, reps: 0, created_at: created_at)]))
+                }
             }
             setSectionsCount()
             tableView.reloadData()
@@ -242,6 +239,7 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
                 deleteEntireExercise(indexPath: indexPath)
             }
             else {
+                deleteSetFromFirestore(set_id: exercises[indexPath.section].sets[indexPath.row-1].set_id)
                 exercises[indexPath.section].sets.remove(at: indexPath.row - 1)
                 tableView.beginUpdates()
                 tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -251,11 +249,22 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
     }
     
     func deleteEntireExercise(indexPath: IndexPath) {
+        self.deleteExerciseFromFirestore(sets: exercises[indexPath.section].sets)
         exercises.remove(at: indexPath.section)
         sectionsCount = sectionsCount - 1
         tableView.beginUpdates()
         tableView.deleteSections([indexPath.section], with: .automatic)
         tableView.endUpdates()
+    }
+    
+    func deleteExerciseFromFirestore(sets: [Set]) {
+        for set in sets {
+            Firestore.firestore().collection("users/\(self.uid)/workouts").document(set.set_id).delete()
+        }
+    }
+    
+    func deleteSetFromFirestore(set_id: String) {
+         Firestore.firestore().collection("users/\(self.uid)/workouts").document(set_id).delete()
     }
 }
 
