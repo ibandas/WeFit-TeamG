@@ -460,7 +460,7 @@
         <!--Leaderboard-->
         <scene sceneID="kwd-nj-heC">
             <objects>
-                <viewController storyboardIdentifier="LeaderboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HUw-1Y-qKq" customClass="LeaderboardViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeaderboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HUw-1Y-qKq" customClass="Leaderboard" customModule="WeFit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R6C-oM-t1P">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -470,7 +470,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="joT-Yg-dnF">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RankCell" rowHeight="75" id="joT-Yg-dnF" customClass="RankCell" customModule="WeFit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="joT-Yg-dnF" id="LyJ-9n-htT">
@@ -504,6 +504,12 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="name" destination="LAz-by-x0D" id="ZrD-4o-OwI"/>
+                                            <outlet property="points" destination="HSt-ci-DwV" id="bwo-Tm-JcF"/>
+                                            <outlet property="profilePicture" destination="E3i-7p-i5f" id="Zz0-ff-Clk"/>
+                                            <outlet property="rank" destination="5Xb-Fc-Zfi" id="xJo-GG-Kiq"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -566,10 +572,13 @@
                         <viewLayoutGuide key="safeArea" id="rTw-Rb-4zi"/>
                     </view>
                     <navigationItem key="navigationItem" title="Leaderboard" id="vMh-sX-22k"/>
+                    <connections>
+                        <outlet property="tableView" destination="X6D-Y0-bo1" id="eak-SJ-TiR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Aj-OI-ZN1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="168" y="402"/>
+            <point key="canvasLocation" x="166.66666666666669" y="401.78571428571428"/>
         </scene>
         <!--Main Tab Controller-->
         <scene sceneID="YCK-Bu-4vf">

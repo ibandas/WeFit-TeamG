@@ -22,15 +22,17 @@
 		1ABEA2852454BF5000BA97A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEA2832454BF5000BA97A6 /* Main.storyboard */; };
 		1ABEA28A2454BF5100BA97A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEA2882454BF5100BA97A6 /* LaunchScreen.storyboard */; };
 		1ABEA2922454C49100BA97A6 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEA2912454C49100BA97A6 /* Workout.swift */; };
+		1AC04AD82469BE39002E8A40 /* RankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC04AD72469BE39002E8A40 /* RankCell.swift */; };
+		1AC04ADA246A08DF002E8A40 /* Competitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC04AD9246A08DF002E8A40 /* Competitor.swift */; };
+		1AFE50E524623858004C560A /* FacebookLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE50E424623858004C560A /* FacebookLoginVC.swift */; };
 		999FFA8B24663D24002AA407 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 999FFA8A24663D24002AA407 /* Assets.xcassets */; };
 		999FFA8D24664BBE002AA407 /* ExerciseProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999FFA8C24664BBE002AA407 /* ExerciseProfileCell.swift */; };
-		99B1E12B246347990005D8A7 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B1E12A246347990005D8A7 /* LeaderboardViewController.swift */; };
+		99B1E12B246347990005D8A7 /* LeaderboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B1E12A246347990005D8A7 /* LeaderboardVC.swift */; };
 		99B1E12D24661C910005D8A7 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B1E12C24661C910005D8A7 /* Profile.swift */; };
 		99B1E12F24661D6C0005D8A7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B1E12E24661D6C0005D8A7 /* ProfileViewController.swift */; };
 		99D2C7982462216600C5273B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D2C7972462216600C5273B /* LoginViewController.swift */; };
 		99D2C79A2462237400C5273B /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D2C7992462237400C5273B /* MainTabController.swift */; };
 		99D2C79C24622D6A00C5273B /* NewChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D2C79B24622D6A00C5273B /* NewChallengeViewController.swift */; };
-		1AFE50E524623858004C560A /* FacebookLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE50E424623858004C560A /* FacebookLoginVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,13 +53,15 @@
 		1ABEA2892454BF5100BA97A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1ABEA28B2454BF5100BA97A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1ABEA2912454C49100BA97A6 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		1AC04AD72469BE39002E8A40 /* RankCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCell.swift; sourceTree = "<group>"; };
+		1AC04AD9246A08DF002E8A40 /* Competitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Competitor.swift; sourceTree = "<group>"; };
 		1AE463532462460E002759D2 /* WeFit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeFit.entitlements; sourceTree = "<group>"; };
 		1AFE50E424623858004C560A /* FacebookLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginVC.swift; sourceTree = "<group>"; };
 		239DCFAA1DD9A860441A5F7E /* Pods_WeFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F41BD77EB61A337DC227591 /* Pods-WeFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeFit.release.xcconfig"; path = "Target Support Files/Pods-WeFit/Pods-WeFit.release.xcconfig"; sourceTree = "<group>"; };
 		999FFA8A24663D24002AA407 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		999FFA8C24664BBE002AA407 /* ExerciseProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseProfileCell.swift; sourceTree = "<group>"; };
-		99B1E12A246347990005D8A7 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
+		99B1E12A246347990005D8A7 /* LeaderboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardVC.swift; sourceTree = "<group>"; };
 		99B1E12C24661C910005D8A7 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		99B1E12E24661D6C0005D8A7 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		99D2C7972462216600C5273B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -104,16 +108,18 @@
 				1ABEA27F2454BF5000BA97A6 /* SceneDelegate.swift */,
 				1ABEA2812454BF5000BA97A6 /* ViewController.swift */,
 				1ABEA2912454C49100BA97A6 /* Workout.swift */,
+				1AC04AD9246A08DF002E8A40 /* Competitor.swift */,
 				1A7E1AFE2454F41700AA6568 /* ExerciseCell.swift */,
 				1A7E1B0024564BB400AA6568 /* SetCell.swift */,
 				1A7E1B02245768B100AA6568 /* AddSetCell.swift */,
 				1A7E1B04245769EB00AA6568 /* AddExerciseCell.swift */,
+				1AC04AD72469BE39002E8A40 /* RankCell.swift */,
 				1A38947E245DEFF1006DA20B /* PossibleExerciseCell.swift */,
 				1A38947C245DEF7A006DA20B /* AddExercisesVC.swift */,
 				999FFA8C24664BBE002AA407 /* ExerciseProfileCell.swift */,
 				1AFE50E424623858004C560A /* FacebookLoginVC.swift */,
 				1A7E1AFC2454D03900AA6568 /* WorkoutLogVC.swift */,
-				99B1E12A246347990005D8A7 /* LeaderboardViewController.swift */,
+				99B1E12A246347990005D8A7 /* LeaderboardVC.swift */,
 				99D2C79B24622D6A00C5273B /* NewChallengeViewController.swift */,
 				99D2C7992462237400C5273B /* MainTabController.swift */,
 				99B1E12C24661C910005D8A7 /* Profile.swift */,
@@ -269,7 +275,7 @@
 				1A7E1AFD2454D03900AA6568 /* WorkoutLogVC.swift in Sources */,
 				1ABEA2822454BF5000BA97A6 /* ViewController.swift in Sources */,
 				99B1E12F24661D6C0005D8A7 /* ProfileViewController.swift in Sources */,
-				99B1E12B246347990005D8A7 /* LeaderboardViewController.swift in Sources */,
+				99B1E12B246347990005D8A7 /* LeaderboardVC.swift in Sources */,
 				999FFA8D24664BBE002AA407 /* ExerciseProfileCell.swift in Sources */,
 				99D2C79A2462237400C5273B /* MainTabController.swift in Sources */,
 				99B1E12D24661C910005D8A7 /* Profile.swift in Sources */,
@@ -277,7 +283,9 @@
 				1ABEA2802454BF5000BA97A6 /* SceneDelegate.swift in Sources */,
 				1A38947F245DEFF1006DA20B /* PossibleExerciseCell.swift in Sources */,
 				1ABEA2922454C49100BA97A6 /* Workout.swift in Sources */,
+				1AC04AD82469BE39002E8A40 /* RankCell.swift in Sources */,
 				1A7E1B05245769EB00AA6568 /* AddExerciseCell.swift in Sources */,
+				1AC04ADA246A08DF002E8A40 /* Competitor.swift in Sources */,
 				1A7E1AFF2454F41700AA6568 /* ExerciseCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
