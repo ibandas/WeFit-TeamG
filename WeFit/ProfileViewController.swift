@@ -32,7 +32,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     private func loadWorkout(){
         
-        let set1 = Set(weight: 0, reps: 50)
+        let set1 = Set(set_id: "", weight: 0, reps: 50)
         let sets1: [Set] = [set1]
         let exercise1 = Exercise(title: "Pushups", sets: sets1)
         workouts = [exercise1]

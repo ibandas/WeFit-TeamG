@@ -35,7 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 self.window!.makeKeyAndVisible()
             }
             else {
-                let initialViewController = storyboard.instantiateViewController(withIdentifier: "homeNavigation") as! UINavigationController
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTabController") as! UITabBarController
                 
                 self.window!.rootViewController = initialViewController
                 self.window!.makeKeyAndVisible()
