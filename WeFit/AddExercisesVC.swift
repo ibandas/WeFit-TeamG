@@ -16,6 +16,7 @@ class AddExercisesVC: UIViewController {
     
     var exercises: [String] = ["Bench Press", "Squat", "Deadlift"]
     var selectedExercises: [String] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
