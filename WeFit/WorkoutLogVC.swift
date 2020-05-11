@@ -164,12 +164,18 @@ extension WorkoutLog: AddSetCellDelegate {
 // Extension of VC for SetCell that allows updates of weight/reps
 extension WorkoutLog: SetCellDelegate {
     func updateWeight(cell: SetCell) {
-        let indexPath = self.tableView.indexPath(for: cell)!
-        updateWeight(indexPath: indexPath, cell: cell)
+        if let indexPath = self.tableView.indexPath(for: cell) {
+            updateWeight(indexPath: indexPath, cell: cell)
+        } else {
+            print("ERROR")
+        }
     }
     func updateReps(cell: SetCell) {
-        let indexPath = self.tableView.indexPath(for: cell)!
-        updateReps(indexPath: indexPath, cell: cell)
+        if let indexPath = self.tableView.indexPath(for: cell) {
+            updateReps(indexPath: indexPath, cell: cell)
+        } else {
+            print("ERROR")
+        }
     }
 }
 
@@ -249,7 +255,8 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
     }
     
     func deleteEntireExercise(indexPath: IndexPath) {
-        self.deleteExerciseFromFirestore(sets: exercises[indexPath.section].sets)
+        let sets_copy = exercises[indexPath.section].sets
+        self.deleteExerciseFromFirestore(sets: sets_copy)
         exercises.remove(at: indexPath.section)
         sectionsCount = sectionsCount - 1
         tableView.beginUpdates()
@@ -264,7 +271,7 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
     }
     
     func deleteSetFromFirestore(set_id: String) {
-         Firestore.firestore().collection("users/\(self.uid)/workouts").document(set_id).delete()
+        Firestore.firestore().collection("users/\(self.uid)/workouts").document(set_id).delete()
     }
 }
 
