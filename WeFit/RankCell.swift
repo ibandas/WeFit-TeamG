@@ -42,7 +42,7 @@ class RankCell: UITableViewCell {
     }
     
     func setProfile(competitor: Competitor, indexPath: IndexPath) {
-        self.setName(name: competitor.name)
+        self.setName(name: competitor.firstName)
         self.setPoints(points: competitor.points)
         self.setProfilePicture(pp: competitor.profilePicture)
         self.setRank(rank: indexPath.row + 1)

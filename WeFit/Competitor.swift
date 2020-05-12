@@ -7,10 +7,13 @@
 //
 
 import Foundation
+import Firebase
 import UIKit
 
 struct Competitor {
-    var name: String
-    var profilePicture: UIImage
+    var id: String
+    var firstName: String
+    var lastName: String
+    var profilePicture: UIImage = UIImage(named: "pp1")!
     var points: Int
 }

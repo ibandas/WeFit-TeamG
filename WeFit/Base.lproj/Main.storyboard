@@ -573,6 +573,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Leaderboard" id="vMh-sX-22k"/>
                     <connections>
+                        <outlet property="challenge_title" destination="FpB-1c-9EZ" id="WnF-i3-r8j"/>
+                        <outlet property="rank" destination="uIX-ZU-X69" id="6X6-s9-UWH"/>
                         <outlet property="tableView" destination="X6D-Y0-bo1" id="eak-SJ-TiR"/>
                     </connections>
                 </viewController>

@@ -24,6 +24,7 @@
 		1ABEA2922454C49100BA97A6 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEA2912454C49100BA97A6 /* Workout.swift */; };
 		1AC04AD82469BE39002E8A40 /* RankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC04AD72469BE39002E8A40 /* RankCell.swift */; };
 		1AC04ADA246A08DF002E8A40 /* Competitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC04AD9246A08DF002E8A40 /* Competitor.swift */; };
+		1AC04ADC246A3275002E8A40 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC04ADB246A3275002E8A40 /* Challenge.swift */; };
 		1AFE50E524623858004C560A /* FacebookLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE50E424623858004C560A /* FacebookLoginVC.swift */; };
 		999FFA8B24663D24002AA407 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 999FFA8A24663D24002AA407 /* Assets.xcassets */; };
 		999FFA8D24664BBE002AA407 /* ExerciseProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999FFA8C24664BBE002AA407 /* ExerciseProfileCell.swift */; };
@@ -55,6 +56,7 @@
 		1ABEA2912454C49100BA97A6 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		1AC04AD72469BE39002E8A40 /* RankCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCell.swift; sourceTree = "<group>"; };
 		1AC04AD9246A08DF002E8A40 /* Competitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Competitor.swift; sourceTree = "<group>"; };
+		1AC04ADB246A3275002E8A40 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		1AE463532462460E002759D2 /* WeFit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeFit.entitlements; sourceTree = "<group>"; };
 		1AFE50E424623858004C560A /* FacebookLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginVC.swift; sourceTree = "<group>"; };
 		239DCFAA1DD9A860441A5F7E /* Pods_WeFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +111,8 @@
 				1ABEA2812454BF5000BA97A6 /* ViewController.swift */,
 				1ABEA2912454C49100BA97A6 /* Workout.swift */,
 				1AC04AD9246A08DF002E8A40 /* Competitor.swift */,
+				1AC04ADB246A3275002E8A40 /* Challenge.swift */,
+				99B1E12C24661C910005D8A7 /* Profile.swift */,
 				1A7E1AFE2454F41700AA6568 /* ExerciseCell.swift */,
 				1A7E1B0024564BB400AA6568 /* SetCell.swift */,
 				1A7E1B02245768B100AA6568 /* AddSetCell.swift */,
@@ -122,11 +126,10 @@
 				99B1E12A246347990005D8A7 /* LeaderboardVC.swift */,
 				99D2C79B24622D6A00C5273B /* NewChallengeViewController.swift */,
 				99D2C7992462237400C5273B /* MainTabController.swift */,
-				99B1E12C24661C910005D8A7 /* Profile.swift */,
-				1ABEA2832454BF5000BA97A6 /* Main.storyboard */,
 				99B1E12E24661D6C0005D8A7 /* ProfileViewController.swift */,
-				999FFA8A24663D24002AA407 /* Assets.xcassets */,
 				99D2C7972462216600C5273B /* LoginViewController.swift */,
+				1ABEA2832454BF5000BA97A6 /* Main.storyboard */,
+				999FFA8A24663D24002AA407 /* Assets.xcassets */,
 				1ABEA2882454BF5100BA97A6 /* LaunchScreen.storyboard */,
 				1ABEA28B2454BF5100BA97A6 /* Info.plist */,
 			);
@@ -281,6 +284,7 @@
 				99B1E12D24661C910005D8A7 /* Profile.swift in Sources */,
 				1ABEA27E2454BF5000BA97A6 /* AppDelegate.swift in Sources */,
 				1ABEA2802454BF5000BA97A6 /* SceneDelegate.swift in Sources */,
+				1AC04ADC246A3275002E8A40 /* Challenge.swift in Sources */,
 				1A38947F245DEFF1006DA20B /* PossibleExerciseCell.swift in Sources */,
 				1ABEA2922454C49100BA97A6 /* Workout.swift in Sources */,
 				1AC04AD82469BE39002E8A40 /* RankCell.swift in Sources */,
