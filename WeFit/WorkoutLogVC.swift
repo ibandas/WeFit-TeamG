@@ -25,6 +25,16 @@ class WorkoutLog: UIViewController {
         self.loadWorkouts()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showPossibleExercises" {
+            let destination = segue.destination as! AddExercisesVC
+            for exercise in self.exercises {
+                destination.already_chosen_exercises.append(exercise.title)
+            }
+            print(destination.already_chosen_exercises)
+        }
+    }
+    
     func loadWorkouts() {
         // let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
 
@@ -164,6 +174,16 @@ extension WorkoutLog: AddSetCellDelegate {
     }
 }
 
+extension WorkoutLog: AddExerciseCellDelegate {
+    func didTapExercisesButton(cell: AddExerciseCell) {
+        let destination = AddExercisesVC()
+        for exercise in self.exercises {
+            destination.already_chosen_exercises.append(exercise.title)
+        }
+        print(destination.already_chosen_exercises)
+    }
+}
+
 // Extension of VC for SetCell that allows updates of weight/reps
 extension WorkoutLog: SetCellDelegate {
     func updateWeight(cell: SetCell) {
@@ -241,6 +261,7 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == exercises.count) {
             let addExerciseCell = self.tableView.dequeueReusableCell(withIdentifier: "AddExerciseCell", for: indexPath) as! AddExerciseCell
+            addExerciseCell.delegate = self
             return addExerciseCell
         }
         else {

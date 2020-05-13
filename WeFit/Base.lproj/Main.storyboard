@@ -149,7 +149,7 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="AddExercisesButton:" destination="sy0-Mq-N0F" eventType="touchUpInside" id="21X-Pf-USz"/>
-                                                        <segue destination="RWq-38-Qvp" kind="show" id="DIc-eR-S2y"/>
+                                                        <segue destination="RWq-38-Qvp" kind="show" identifier="showPossibleExercises" id="DIc-eR-S2y"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
