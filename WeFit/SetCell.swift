@@ -11,17 +11,36 @@ import UIKit
 protocol SetCellDelegate {
     func updateWeight(cell: SetCell)
     func updateReps(cell: SetCell)
+    func updateChallenge(cell: SetCell, completion: @escaping () -> ())
+    func updateCompletion(cell: SetCell)
 }
 
 class SetCell: UITableViewCell {
     
     var delegate: SetCellDelegate?
+    var completed: Bool = false
 
     @IBOutlet weak var WeightLabel: UILabel!
     @IBOutlet weak var RepLabel: UILabel!
     
+    @IBOutlet weak var checkmarkButton: UIButton!
     @IBOutlet weak var WeightEntry: UITextField!
     @IBOutlet weak var RepEntry: UITextField!
+    @IBAction func checkmarkButton(_ sender: Any) {
+        if self.completed {
+            self.delegate?.updateChallenge(cell: self) {
+                self.completed = false
+                self.delegate?.updateCompletion(cell: self)
+            }
+            checkmarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        } else {
+            self.delegate?.updateChallenge(cell: self) {
+                self.completed = true
+                self.delegate?.updateCompletion(cell: self)
+            }
+            checkmarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        }
+    }
     
     @IBAction func weightTextFieldUpdated(_ sender: Any) {
         delegate?.updateWeight(cell: self)
@@ -42,6 +61,15 @@ class SetCell: UITableViewCell {
     
     func setReps(reps: Int) {
         RepEntry.text = String(reps)
+    }
+    
+    func setCompletion(completion: Bool) {
+        self.completed = completion
+        if self.completed {
+            checkmarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        } else {
+            checkmarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        }
     }
     
     override func awakeFromNib() {
