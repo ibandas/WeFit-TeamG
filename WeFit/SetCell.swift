@@ -33,12 +33,14 @@ class SetCell: UITableViewCell {
                 self.delegate?.updateCompletion(cell: self)
             }
             checkmarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+            checkmarkButton.tintColor = UIColor.gray
         } else {
             self.delegate?.updateChallenge(cell: self) {
                 self.completed = true
                 self.delegate?.updateCompletion(cell: self)
             }
             checkmarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            checkmarkButton.tintColor = UIColor.blue
         }
     }
     
@@ -67,8 +69,10 @@ class SetCell: UITableViewCell {
         self.completed = completion
         if self.completed {
             checkmarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            checkmarkButton.tintColor = UIColor.blue
         } else {
             checkmarkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+            checkmarkButton.tintColor = UIColor.gray
         }
     }
     
