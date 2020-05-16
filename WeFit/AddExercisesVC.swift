@@ -14,11 +14,16 @@ class AddExercisesVC: UIViewController {
     
     @IBOutlet weak var addButtonPressed: UIBarButtonItem!
     
-    var exercises: [String] = ["Bench Press", "Squat", "Deadlift"]
+    var exercises: [String] = ["Bench Press", "Squat", "Deadlift", "Pushup"]
+    var already_chosen_exercises: [String] = []
     var selectedExercises: [String] = []
 
     
     override func viewDidLoad() {
+        self.removeExerciseDifferences(completion: {result in
+            self.exercises = result
+            self.possibleExercisesTV.reloadData()
+        })
         super.viewDidLoad()
         possibleExercisesTV.delegate = self
         possibleExercisesTV.dataSource = self
@@ -33,6 +38,17 @@ class AddExercisesVC: UIViewController {
                 selectedExercises.append(title)
             }
         }
+    }
+    
+    func removeExerciseDifferences(completion: @escaping ([String]) -> ()) {
+        var tempExercises: [String] = []
+        print(self.already_chosen_exercises)
+        for exercise in self.exercises {
+            if !self.already_chosen_exercises.contains(exercise) {
+                tempExercises.append(exercise)
+            }
+        }
+        completion(tempExercises)
     }
 }
 

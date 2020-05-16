@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol AddExerciseCellDelegate {
+    func didTapExercisesButton(cell: AddExerciseCell)
+}
+
+
 class AddExerciseCell: UITableViewCell {
+    
+    var delegate: AddExerciseCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,7 +29,7 @@ class AddExerciseCell: UITableViewCell {
     }
     
     @IBAction func AddExercisesButton(_ sender: Any) {
-        
+        delegate?.didTapExercisesButton(cell: self)
     }
 
 }

@@ -25,6 +25,15 @@ class WorkoutLog: UIViewController {
         self.loadWorkouts()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showPossibleExercises" {
+            let destination = segue.destination as! AddExercisesVC
+            for exercise in self.exercises {
+                destination.already_chosen_exercises.append(exercise.title)
+            }
+        }
+    }
+    
     func loadWorkouts() {
         // let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
 
@@ -45,8 +54,9 @@ class WorkoutLog: UIViewController {
                     let exercise_title = data["title"] as? String ?? ""
                     let weight = data["weight"] as? Int
                     let reps = data["reps"] as? Int
+                    let completion = data["completion"] as? Bool
                     var exercise_sets = workoutDict[exercise_title]
-                    let set = Set(set_id: id, weight: weight!, reps: reps!, created_at: created_at!)
+                    let set = Set(set_id: id, weight: weight!, reps: reps!, created_at: created_at!, completion: completion!)
                     if exercise_sets == nil {
                         workoutDict[exercise_title] = [set]
                     }
@@ -75,8 +85,9 @@ class WorkoutLog: UIViewController {
             "title": exercise_title,
             "weight": weight,
             "reps": reps,
-            "created_at": created_at])
-        let set = Set(set_id: set_id.documentID, weight: 0, reps: 0, created_at: created_at)
+            "created_at": created_at,
+            "completion": false])
+        let set = Set(set_id: set_id.documentID, weight: 0, reps: 0, created_at: created_at, completion: false)
         exercises[indexPath.section].sets.append(set)
 
         let indexPath = IndexPath(row: exercises[indexPath.section].sets.count, section: indexPath.section)
@@ -142,8 +153,9 @@ class WorkoutLog: UIViewController {
                         "created_at": created_at,
                         "title": exercise,
                         "weight": 0,
-                        "reps": 0])
-                    self.exercises.append(Exercise(title: exercise, sets: [Set(set_id: exercise_doc.documentID, weight: 0, reps: 0, created_at: created_at)]))
+                        "reps": 0,
+                        "completion": false])
+                    self.exercises.append(Exercise(title: exercise, sets: [Set(set_id: exercise_doc.documentID, weight: 0, reps: 0, created_at: created_at, completion: false)]))
                 }
             }
             setSectionsCount()
@@ -158,6 +170,16 @@ extension WorkoutLog: AddSetCellDelegate {
     func didTapAddSetButton(cell: AddSetCell) {
         let indexPath = self.tableView.indexPath(for: cell)
         addSet(indexPath: indexPath!)
+    }
+}
+
+extension WorkoutLog: AddExerciseCellDelegate {
+    func didTapExercisesButton(cell: AddExerciseCell) {
+        let destination = AddExercisesVC()
+        for exercise in self.exercises {
+            destination.already_chosen_exercises.append(exercise.title)
+        }
+        print(destination.already_chosen_exercises)
     }
 }
 
@@ -176,6 +198,39 @@ extension WorkoutLog: SetCellDelegate {
         } else {
             print("ERROR")
         }
+    }
+    
+    func updateChallenge(cell: SetCell, completion: @escaping () -> ()) {
+        let indexPath = self.tableView.indexPath(for: cell)
+        let exercise_title = exercises[indexPath!.section].title
+        let challenge_ref = Firestore.firestore().collection("challenges").whereField("active", isEqualTo: true).whereField("members", arrayContains: self.uid).whereField("exercise", isEqualTo: exercise_title)
+        let field_path = FieldPath(["scores", self.uid, "points"])
+        challenge_ref.getDocuments(completion: {(snapshot, error) in
+            if error != nil {
+                print("Error")
+            } else {
+                guard let snap = snapshot else {return}
+                for document in snap.documents {
+                    let points = Int64(cell.RepEntry.text!)!
+                    if !cell.completed {
+                        document.reference.updateData([field_path: FieldValue.increment(points)])
+                        print("Added 50 to challenge points")
+                    } else {
+                        let points = (points * -1)
+                        document.reference.updateData([field_path: FieldValue.increment(points)])
+                        print("Subtracting 50 to challenge points")
+                    }
+                }
+                completion()
+            }
+        })
+    }
+    
+    func updateCompletion(cell: SetCell) {
+        let indexPath: IndexPath = self.tableView.indexPath(for: cell)!
+        let set_id = exercises[indexPath.section].sets[indexPath.row-1].set_id
+        let set_doc = Firestore.firestore().collection("users/\(self.uid)/workouts").document(set_id)
+        set_doc.updateData(["completion": cell.completed])
     }
 }
 
@@ -205,6 +260,7 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == exercises.count) {
             let addExerciseCell = self.tableView.dequeueReusableCell(withIdentifier: "AddExerciseCell", for: indexPath) as! AddExerciseCell
+            addExerciseCell.delegate = self
             return addExerciseCell
         }
         else {
@@ -222,6 +278,7 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
             else {
                 let setCell = self.tableView.dequeueReusableCell(withIdentifier: "SetCell", for: indexPath) as! SetCell
                 setCell.setSets(set: exercises[indexPath.section].sets[indexPath.row - 1])
+                setCell.setCompletion(completion: exercises[indexPath.section].sets[indexPath.row - 1].completion)
                 setCell.delegate = self
                 return setCell
             }
