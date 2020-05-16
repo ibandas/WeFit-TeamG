@@ -57,13 +57,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reps:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UOD-aW-oGy" customClass="LeaderboardViewController">
-                                                    <rect key="frame" x="235" y="11" width="59" height="68"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="21"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ju4-fK-KBL">
                                                     <rect key="frame" x="108" y="28" width="81" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -74,7 +67,7 @@
                                                     </connections>
                                                 </textField>
                                                 <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H6y-HY-Z92">
-                                                    <rect key="frame" x="293" y="28" width="81" height="34"/>
+                                                    <rect key="frame" x="264" y="28" width="81" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -89,6 +82,21 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGZ-HN-pJl">
+                                                    <rect key="frame" x="377" y="33" width="20" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="checkmark.circle" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="checkmarkButton:" destination="RW1-Ag-gsx" eventType="touchUpInside" id="Gbh-at-Xl3"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reps:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UOD-aW-oGy" customClass="LeaderboardViewController">
+                                                    <rect key="frame" x="197" y="11" width="59" height="68"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="21"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -96,6 +104,7 @@
                                             <outlet property="RepLabel" destination="UOD-aW-oGy" id="nAS-c8-XhB"/>
                                             <outlet property="WeightEntry" destination="ju4-fK-KBL" id="bPn-PC-WLP"/>
                                             <outlet property="WeightLabel" destination="TnE-EX-V4O" id="e8l-wk-SCg"/>
+                                            <outlet property="checkmarkButton" destination="LGZ-HN-pJl" id="oPj-ve-tLI"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddSetCell" id="EX0-t3-8Ca" customClass="AddSetCell" customModule="WeFit" customModuleProvider="target">
@@ -140,7 +149,7 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="AddExercisesButton:" destination="sy0-Mq-N0F" eventType="touchUpInside" id="21X-Pf-USz"/>
-                                                        <segue destination="RWq-38-Qvp" kind="show" id="DIc-eR-S2y"/>
+                                                        <segue destination="RWq-38-Qvp" kind="show" identifier="showPossibleExercises" id="DIc-eR-S2y"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -168,7 +177,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-348" y="-494"/>
+            <point key="canvasLocation" x="-349.27536231884062" y="-494.19642857142856"/>
         </scene>
         <!--Add ExercisesVC-->
         <scene sceneID="ME1-Ch-hbP">
@@ -460,7 +469,7 @@
         <!--Leaderboard-->
         <scene sceneID="kwd-nj-heC">
             <objects>
-                <viewController storyboardIdentifier="LeaderboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HUw-1Y-qKq" customClass="LeaderboardViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeaderboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HUw-1Y-qKq" customClass="Leaderboard" customModule="WeFit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R6C-oM-t1P">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -470,7 +479,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="joT-Yg-dnF">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RankCell" rowHeight="75" id="joT-Yg-dnF" customClass="RankCell" customModule="WeFit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="joT-Yg-dnF" id="LyJ-9n-htT">
@@ -484,12 +493,8 @@
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E3i-7p-i5f">
-                                                    <rect key="frame" x="116" y="16" width="45" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAz-by-x0D">
-                                                    <rect key="frame" x="178" y="26" width="37" height="24"/>
+                                                    <rect key="frame" x="178" y="11" width="159" height="53"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="17"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -502,8 +507,18 @@
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E3i-7p-i5f">
+                                                    <rect key="frame" x="106" y="18" width="49" height="39"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="name" destination="LAz-by-x0D" id="ZrD-4o-OwI"/>
+                                            <outlet property="points" destination="HSt-ci-DwV" id="bwo-Tm-JcF"/>
+                                            <outlet property="profilePicture" destination="E3i-7p-i5f" id="Zz0-ff-Clk"/>
+                                            <outlet property="rank" destination="5Xb-Fc-Zfi" id="xJo-GG-Kiq"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -566,10 +581,15 @@
                         <viewLayoutGuide key="safeArea" id="rTw-Rb-4zi"/>
                     </view>
                     <navigationItem key="navigationItem" title="Leaderboard" id="vMh-sX-22k"/>
+                    <connections>
+                        <outlet property="challenge_title" destination="FpB-1c-9EZ" id="WnF-i3-r8j"/>
+                        <outlet property="rank" destination="uIX-ZU-X69" id="6X6-s9-UWH"/>
+                        <outlet property="tableView" destination="X6D-Y0-bo1" id="eak-SJ-TiR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Aj-OI-ZN1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="168" y="402"/>
+            <point key="canvasLocation" x="166.66666666666669" y="401.78571428571428"/>
         </scene>
         <!--Main Tab Controller-->
         <scene sceneID="YCK-Bu-4vf">
@@ -665,6 +685,7 @@
     </scenes>
     <resources>
         <image name="blue2,0" width="1096" height="64"/>
+        <image name="checkmark.circle" catalog="system" width="64" height="60"/>
         <image name="gradient" width="1642" height="248"/>
         <image name="person.3.fill" catalog="system" width="71" height="34"/>
         <image name="person.circle" catalog="system" width="64" height="60"/>
