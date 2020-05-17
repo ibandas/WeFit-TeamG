@@ -87,23 +87,33 @@ extension AddChallengeViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell
         switch tableView {
         case exerciseTblView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "exercisecell", for: indexPath)
             cell.textLabel?.text = exerciseList[indexPath.row]
+            return cell
         case metricTblView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "metriccell", for: indexPath)
             cell.textLabel?.text = metricList[indexPath.row]
+            return cell
         default:
             print("something is wrong")
         }
-        return cell
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        exerciseDrop.setTitle("\(exerciseList[indexPath.row])", for: .normal)
-        animate(toggle: false, type: exerciseDrop)
+        switch tableView{
+        case exerciseTblView:
+            exerciseDrop.setTitle("\(exerciseList[indexPath.row])", for: .normal)
+            animate(toggle: false, type: exerciseDrop)
+        case metricTblView:
+            metricDrop.setTitle("\(metricList[indexPath.row])", for: .normal)
+            animate(toggle: false, type: metricDrop)
+        default:
+            print("something wrong")
+        }
+       
     }
 }
