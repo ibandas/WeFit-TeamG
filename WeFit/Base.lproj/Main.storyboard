@@ -395,7 +395,7 @@
                     <navigationItem key="navigationItem" id="sdG-6e-0RA">
                         <barButtonItem key="rightBarButtonItem" title="Add" id="dmg-DW-LV6">
                             <connections>
-                                <action selector="addMembers:" destination="xNC-XF-c3X" id="fqf-NS-swf"/>
+                                <segue destination="awn-9j-9Vt" kind="unwind" unwindAction="unwindFromChallengeAddMembers:" id="BSs-rI-dQ0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -404,6 +404,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qn9-J2-70t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="awn-9j-9Vt" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1863.7681159420292" y="-163.39285714285714"/>
         </scene>

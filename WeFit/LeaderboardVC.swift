@@ -32,6 +32,29 @@ class Leaderboard: UIViewController {
         }
     }
     
+    @IBAction func unwindFromChallengeAddMembers(_ sender: UIStoryboardSegue) {
+        if sender.source is ChallengeAddMemberVC {
+            if let senderVC = sender.source as? ChallengeAddMemberVC {
+                let challenge_ref = Firestore.firestore().collection("challenges").document(senderVC.challenge_id)
+                    let cells = senderVC.tableView.visibleCells as! [ChallengeMemberCell]
+                    for cell in cells {
+                        if(cell.accessoryType == UITableViewCell.AccessoryType.checkmark) {
+                            let indexPath = senderVC.tableView.indexPath(for: cell)
+                            let uid: String = senderVC.members[indexPath!.row].uid
+                            let firstName: String = senderVC.members[indexPath!.row].firstName
+                            let lastName: String = senderVC.members[indexPath!.row].lastName
+                            let points: Int = 0
+                            let newMember: Dictionary<String, Any> = ["firstName": firstName,
+                                                                      "lastName": lastName,
+                                                                      "points": points]
+                            challenge_ref.updateData(["scores.\(uid)": newMember,
+                                                      "members": FieldValue.arrayUnion([uid])])
+                        }
+                    }
+                }
+            }
+        }
+    
     
     var leaderboard: [Competitor] = []
     var challenges: myChallenges = myChallenges()
