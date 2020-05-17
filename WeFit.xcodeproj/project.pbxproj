@@ -59,7 +59,7 @@
 		1AC04AD9246A08DF002E8A40 /* Competitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Competitor.swift; sourceTree = "<group>"; };
 		1AC04ADB246A3275002E8A40 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		1AE463532462460E002759D2 /* WeFit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeFit.entitlements; sourceTree = "<group>"; };
-		1AFE50E424623858004C560A /* FacebookLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginVC.swift; sourceTree = "<group>"; };
+		1AFE50E424623858004C560A /* FacebookLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FacebookLoginVC.swift; path = WeFit/FacebookLoginVC.swift; sourceTree = SOURCE_ROOT; };
 		239DCFAA1DD9A860441A5F7E /* Pods_WeFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F41BD77EB61A337DC227591 /* Pods-WeFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeFit.release.xcconfig"; path = "Target Support Files/Pods-WeFit/Pods-WeFit.release.xcconfig"; sourceTree = "<group>"; };
 		999FFA8A24663D24002AA407 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -70,7 +70,7 @@
 		99D2C7972462216600C5273B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		99D2C7992462237400C5273B /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		99D2C79B24622D6A00C5273B /* NewChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChallengeViewController.swift; sourceTree = "<group>"; };
-		99F6B8CE2470989B002582C4 /* AddChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddChallengeViewController.swift; path = "../../WeFit-TeamG copy 3/WeFit/AddChallengeViewController.swift"; sourceTree = "<group>"; };
+		99F6B8CE2470989B002582C4 /* AddChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddChallengeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
