@@ -374,7 +374,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0o-Hy-M3W">
-                                                    <rect key="frame" x="20" y="12" width="45" height="21"/>
+                                                    <rect key="frame" x="20" y="12" width="145" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -382,6 +382,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="name" destination="m0o-Hy-M3W" id="B67-tD-AAn"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -389,7 +392,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="q4T-9g-osl"/>
                     </view>
-                    <navigationItem key="navigationItem" id="sdG-6e-0RA"/>
+                    <navigationItem key="navigationItem" id="sdG-6e-0RA">
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="dmg-DW-LV6">
+                            <connections>
+                                <action selector="addMembers:" destination="xNC-XF-c3X" id="fqf-NS-swf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="X9M-vW-L6a" id="5PP-vI-J1E"/>
                     </connections>
@@ -629,6 +638,7 @@
                                     <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="addMembers:" destination="HUw-1Y-qKq" eventType="touchUpInside" id="O51-5z-W6p"/>
                                     <segue destination="xNC-XF-c3X" kind="show" id="ai9-eN-ubS"/>
                                 </connections>
                             </button>

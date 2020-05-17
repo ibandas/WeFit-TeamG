@@ -8,8 +8,16 @@
 
 import UIKit
 
+
+
 class ChallengeMemberCell: UITableViewCell {
 
+    @IBOutlet weak var name: UILabel!
+    
+    func setName(firstName: String, lastName: String) {
+        self.name.text = "\(firstName) \(lastName)"
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

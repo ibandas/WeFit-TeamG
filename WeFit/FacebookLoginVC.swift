@@ -71,7 +71,7 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
         }
 
         // After successful login, sets new root controller at homepage
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let homePage = storyBoard.instantiateViewController(withIdentifier: "MainTabController") as! UITabBarController
             UIApplication.shared.windows.first?.rootViewController = homePage

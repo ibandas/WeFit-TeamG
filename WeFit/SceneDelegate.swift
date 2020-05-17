@@ -35,6 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 self.window!.makeKeyAndVisible()
             }
             else {
+                let user = User()
                 let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTabController") as! UITabBarController
                 
                 self.window!.rootViewController = initialViewController

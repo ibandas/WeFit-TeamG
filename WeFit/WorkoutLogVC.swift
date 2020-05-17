@@ -214,11 +214,9 @@ extension WorkoutLog: SetCellDelegate {
                     let points = Int64(cell.RepEntry.text!)!
                     if !cell.completed {
                         document.reference.updateData([field_path: FieldValue.increment(points)])
-                        print("Added 50 to challenge points")
                     } else {
                         let points = (points * -1)
                         document.reference.updateData([field_path: FieldValue.increment(points)])
-                        print("Subtracting 50 to challenge points")
                     }
                 }
                 completion()

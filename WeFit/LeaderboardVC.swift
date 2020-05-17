@@ -17,6 +17,22 @@ class Leaderboard: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var challenge_title: UILabel!
     @IBOutlet weak var rank: UILabel!
+    
+    @IBAction func addMembers(_ sender: Any) {
+        print("Navigated")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.destination is ChallengeAddMemberVC
+        {
+            let vc = segue.destination as? ChallengeAddMemberVC
+            vc?.challenge_id = challenges.challenges[0].challenge_id
+            vc?.already_members = leaderboard
+        }
+    }
+    
+    
     var leaderboard: [Competitor] = []
     var challenges: myChallenges = myChallenges()
     var refreshControl = UIRefreshControl()
@@ -32,7 +48,6 @@ class Leaderboard: UIViewController {
             self.dismiss(animated: true, completion: nil)
             self.refreshControl.endRefreshing()
             for challenge in self.challenges.challenges {
-                print(challenge.leaderboard)
             }
        }
     }
@@ -52,6 +67,8 @@ class Leaderboard: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
+    
+    
     
     func startLoadingAlert() {
         let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
