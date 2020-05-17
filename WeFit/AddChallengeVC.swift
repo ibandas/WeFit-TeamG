@@ -34,8 +34,6 @@ extension UIColor {
 class AddChallengeVC: UIViewController {
 
     
-    @IBOutlet weak var exerciseDrop: UIButton!
-    @IBOutlet weak var exerciseTblView: UITableView!
     @IBOutlet weak var metricDrop: UIButton!
     @IBOutlet weak var metricTblView: UITableView!
 
@@ -46,7 +44,7 @@ class AddChallengeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        exerciseTblView.isHidden = true
+
         metricTblView.isHidden = true
         
         let newLayer = CAGradientLayer()
@@ -60,15 +58,7 @@ class AddChallengeVC: UIViewController {
     }
     
     
-    
-    @IBAction func onClickExercise(_ sender: Any) {
-        if exerciseTblView.isHidden{
-            animate(toggle: true, type: exerciseDrop)
-        } else{
-            animate(toggle: false, type: exerciseDrop)
-        }
-    }
-    
+
     
     @IBAction func onClickMetric(_ sender: Any) {
         if metricTblView.isHidden{
@@ -80,74 +70,33 @@ class AddChallengeVC: UIViewController {
     
     
     func animate(toggle: Bool, type: UIButton){
-         if type == exerciseDrop {
-               
-               if toggle {
-                   UIView.animate(withDuration: 0.3) {
-                       self.exerciseTblView.isHidden = false
-                   }
-               } else {
-                   UIView.animate(withDuration: 0.3) {
-                       self.exerciseTblView.isHidden = true
-                   }
-               }
-               } else {
-                   if toggle {
-                       UIView.animate(withDuration: 0.3) {
-                           self.metricTblView.isHidden = false
-                       }
-                   } else {
-                       UIView.animate(withDuration: 0.3) {
-                           self.metricTblView.isHidden = true
-                       }
-                   }
-               }
+       if toggle {
+           UIView.animate(withDuration: 0.3) {
+               self.metricTblView.isHidden = false
+           }
+       } else {
+           UIView.animate(withDuration: 0.3) {
+               self.metricTblView.isHidden = true
+           }
+       }
+   }
     }
-}
+
 
 extension AddChallengeVC: UITableViewDelegate, UITableViewDataSource{
   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var numberofRows = 1
-        switch tableView {
-            case exerciseTblView:
-                numberofRows = exerciseList.count
-            case metricTblView:
-                numberofRows = metricList.count
-            default:
-                print("something is wrong")
-        }
-        return numberofRows
+        return metricList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch tableView {
-        case exerciseTblView:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "exercisecell", for: indexPath)
-            cell.textLabel?.text = exerciseList[indexPath.row]
-            return cell
-        case metricTblView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "metriccell", for: indexPath)
             cell.textLabel?.text = metricList[indexPath.row]
             return cell
-        default:
-            print("something is wrong")
-        }
-        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        switch tableView{
-        case exerciseTblView:
-            exerciseDrop.setTitle("\(exerciseList[indexPath.row])", for: .normal)
-            animate(toggle: false, type: exerciseDrop)
-        case metricTblView:
             metricDrop.setTitle("\(metricList[indexPath.row])", for: .normal)
             animate(toggle: false, type: metricDrop)
-        default:
-            print("something wrong")
         }
-       
-    }
 }
