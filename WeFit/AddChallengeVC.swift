@@ -8,13 +8,38 @@
 
 import UIKit
 
-class AddChallengeViewController: UIViewController {
+extension UIColor {
+
+    class var customBlue: UIColor {
+        let lightBlue = 0x76B3D2
+        return UIColor.rgb(fromHex: lightBlue)
+    }
+    
+    class var customGreen: UIColor {
+           let lightGreen = 0x66B186
+           return UIColor.rgb(fromHex: lightGreen)
+       }
+
+    class func rgb(fromHex: Int) -> UIColor {
+
+        let red =   CGFloat((fromHex & 0xFF0000) >> 16) / 0xFF
+        let green = CGFloat((fromHex & 0x00FF00) >> 8) / 0xFF
+        let blue =  CGFloat(fromHex & 0x0000FF) / 0xFF
+        let alpha = CGFloat(1.0)
+
+        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
+    }
+}
+
+class AddChallengeVC: UIViewController {
 
     
     @IBOutlet weak var exerciseDrop: UIButton!
     @IBOutlet weak var exerciseTblView: UITableView!
     @IBOutlet weak var metricDrop: UIButton!
     @IBOutlet weak var metricTblView: UITableView!
+
+    @IBOutlet weak var submitButton: UIButton!
     
     var exerciseList = ["Squats", "Pushups", "Deadlift"]
     var metricList = ["Miles", "Kilometers", "Pounds", "Kilograms", "Reps"]
@@ -23,6 +48,13 @@ class AddChallengeViewController: UIViewController {
         super.viewDidLoad()
         exerciseTblView.isHidden = true
         metricTblView.isHidden = true
+        
+        let newLayer = CAGradientLayer()
+               newLayer.colors = [UIColor.customBlue.cgColor, UIColor.customGreen.cgColor]
+               newLayer.frame = view.frame
+               
+               view.layer.insertSublayer(newLayer, at: 0)
+        submitButton.layer.borderColor = UIColor.white.cgColor
     }
     
     
@@ -71,7 +103,7 @@ class AddChallengeViewController: UIViewController {
     }
 }
 
-extension AddChallengeViewController: UITableViewDelegate, UITableViewDataSource{
+extension AddChallengeVC: UITableViewDelegate, UITableViewDataSource{
   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var numberofRows = 1
