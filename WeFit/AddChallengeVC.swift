@@ -54,7 +54,9 @@ class AddChallengeVC: UIViewController {
                newLayer.frame = view.frame
                
                view.layer.insertSublayer(newLayer, at: 0)
+        
         submitButton.layer.borderColor = UIColor.white.cgColor
+        submitButton.layer.borderWidth = 1.5
     }
     
     
