@@ -101,6 +101,14 @@ class Leaderboard: UIViewController {
     func setRank(rank: String) {
         self.rank.text? = rank
     }
+    
+    func loadChallenge(selectedIndex: Int){
+        
+        self.challenges.challenges[selectedIndex].sortLeaderboard()
+        self.leaderboard = self.challenges.challenges[selectedIndex].leaderboard
+            
+    }
+        
 }
 
 extension Leaderboard: UITableViewDelegate, UITableViewDataSource {
@@ -144,8 +152,11 @@ extension Leaderboard: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.challengeTblView {
-            challengeDrop.setTitle("\(challenges.challenges[indexPath.row].title)", for: .normal)
+            var selectedChallenge = indexPath.row
+            challengeDrop.setTitle("  \(challenges.challenges[indexPath.row].title)", for: .normal)
             animate(toggle: false)
+            
+            loadChallenge(selectedIndex: selectedChallenge)
         }
     }
 }
