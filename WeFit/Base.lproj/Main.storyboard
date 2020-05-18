@@ -561,8 +561,8 @@
                     <connections>
                         <outlet property="challengeDrop" destination="Y3N-cQ-rUq" id="g1h-l7-XSV"/>
                         <outlet property="challengeTblView" destination="ii5-A7-2dO" id="ZTg-lH-3Ta"/>
+                        <outlet property="leaderboardTblView" destination="X6D-Y0-bo1" id="LjE-d6-w1O"/>
                         <outlet property="rank" destination="uIX-ZU-X69" id="6X6-s9-UWH"/>
-                        <outlet property="tableView" destination="X6D-Y0-bo1" id="eak-SJ-TiR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Aj-OI-ZN1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
