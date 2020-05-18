@@ -17,6 +17,11 @@ class Leaderboard: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var challenge_title: UILabel!
     @IBOutlet weak var rank: UILabel!
+    @IBOutlet weak var challengeDrop: UIButton!
+    
+    @IBOutlet weak var challengeTblView: UITableView!
+    
+    
     var leaderboard: [Competitor] = []
     var challenges: myChallenges = myChallenges()
     var refreshControl = UIRefreshControl()
@@ -51,6 +56,28 @@ class Leaderboard: UIViewController {
         }
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        challengeTblView.isHidden = true
+    }
+    
+    
+    @IBAction func onClickDrop(_ sender: Any) {
+        if challengeTblView.isHidden{
+            animate(toggle: true)
+        } else{
+            animate(toggle: false)
+        }
+    }
+    
+    func animate(toggle: Bool){
+        if toggle {
+            UIView.animate(withDuration: 0.3) {
+                self.challengeTblView.isHidden = false
+            }
+        } else {
+            UIView.animate(withDuration: 0.3) {
+                self.challengeTblView.isHidden = true
+            }
+        }
     }
     
     func startLoadingAlert() {
@@ -85,15 +112,39 @@ extension Leaderboard: UITableViewDelegate, UITableViewDataSource {
     
         // Total amount of exercises displayed in Table View
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return leaderboard.count
+        var numberOfRows = 1
+        switch tableView {
+        case tableView:
+            numberOfRows = leaderboard.count
+        case challengeTblView:
+            numberOfRows = challenges.challenges.count
+        default:
+            print("something is wrong")
+        }
+        return numberOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let rankCell = self.tableView.dequeueReusableCell(withIdentifier: "RankCell", for: indexPath) as! RankCell
-        rankCell.setProfile(competitor: leaderboard[indexPath.row], indexPath: indexPath)
-        if leaderboard[indexPath.row].id == self.uid {
-            self.setRank(rank: String(indexPath.row + 1))
+        
+        switch tableView {
+        case tableView:
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "RankCell", for: indexPath) as! RankCell
+            cell.setProfile(competitor: leaderboard[indexPath.row], indexPath: indexPath)
+            if leaderboard[indexPath.row].id == self.uid {
+                self.setRank(rank: String(indexPath.row + 1))
+            }
+            return cell
+        case challengeTblView:
+            let cell = challengeTblView.dequeueReusableCell(withIdentifier: "ChallengeTitleCell", for: indexPath)
+            return cell
+        default:
+            print("something wrong")
         }
-        return rankCell
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        challengeDrop.setTitle("\(challenges.challenges[indexPath.row].title)", for: .normal)
+        animate(toggle: false)
     }
 }
