@@ -35,8 +35,6 @@ class WorkoutLog: UIViewController {
     }
     
     func loadWorkouts() {
-        // let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
-
         let ref = Firestore.firestore().collection("users/\(self.uid)/workouts").whereField("created_at", isDateInToday: Date()).order(by: "created_at")
 
         ref.getDocuments(completion: {(snapshot, error) in
@@ -203,7 +201,10 @@ extension WorkoutLog: SetCellDelegate {
     func updateChallenge(cell: SetCell, completion: @escaping () -> ()) {
         let indexPath = self.tableView.indexPath(for: cell)
         let exercise_title = exercises[indexPath!.section].title
-        let challenge_ref = Firestore.firestore().collection("challenges").whereField("active", isEqualTo: true).whereField("members", arrayContains: self.uid).whereField("exercise", isEqualTo: exercise_title)
+        
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+        let start = Calendar.current.date(from: components)!
+        let challenge_ref = Firestore.firestore().collection("challenges").whereField("members", arrayContains: self.uid).whereField("ends_at", isGreaterThanOrEqualTo: start)
         let field_path = FieldPath(["scores", self.uid, "points"])
         challenge_ref.getDocuments(completion: {(snapshot, error) in
             if error != nil {
@@ -211,12 +212,16 @@ extension WorkoutLog: SetCellDelegate {
             } else {
                 guard let snap = snapshot else {return}
                 for document in snap.documents {
-                    let points = Int64(cell.RepEntry.text!)!
-                    if !cell.completed {
-                        document.reference.updateData([field_path: FieldValue.increment(points)])
-                    } else {
-                        let points = (points * -1)
-                        document.reference.updateData([field_path: FieldValue.increment(points)])
+                    let data = document.data()
+                    let exercises: [String] = data["exercises"] as! [String]
+                    if (exercises.contains(exercise_title)) {
+                        let points = Int64(cell.RepEntry.text!)!
+                        if !cell.completed {
+                            document.reference.updateData([field_path: FieldValue.increment(points)])
+                        } else {
+                            let points = (points * -1)
+                            document.reference.updateData([field_path: FieldValue.increment(points)])
+                        }
                     }
                 }
                 completion()
