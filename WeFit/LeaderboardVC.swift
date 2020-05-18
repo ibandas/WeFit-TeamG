@@ -15,7 +15,6 @@ class Leaderboard: UIViewController {
     
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var challenge_title: UILabel!
     @IBOutlet weak var rank: UILabel!
     @IBOutlet weak var challengeDrop: UIButton!
     
@@ -30,7 +29,6 @@ class Leaderboard: UIViewController {
     
     @objc func refresh(_ sender: AnyObject) {
         self.challenges.loadChallenges {
-            self.setChallengeTitle(title: self.challenges.challenges[0].title)
             self.challenges.challenges[0].sortLeaderboard()
             self.leaderboard = self.challenges.challenges[0].leaderboard
             self.tableView.reloadData()
@@ -48,7 +46,6 @@ class Leaderboard: UIViewController {
         self.tableView.addSubview(refreshControl)
         self.startLoadingAlert()
         self.challenges.loadChallenges {
-            self.setChallengeTitle(title: self.challenges.challenges[0].title)
             self.challenges.challenges[0].sortLeaderboard()
             self.leaderboard = self.challenges.challenges[0].leaderboard
             self.tableView.reloadData()
@@ -95,10 +92,7 @@ class Leaderboard: UIViewController {
             })
         }
     }
-    
-    func setChallengeTitle(title: String) {
-        self.challenge_title.text? = title
-    }
+
     
     func setRank(rank: String) {
         self.rank.text? = rank
@@ -136,6 +130,7 @@ extension Leaderboard: UITableViewDelegate, UITableViewDataSource {
             return cell
         case challengeTblView:
             let cell = challengeTblView.dequeueReusableCell(withIdentifier: "ChallengeTitleCell", for: indexPath)
+            cell.textLabel?.text = challenges.challenges[indexPath.row].title
             return cell
         default:
             print("something wrong")
