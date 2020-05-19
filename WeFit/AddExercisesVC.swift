@@ -11,12 +11,16 @@ import UIKit
 class AddExercisesVC: UIViewController {
     
     @IBOutlet weak var possibleExercisesTV: UITableView!
-    
+  
+    @IBOutlet weak var possibleSearchBar: UISearchBar!
     @IBOutlet weak var addButtonPressed: UIBarButtonItem!
     
     var exercises: [String] = ["Bench Press", "Squat", "Deadlift", "Pushup"]
     var already_chosen_exercises: [String] = []
     var selectedExercises: [String] = []
+    
+    var searchExercise = [String]()
+    var searching = false
 
     
     override func viewDidLoad() {
@@ -27,6 +31,7 @@ class AddExercisesVC: UIViewController {
         super.viewDidLoad()
         possibleExercisesTV.delegate = self
         possibleExercisesTV.dataSource = self
+        self.possibleSearchBar.delegate = self
     }
     
     
@@ -58,12 +63,19 @@ extension AddExercisesVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return exercises.count
-    }
+        if searching{
+            return searchExercise.count
+        }else{
+            return exercises.count
+        }    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let possibleExerciseCell = self.possibleExercisesTV.dequeueReusableCell(withIdentifier: "PossibleExerciseCell", for: indexPath) as! PossibleExerciseCell
-        possibleExerciseCell.setPossibleExerciseTitle(title: exercises[indexPath.row])
+        if searching{
+            possibleExerciseCell.setPossibleExerciseTitle(title: searchExercise[indexPath.row])
+        }else{
+            possibleExerciseCell.setPossibleExerciseTitle(title: exercises[indexPath.row])
+        }
         return possibleExerciseCell
     }
     
@@ -74,5 +86,20 @@ extension AddExercisesVC: UITableViewDataSource, UITableViewDelegate {
         else {
             possibleExercisesTV.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
         }
+    }
+}
+
+extension AddExercisesVC: UISearchBarDelegate{
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchExercise = exercises.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
+        searching = true
+        possibleExercisesTV.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        possibleSearchBar.text = ""
+        possibleExercisesTV.reloadData()
     }
 }

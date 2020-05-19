@@ -191,11 +191,15 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="PZw-jy-jWr">
+                                <searchBar key="tableHeaderView" contentMode="redraw" showsCancelButton="YES" id="PZw-jy-jWr">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="barTintColor" cyan="0.55000000000000004" magenta="0.050000000000000003" yellow="0.0" black="0.040464527030000003" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                                     <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="RWq-38-Qvp" id="Ved-lU-S7Z"/>
+                                    </connections>
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PossibleExerciseCell" id="0ew-wz-efj" customClass="PossibleExerciseCell" customModule="WeFit" customModuleProvider="target">
@@ -219,6 +223,9 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="delegate" destination="RWq-38-Qvp" id="2eh-dy-Umz"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -239,6 +246,7 @@
                     <connections>
                         <outlet property="addButtonPressed" destination="WUw-BZ-tli" id="YL4-bw-D7R"/>
                         <outlet property="possibleExercisesTV" destination="ffv-gc-nU9" id="okY-lx-oUc"/>
+                        <outlet property="possibleSearchBar" destination="PZw-jy-jWr" id="ARz-D3-nW4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R1A-FW-Wf0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
