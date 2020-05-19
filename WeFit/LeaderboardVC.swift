@@ -15,7 +15,7 @@ import FirebaseStorage
 class Leaderboard: UIViewController {
     
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var leaderboardTblView: UITableView!
     @IBOutlet weak var rank: UILabel!
     
     @IBAction func addMembers(_ sender: Any) {
@@ -72,7 +72,8 @@ class Leaderboard: UIViewController {
             self.challenges.challenges[0].sortLeaderboard()
             self.leaderboard = self.challenges.challenges[0].leaderboard
             self.loadCompetitors {
-                self.tableView.reloadData()
+                self.leaderboardTblView.reloadData()
+                self.challengeTblView.reloadData()
                 self.dismiss(animated: true, completion: nil)
                 self.refreshControl.endRefreshing()
                 let methodFinish = Date()
@@ -86,21 +87,24 @@ class Leaderboard: UIViewController {
         let methodStart = Date()
         super.viewDidLoad()
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        self.tableView.addSubview(refreshControl)
+        self.leaderboardTblView.addSubview(refreshControl)
         self.startLoadingAlert()
         self.challenges.loadChallenges {
             self.challenges.challenges[0].sortLeaderboard()
             self.leaderboard = self.challenges.challenges[0].leaderboard
             self.loadCompetitors {
-                self.tableView.reloadData()
+                self.leaderboardTblView.reloadData()
+                self.challengeTblView.reloadData()
                 self.dismiss(animated: true, completion: nil)
                 let methodFinish = Date()
                 let executionTime = methodFinish.timeIntervalSince(methodStart)
                 print("Execution time: \(executionTime)")
             }
         }
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        self.leaderboardTblView.delegate = self
+        self.leaderboardTblView.dataSource = self
+        self.challengeTblView.delegate = self
+        self.challengeTblView.dataSource = self
         challengeTblView.isHidden = true
     }
     
@@ -172,6 +176,14 @@ class Leaderboard: UIViewController {
     func setRank(rank: String) {
         self.rank.text? = rank
     }
+    
+    func loadChallenge(selectedIndex: Int){
+        
+        self.challenges.challenges[selectedIndex].sortLeaderboard()
+        self.leaderboard = self.challenges.challenges[selectedIndex].leaderboard
+            
+    }
+        
 }
 
 extension Leaderboard: UITableViewDelegate, UITableViewDataSource {
@@ -183,7 +195,7 @@ extension Leaderboard: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var numberOfRows = 1
         switch tableView {
-        case tableView:
+        case leaderboardTblView:
             numberOfRows = leaderboard.count
         case challengeTblView:
             numberOfRows = challenges.challenges.count
@@ -196,15 +208,15 @@ extension Leaderboard: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch tableView {
-        case tableView:
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: "RankCell", for: indexPath) as! RankCell
+        case leaderboardTblView:
+            let cell = self.leaderboardTblView.dequeueReusableCell(withIdentifier: "RankCell", for: indexPath) as! RankCell
             cell.setProfile(competitor: leaderboard[indexPath.row], indexPath: indexPath)
             if leaderboard[indexPath.row].id == self.uid {
                 self.setRank(rank: String(indexPath.row + 1))
             }
             return cell
         case challengeTblView:
-            let cell = challengeTblView.dequeueReusableCell(withIdentifier: "ChallengeTitleCell", for: indexPath)
+            let cell = self.challengeTblView.dequeueReusableCell(withIdentifier: "ChallengeTitleCell", for: indexPath)
             cell.textLabel?.text = challenges.challenges[indexPath.row].title
             return cell
         default:
@@ -214,7 +226,12 @@ extension Leaderboard: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        challengeDrop.setTitle("\(challenges.challenges[indexPath.row].title)", for: .normal)
-        animate(toggle: false)
+        if tableView == self.challengeTblView {
+            var selectedChallenge = indexPath.row
+            challengeDrop.setTitle("  \(challenges.challenges[indexPath.row].title)", for: .normal)
+            animate(toggle: false)
+            
+            loadChallenge(selectedIndex: selectedChallenge)
+        }
     }
 }
