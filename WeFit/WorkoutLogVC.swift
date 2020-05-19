@@ -177,7 +177,6 @@ extension WorkoutLog: AddExerciseCellDelegate {
         for exercise in self.exercises {
             destination.already_chosen_exercises.append(exercise.title)
         }
-        print(destination.already_chosen_exercises)
     }
 }
 

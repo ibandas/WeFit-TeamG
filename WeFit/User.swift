@@ -8,23 +8,18 @@
 
 import Foundation
 import Firebase
+import FirebaseStorage
 import UIKit
 
 class User {
-    var uid: String = ""
+    var uid: String = Auth.auth().currentUser!.uid
     var firstName: String = ""
     var lastName: String = ""
     var profilePicture: UIImage = UIImage(named: "pp1")!
     
-    init() {
-        self.getFirebaseUser() {
-            print("Name: \(self.firstName) \(self.lastName)")
-        }
-    }
+    static let sharedGlobal = User()
     
-    // This only to be used for the user logged in
     func getFirebaseUser(completion: @escaping () -> ()) {
-        self.uid = Auth.auth().currentUser!.uid
         let ref = Firestore.firestore().collection("users").document(self.uid)
         ref.getDocument(completion: {(snapshot, error) in
             if error != nil {
@@ -32,6 +27,18 @@ class User {
             }
             else {
                 guard let snap = snapshot else {return}
+                let storageRef = Storage.storage().reference().child("profile/\(self.uid).jpg")
+                
+                storageRef.downloadURL(completion: {(url, error) in
+                    do {
+                        print("HERE")
+                        let data = try Data(contentsOf: url!)
+                        self.profilePicture = UIImage(data: data as Data)!
+                    } catch {
+                        print("error")
+                    }
+                })
+                
                 let data = snap.data()
                 self.setFirstName(firstName: data!["firstName"] as! String)
                 self.setLastName(lastName: data!["lastName"] as! String)
@@ -52,3 +59,4 @@ class User {
         self.lastName = lastName
     }
 }
+

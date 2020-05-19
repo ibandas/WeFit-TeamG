@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseStorage
 
 
 class Leaderboard: UIViewController {
@@ -21,6 +22,14 @@ class Leaderboard: UIViewController {
     @IBAction func addMembers(_ sender: Any) {
         print("Navigated")
     }
+    
+    
+    var leaderboard: [Competitor] = []
+    var challenges: myChallenges = myChallenges()
+    let myGroup = DispatchGroup()
+    var refreshControl = UIRefreshControl()
+    let uid = Auth.auth().currentUser!.uid
+    let opQueue: OperationQueue = OperationQueue()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
@@ -55,27 +64,25 @@ class Leaderboard: UIViewController {
             }
         }
     
-    
-    var leaderboard: [Competitor] = []
-    var challenges: myChallenges = myChallenges()
-    var refreshControl = UIRefreshControl()
-    let uid = Auth.auth().currentUser!.uid
-    let opQueue: OperationQueue = OperationQueue()
-    
     @objc func refresh(_ sender: AnyObject) {
+        let methodStart = Date()
         self.challenges.loadChallenges {
             self.setChallengeTitle(title: self.challenges.challenges[0].title)
             self.challenges.challenges[0].sortLeaderboard()
             self.leaderboard = self.challenges.challenges[0].leaderboard
-            self.tableView.reloadData()
-            self.dismiss(animated: true, completion: nil)
-            self.refreshControl.endRefreshing()
-            for challenge in self.challenges.challenges {
+            self.loadCompetitors {
+                self.tableView.reloadData()
+                self.dismiss(animated: true, completion: nil)
+                self.refreshControl.endRefreshing()
+                let methodFinish = Date()
+                let executionTime = methodFinish.timeIntervalSince(methodStart)
+                print("Execution time: \(executionTime)")
             }
        }
     }
     
     override func viewDidLoad() {
+        let methodStart = Date()
         super.viewDidLoad()
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         self.tableView.addSubview(refreshControl)
@@ -84,11 +91,41 @@ class Leaderboard: UIViewController {
             self.setChallengeTitle(title: self.challenges.challenges[0].title)
             self.challenges.challenges[0].sortLeaderboard()
             self.leaderboard = self.challenges.challenges[0].leaderboard
-            self.tableView.reloadData()
-            self.dismiss(animated: true, completion: nil)
+            self.loadCompetitors {
+                self.tableView.reloadData()
+                self.dismiss(animated: true, completion: nil)
+                let methodFinish = Date()
+                let executionTime = methodFinish.timeIntervalSince(methodStart)
+                print("Execution time: \(executionTime)")
+            }
         }
         self.tableView.delegate = self
         self.tableView.dataSource = self
+    }
+    
+    func loadCompetitors(completion: @escaping () -> ()) {
+        self.myGroup.enter()
+        for competitor in self.challenges.challenges[0].leaderboard {
+            self.myGroup.enter()
+            let storageRef = Storage.storage().reference().child("profile/\(competitor.id).jpg")
+            storageRef.downloadURL(completion: {(url, error) in
+                do {
+                    print("Competitor: \(competitor.firstName)")
+                    if url != nil {
+                        let data = try Data(contentsOf: url!)
+                        let result = UIImage(data: data as Data)!
+                        competitor.profilePicture = result
+                    }
+                    self.myGroup.leave()
+                } catch {
+                    print("error")
+                }
+            })
+        }
+        self.myGroup.leave()
+        self.myGroup.notify(queue: .main) {
+            completion()
+        }
     }
     
     

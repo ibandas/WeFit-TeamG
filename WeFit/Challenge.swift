@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import FirebaseStorage
 import UIKit
 
 struct Challenge {
@@ -28,11 +29,12 @@ struct Challenge {
 
 class myChallenges {
     let uid: String = Auth.auth().currentUser!.uid
-    let myGroup: DispatchGroup = DispatchGroup()
+    let myGroup = DispatchGroup()
     var challenges: [Challenge] = []
     
     
     func loadChallenges(completion: @escaping () -> ()) {
+//        self.myGroup.enter()
         var challenge_results: [Challenge] = []
         let components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         let start = Calendar.current.date(from: components)!
@@ -61,14 +63,17 @@ class myChallenges {
                         let firstName = value["firstName"] as? String
                         let lastName = value["lastName"] as? String
                         let points = value["points"] as? Int
-                        let competitor = Competitor(id: key, firstName: firstName!, lastName: lastName!, points: points!)
+                        var competitor = Competitor(id: key, firstName: firstName!, lastName: lastName!, points: points!)
                         competitors.append(competitor)
                     }
+//                    self.myGroup.leave()
+//                    self.myGroup.notify(queue: .main) {
                     let challenge = Challenge(challenge_id: challenge_id, title: title!, exercise: exercise!, mectric: mectric!, group_owner: group_owner!, group_members: members!, leaderboard: competitors, created_at: created_at, ends_at: ends_at)
                     challenge_results.append(challenge)
+                    self.challenges = challenge_results
+                    completion()
+//                    }
                 }
-                self.challenges = challenge_results
-                completion()
             }
         })
     }

@@ -10,10 +10,17 @@ import Foundation
 import Firebase
 import UIKit
 
-struct Competitor {
-    var id: String
-    var firstName: String
-    var lastName: String
+class Competitor {
+    var id: String = ""
+    var firstName: String = ""
+    var lastName: String = ""
     var profilePicture: UIImage = UIImage(named: "pp1")!
-    var points: Int
+    var points: Int = 0
+    
+    init(id: String, firstName: String, lastName: String, points: Int) {
+        self.id = id
+        self.firstName = firstName
+        self.lastName = lastName
+        self.points = points
+    }
 }
