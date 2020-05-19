@@ -282,7 +282,6 @@
             </objects>
             <point key="canvasLocation" x="-3372.4637681159425" y="39.508928571428569"/>
         </scene>
-<<<<<<< HEAD
         <!--Leaderboard-->
         <scene sceneID="pMX-cF-EHX">
             <objects>
@@ -409,8 +408,6 @@
             </objects>
             <point key="canvasLocation" x="1863.7681159420292" y="-163.39285714285714"/>
         </scene>
-=======
->>>>>>> new-challenge
         <!--Profile View Controller-->
         <scene sceneID="E1Z-GM-dg2">
             <objects>
@@ -614,7 +611,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-<<<<<<< HEAD
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LtN-pK-WRn">
                                 <rect key="frame" x="288" y="213" width="122" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -625,7 +621,6 @@
                                 <connections>
                                     <action selector="addMembers:" destination="HUw-1Y-qKq" eventType="touchUpInside" id="O51-5z-W6p"/>
                                     <segue destination="xNC-XF-c3X" kind="show" id="ai9-eN-ubS"/>
-=======
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sNt-AV-S0V">
                                 <rect key="frame" x="23" y="156" width="246" height="253"/>
                                 <subviews>
@@ -687,7 +682,6 @@
                                 </state>
                                 <connections>
                                     <segue destination="7w9-uf-Kdf" kind="show" id="Xsp-02-28E"/>
->>>>>>> new-challenge
                                 </connections>
                             </button>
                         </subviews>
