@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import FirebaseStorage
 import UIKit
 
 struct Challenge {
@@ -28,22 +29,25 @@ struct Challenge {
 
 class myChallenges {
     let uid: String = Auth.auth().currentUser!.uid
-    let myGroup: DispatchGroup = DispatchGroup()
+    let myGroup = DispatchGroup()
     var challenges: [Challenge] = []
     
     
     func loadChallenges(completion: @escaping () -> ()) {
+//        self.myGroup.enter()
         var challenge_results: [Challenge] = []
-        let ref = Firestore.firestore().collection("challenges").whereField("active", isEqualTo: true).whereField("members", arrayContains: self.uid)
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+        let start = Calendar.current.date(from: components)!
+        let ref = Firestore.firestore().collection("challenges").whereField("members", arrayContains: self.uid).whereField("ends_at", isGreaterThanOrEqualTo: start).order(by: "ends_at")
         ref.getDocuments(completion: {(snapshot, error) in
             if error != nil {
-                print("Error")
+                print("Error: \(error)")
             }
             else {
                 guard let snap = snapshot else {return}
                 for document in snap.documents {
                     let data = document.data()
-                    let challenge_id = document.documentID as? String
+                    let challenge_id = document.documentID
                     let title = data["title"] as? String
                     let created_at_ts = data["created_at"] as? Timestamp
                     let ends_at_ts = data["ends_at"] as? Timestamp
@@ -59,15 +63,31 @@ class myChallenges {
                         let firstName = value["firstName"] as? String
                         let lastName = value["lastName"] as? String
                         let points = value["points"] as? Int
-                        let competitor = Competitor(id: key, firstName: firstName!, lastName: lastName!, points: points!)
+                        var competitor = Competitor(id: key, firstName: firstName!, lastName: lastName!, points: points!)
                         competitors.append(competitor)
                     }
-                    let challenge = Challenge(challenge_id: challenge_id!, title: title!, exercise: exercise!, mectric: mectric!, group_owner: group_owner!, group_members: members!, leaderboard: competitors, created_at: created_at, ends_at: ends_at)
+//                    self.myGroup.leave()
+//                    self.myGroup.notify(queue: .main) {
+                    let challenge = Challenge(challenge_id: challenge_id, title: title!, exercise: exercise!, mectric: mectric!, group_owner: group_owner!, group_members: members!, leaderboard: competitors, created_at: created_at, ends_at: ends_at)
                     challenge_results.append(challenge)
+                    self.challenges = challenge_results
+                    completion()
+//                    }
                 }
-                self.challenges = challenge_results
-                completion()
             }
         })
+    }
+}
+
+extension CollectionReference {
+    func whereField(_ field: String, isDateLess value: Date) -> Query {
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: value)
+        guard
+            let start = Calendar.current.date(from: components),
+            let end = Calendar.current.date(byAdding: .day, value: 1, to: start)
+        else {
+            fatalError("Could not find start date or calculate end date.")
+        }
+        return whereField(field, isLessThanOrEqualTo: end)
     }
 }
