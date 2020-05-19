@@ -71,7 +71,7 @@ class Leaderboard: UIViewController {
         self.challenges.loadChallenges {
             self.challenges.challenges[0].sortLeaderboard()
             self.leaderboard = self.challenges.challenges[0].leaderboard
-            self.loadCompetitors {
+            self.loadCompetitors(index: 0) {
                 self.leaderboardTblView.reloadData()
                 self.challengeTblView.reloadData()
                 self.dismiss(animated: true, completion: nil)
@@ -90,9 +90,10 @@ class Leaderboard: UIViewController {
         self.leaderboardTblView.addSubview(refreshControl)
         self.startLoadingAlert()
         self.challenges.loadChallenges {
+            print(self.uid)
             self.challenges.challenges[0].sortLeaderboard()
             self.leaderboard = self.challenges.challenges[0].leaderboard
-            self.loadCompetitors {
+            self.loadCompetitors(index: 0) {
                 self.leaderboardTblView.reloadData()
                 self.challengeTblView.reloadData()
                 self.dismiss(animated: true, completion: nil)
@@ -129,9 +130,9 @@ class Leaderboard: UIViewController {
         }
     }
     
-    func loadCompetitors(completion: @escaping () -> ()) {
+    func loadCompetitors(index: Int, completion: @escaping () -> ()) {
         self.myGroup.enter()
-        for competitor in self.challenges.challenges[0].leaderboard {
+        for competitor in self.challenges.challenges[index].leaderboard {
             self.myGroup.enter()
             let storageRef = Storage.storage().reference().child("profile/\(competitor.id).jpg")
             storageRef.downloadURL(completion: {(url, error) in
@@ -178,9 +179,18 @@ class Leaderboard: UIViewController {
     }
     
     func loadChallenge(selectedIndex: Int){
-        
+        let methodStart = Date()
         self.challenges.challenges[selectedIndex].sortLeaderboard()
         self.leaderboard = self.challenges.challenges[selectedIndex].leaderboard
+        self.startLoadingAlert()
+        self.loadCompetitors(index: selectedIndex) {
+            self.leaderboardTblView.reloadData()
+            self.challengeTblView.reloadData()
+            self.dismiss(animated: true, completion: nil)
+            let methodFinish = Date()
+            let executionTime = methodFinish.timeIntervalSince(methodStart)
+            print("Execution time: \(executionTime)")
+        }
             
     }
         
@@ -227,7 +237,7 @@ extension Leaderboard: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.challengeTblView {
-            var selectedChallenge = indexPath.row
+            let selectedChallenge = indexPath.row
             challengeDrop.setTitle("  \(challenges.challenges[indexPath.row].title)", for: .normal)
             animate(toggle: false)
             
