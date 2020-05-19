@@ -37,7 +37,7 @@
 		99B1E12F24661D6C0005D8A7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B1E12E24661D6C0005D8A7 /* ProfileViewController.swift */; };
 		99D2C7982462216600C5273B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D2C7972462216600C5273B /* LoginViewController.swift */; };
 		99D2C79A2462237400C5273B /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D2C7992462237400C5273B /* MainTabController.swift */; };
-		99D2C79C24622D6A00C5273B /* NewChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D2C79B24622D6A00C5273B /* NewChallengeViewController.swift */; };
+		99F6B8D32470F8DC002582C4 /* AddChallengeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F6B8D22470F8DC002582C4 /* AddChallengeVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,7 +66,7 @@
 		1AC04ADD2470B5E4002E8A40 /* ChallengeAddMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeAddMemberVC.swift; sourceTree = "<group>"; };
 		1AC04ADF2470B755002E8A40 /* ChallengeMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeMemberCell.swift; sourceTree = "<group>"; };
 		1AE463532462460E002759D2 /* WeFit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeFit.entitlements; sourceTree = "<group>"; };
-		1AFE50E424623858004C560A /* FacebookLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginVC.swift; sourceTree = "<group>"; };
+		1AFE50E424623858004C560A /* FacebookLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FacebookLoginVC.swift; path = WeFit/FacebookLoginVC.swift; sourceTree = SOURCE_ROOT; };
 		239DCFAA1DD9A860441A5F7E /* Pods_WeFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F41BD77EB61A337DC227591 /* Pods-WeFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeFit.release.xcconfig"; path = "Target Support Files/Pods-WeFit/Pods-WeFit.release.xcconfig"; sourceTree = "<group>"; };
 		999FFA8A24663D24002AA407 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 		99B1E12E24661D6C0005D8A7 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		99D2C7972462216600C5273B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		99D2C7992462237400C5273B /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
-		99D2C79B24622D6A00C5273B /* NewChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChallengeViewController.swift; sourceTree = "<group>"; };
+		99F6B8D22470F8DC002582C4 /* AddChallengeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChallengeVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,17 +129,20 @@
 				1A7E1B04245769EB00AA6568 /* AddExerciseCell.swift */,
 				1AC04AD72469BE39002E8A40 /* RankCell.swift */,
 				1A38947E245DEFF1006DA20B /* PossibleExerciseCell.swift */,
-				1A38947C245DEF7A006DA20B /* AddExercisesVC.swift */,
 				999FFA8C24664BBE002AA407 /* ExerciseProfileCell.swift */,
+<<<<<<< HEAD
 				1AC04ADF2470B755002E8A40 /* ChallengeMemberCell.swift */,
 				1AC04ADD2470B5E4002E8A40 /* ChallengeAddMemberVC.swift */,
+=======
+				99D2C7992462237400C5273B /* MainTabController.swift */,
+				99D2C7972462216600C5273B /* LoginViewController.swift */,
+>>>>>>> new-challenge
 				1AFE50E424623858004C560A /* FacebookLoginVC.swift */,
 				1A7E1AFC2454D03900AA6568 /* WorkoutLogVC.swift */,
+				1A38947C245DEF7A006DA20B /* AddExercisesVC.swift */,
 				99B1E12A246347990005D8A7 /* LeaderboardVC.swift */,
-				99D2C79B24622D6A00C5273B /* NewChallengeViewController.swift */,
-				99D2C7992462237400C5273B /* MainTabController.swift */,
+				99F6B8D22470F8DC002582C4 /* AddChallengeVC.swift */,
 				99B1E12E24661D6C0005D8A7 /* ProfileViewController.swift */,
-				99D2C7972462216600C5273B /* LoginViewController.swift */,
 				1ABEA2832454BF5000BA97A6 /* Main.storyboard */,
 				999FFA8A24663D24002AA407 /* Assets.xcassets */,
 				1ABEA2882454BF5100BA97A6 /* LaunchScreen.storyboard */,
@@ -288,9 +291,12 @@
 				1AC04ADE2470B5E4002E8A40 /* ChallengeAddMemberVC.swift in Sources */,
 				1A7E1B03245768B100AA6568 /* AddSetCell.swift in Sources */,
 				1A7E1B0124564BB400AA6568 /* SetCell.swift in Sources */,
+<<<<<<< HEAD
 				99D2C79C24622D6A00C5273B /* NewChallengeViewController.swift in Sources */,
 				1AC04AE02470B755002E8A40 /* ChallengeMemberCell.swift in Sources */,
 				1A6BD40A2470C6A200D75268 /* Member.swift in Sources */,
+=======
+>>>>>>> new-challenge
 				1A7E1AFD2454D03900AA6568 /* WorkoutLogVC.swift in Sources */,
 				1ABEA2822454BF5000BA97A6 /* ViewController.swift in Sources */,
 				99B1E12F24661D6C0005D8A7 /* ProfileViewController.swift in Sources */,
@@ -300,6 +306,7 @@
 				99B1E12D24661C910005D8A7 /* Profile.swift in Sources */,
 				1ABEA27E2454BF5000BA97A6 /* AppDelegate.swift in Sources */,
 				1ABEA2802454BF5000BA97A6 /* SceneDelegate.swift in Sources */,
+				99F6B8D32470F8DC002582C4 /* AddChallengeVC.swift in Sources */,
 				1AC04ADC246A3275002E8A40 /* Challenge.swift in Sources */,
 				1A38947F245DEFF1006DA20B /* PossibleExerciseCell.swift in Sources */,
 				1ABEA2922454C49100BA97A6 /* Workout.swift in Sources */,
