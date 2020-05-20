@@ -12,15 +12,16 @@ import FirebaseStorage
 import UIKit
 
 struct Challenge {
-    var challenge_id: String
+    var challenge_id: String = ""
     var title: String = ""
-    var exercise: String = ""
+    var exercises: [String] = []
     var mectric: String = "reps"
     var group_owner: String = ""
-    var group_members: [String]
+    var group_members: [String] = []
     var leaderboard: [Competitor] = []
     var created_at: Date = Date()
     var ends_at: Date = Date()
+    var loaded: Bool = false
     
     mutating func sortLeaderboard() {
         self.leaderboard.sort(by: {$0.points > $1.points})
@@ -34,7 +35,7 @@ class myChallenges {
     
     
     func loadChallenges(completion: @escaping () -> ()) {
-//        self.myGroup.enter()
+        self.myGroup.enter()
         var challenge_results: [Challenge] = []
         let components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         let start = Calendar.current.date(from: components)!
@@ -46,6 +47,7 @@ class myChallenges {
             else {
                 guard let snap = snapshot else {return}
                 for document in snap.documents {
+                    self.myGroup.enter()
                     let data = document.data()
                     let challenge_id = document.documentID
                     let title = data["title"] as? String
@@ -55,7 +57,7 @@ class myChallenges {
                     let ends_at = ends_at_ts!.dateValue() as Date
                     let group_owner = data["group_owner"] as? String
                     let mectric = data["mectric"] as? String
-                    let exercise = data["exercise"] as? String
+                    let exercises = data["exercises"] as? [String]
                     let scores = data["scores"] as? Dictionary<String, Dictionary<String, Any>>
                     let members = data["members"] as? Array<String>
                     var competitors: [Competitor] = []
@@ -66,13 +68,14 @@ class myChallenges {
                         var competitor = Competitor(id: key, firstName: firstName!, lastName: lastName!, points: points!)
                         competitors.append(competitor)
                     }
-//                    self.myGroup.leave()
-//                    self.myGroup.notify(queue: .main) {
-                    let challenge = Challenge(challenge_id: challenge_id, title: title!, exercise: exercise!, mectric: mectric!, group_owner: group_owner!, group_members: members!, leaderboard: competitors, created_at: created_at, ends_at: ends_at)
+                    let challenge = Challenge(challenge_id: challenge_id, title: title!, exercises: exercises!, mectric: mectric!, group_owner: group_owner!, group_members: members!, leaderboard: competitors, created_at: created_at, ends_at: ends_at)
                     challenge_results.append(challenge)
+                    self.myGroup.leave()
+                }
+                self.myGroup.leave()
+                self.myGroup.notify(queue: .main) {
                     self.challenges = challenge_results
                     completion()
-//                    }
                 }
             }
         })

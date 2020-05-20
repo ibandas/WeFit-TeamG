@@ -42,7 +42,6 @@ class AddExercisesVC: UIViewController {
     
     func removeExerciseDifferences(completion: @escaping ([String]) -> ()) {
         var tempExercises: [String] = []
-        print(self.already_chosen_exercises)
         for exercise in self.exercises {
             if !self.already_chosen_exercises.contains(exercise) {
                 tempExercises.append(exercise)

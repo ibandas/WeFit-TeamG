@@ -25,7 +25,7 @@ class Leaderboard: UIViewController {
     
     @IBOutlet weak var challengeTblView: UITableView!
     
-    
+    var currentlySelectedIndex: Int = 0
     var leaderboard: [Competitor] = []
     var challenges: myChallenges = myChallenges()
     let myGroup = DispatchGroup()
@@ -43,46 +43,6 @@ class Leaderboard: UIViewController {
         }
     }
     
-    @IBAction func unwindFromChallengeAddMembers(_ sender: UIStoryboardSegue) {
-        if sender.source is ChallengeAddMemberVC {
-            if let senderVC = sender.source as? ChallengeAddMemberVC {
-                let challenge_ref = Firestore.firestore().collection("challenges").document(senderVC.challenge_id)
-                    let cells = senderVC.tableView.visibleCells as! [ChallengeMemberCell]
-                    for cell in cells {
-                        if(cell.accessoryType == UITableViewCell.AccessoryType.checkmark) {
-                            let indexPath = senderVC.tableView.indexPath(for: cell)
-                            let uid: String = senderVC.members[indexPath!.row].uid
-                            let firstName: String = senderVC.members[indexPath!.row].firstName
-                            let lastName: String = senderVC.members[indexPath!.row].lastName
-                            let points: Int = 0
-                            let newMember: Dictionary<String, Any> = ["firstName": firstName,
-                                                                      "lastName": lastName,
-                                                                      "points": points]
-                            challenge_ref.updateData(["scores.\(uid)": newMember,
-                                                      "members": FieldValue.arrayUnion([uid])])
-                        }
-                    }
-                }
-            }
-        }
-    
-    @objc func refresh(_ sender: AnyObject) {
-        let methodStart = Date()
-        self.challenges.loadChallenges {
-            self.challenges.challenges[0].sortLeaderboard()
-            self.leaderboard = self.challenges.challenges[0].leaderboard
-            self.loadCompetitors(index: 0) {
-                self.leaderboardTblView.reloadData()
-                self.challengeTblView.reloadData()
-                self.dismiss(animated: true, completion: nil)
-                self.refreshControl.endRefreshing()
-                let methodFinish = Date()
-                let executionTime = methodFinish.timeIntervalSince(methodStart)
-                print("Execution time: \(executionTime)")
-            }
-       }
-    }
-    
     override func viewDidLoad() {
         let methodStart = Date()
         super.viewDidLoad()
@@ -90,10 +50,10 @@ class Leaderboard: UIViewController {
         self.leaderboardTblView.addSubview(refreshControl)
         self.startLoadingAlert()
         self.challenges.loadChallenges {
-            print(self.uid)
             self.challenges.challenges[0].sortLeaderboard()
             self.leaderboard = self.challenges.challenges[0].leaderboard
             self.loadCompetitors(index: 0) {
+                self.challenges.challenges[0].loaded = true
                 self.leaderboardTblView.reloadData()
                 self.challengeTblView.reloadData()
                 self.dismiss(animated: true, completion: nil)
@@ -107,6 +67,82 @@ class Leaderboard: UIViewController {
         self.challengeTblView.delegate = self
         self.challengeTblView.dataSource = self
         challengeTblView.isHidden = true
+    }
+    
+    
+    @IBAction func unwindFromChallengeAddMembers(_ sender: UIStoryboardSegue) {
+        if sender.source is ChallengeAddMemberVC {
+            if let senderVC = sender.source as? ChallengeAddMemberVC {
+                let challenge_ref = Firestore.firestore().collection("challenges").document(senderVC.challenge_id)
+                let cells = senderVC.tableView.visibleCells as! [ChallengeMemberCell]
+                for cell in cells {
+                    if(cell.accessoryType == UITableViewCell.AccessoryType.checkmark) {
+                        let indexPath = senderVC.tableView.indexPath(for: cell)
+                        let uid: String = senderVC.members[indexPath!.row].uid
+                        let firstName: String = senderVC.members[indexPath!.row].firstName
+                        let lastName: String = senderVC.members[indexPath!.row].lastName
+                        let points: Int = 0
+                        let newMember: Dictionary<String, Any> = ["firstName": firstName,
+                                                                  "lastName": lastName,
+                                                                  "points": points]
+                        challenge_ref.updateData(["scores.\(uid)": newMember,
+                                                  "members": FieldValue.arrayUnion([uid])])
+                    }
+                }
+            }
+        }
+    }
+    
+    @IBAction func unwindFromAddChallenge(_ sender: UIStoryboardSegue) {
+        if sender.source is AddChallengeVC {
+            if let senderVC = sender.source as? AddChallengeVC {
+                var goals: Dictionary<String, Int> = [:]
+                var totalGoal: Int = 0
+                let title: String = senderVC.challengeTitle.text!
+                var exercises: [String] = []
+                let ends_at: Date = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+                for exercise in senderVC.chosenExercises {
+                    exercises.append(exercise.title)
+                    goals[exercise.title] = exercise.goalAmount
+                    totalGoal += exercise.goalAmount
+                }
+                
+                Firestore.firestore().collection("challenges").addDocument(data: [
+                    "created_at": Date(),
+                    "ends_at": ends_at,
+                    "exercises": exercises,
+                    "goals": goals,
+                    "group_owner": Auth.auth().currentUser!.uid,
+                    "mectric": "Reps",
+                    "members": [Auth.auth().currentUser!.uid],
+                    "scores": [Auth.auth().currentUser!.uid:
+                        ["firstName": User.sharedGlobal.firstName,
+                         "lastName": User.sharedGlobal.lastName,
+                         "points": 0]],
+                    "title": title,
+                    "totalGoal": totalGoal
+                ])
+            }
+        }
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        let methodStart = Date()
+        self.challenges.loadChallenges {
+            print(self.currentlySelectedIndex)
+            print(self.challenges.challenges)
+            self.challenges.challenges[self.currentlySelectedIndex].sortLeaderboard()
+            self.leaderboard = self.challenges.challenges[self.currentlySelectedIndex].leaderboard
+            self.loadCompetitors(index: self.currentlySelectedIndex) {
+                self.leaderboardTblView.reloadData()
+                self.challengeTblView.reloadData()
+                self.dismiss(animated: true, completion: nil)
+                self.refreshControl.endRefreshing()
+                let methodFinish = Date()
+                let executionTime = methodFinish.timeIntervalSince(methodStart)
+                print("Execution time: \(executionTime)")
+            }
+       }
     }
     
     
@@ -137,7 +173,6 @@ class Leaderboard: UIViewController {
             let storageRef = Storage.storage().reference().child("profile/\(competitor.id).jpg")
             storageRef.downloadURL(completion: {(url, error) in
                 do {
-                    print("Competitor: \(competitor.firstName)")
                     if url != nil {
                         let data = try Data(contentsOf: url!)
                         let result = UIImage(data: data as Data)!
@@ -154,9 +189,7 @@ class Leaderboard: UIViewController {
             completion()
         }
     }
-    
-    
-    
+
     func startLoadingAlert() {
         let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
@@ -179,21 +212,28 @@ class Leaderboard: UIViewController {
     }
     
     func loadChallenge(selectedIndex: Int){
-        let methodStart = Date()
-        self.challenges.challenges[selectedIndex].sortLeaderboard()
-        self.leaderboard = self.challenges.challenges[selectedIndex].leaderboard
-        self.startLoadingAlert()
-        self.loadCompetitors(index: selectedIndex) {
+        if self.challenges.challenges[selectedIndex].loaded {
+            self.leaderboard = self.challenges.challenges[selectedIndex].leaderboard
             self.leaderboardTblView.reloadData()
             self.challengeTblView.reloadData()
-            self.dismiss(animated: true, completion: nil)
-            let methodFinish = Date()
-            let executionTime = methodFinish.timeIntervalSince(methodStart)
-            print("Execution time: \(executionTime)")
-        }
             
+        }
+        else {
+            let methodStart = Date()
+            self.challenges.challenges[selectedIndex].sortLeaderboard()
+            self.leaderboard = self.challenges.challenges[selectedIndex].leaderboard
+            self.startLoadingAlert()
+            self.loadCompetitors(index: selectedIndex) {
+                self.challenges.challenges[selectedIndex].loaded = true
+                self.leaderboardTblView.reloadData()
+                self.challengeTblView.reloadData()
+                self.dismiss(animated: true, completion: nil)
+                let methodFinish = Date()
+                let executionTime = methodFinish.timeIntervalSince(methodStart)
+                print("Execution time: \(executionTime)")
+            }
+        }
     }
-        
 }
 
 extension Leaderboard: UITableViewDelegate, UITableViewDataSource {
@@ -240,7 +280,7 @@ extension Leaderboard: UITableViewDelegate, UITableViewDataSource {
             let selectedChallenge = indexPath.row
             challengeDrop.setTitle("  \(challenges.challenges[indexPath.row].title)", for: .normal)
             animate(toggle: false)
-            
+            self.currentlySelectedIndex = selectedChallenge
             loadChallenge(selectedIndex: selectedChallenge)
         }
     }
