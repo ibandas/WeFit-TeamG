@@ -17,6 +17,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
+//        do {
+//            try Auth.auth().signOut()
+//        } catch let signOutError as Error {
+//          print ("Error signing out: %@", signOutError)
+//        }
+//        LoginManager().logOut()
         // Decides what the initial view controller should be based on authentication
         if let windowScene = scene as? UIWindowScene {
             self.window = UIWindow(windowScene: windowScene)
