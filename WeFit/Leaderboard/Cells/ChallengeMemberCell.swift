@@ -1,21 +1,22 @@
 //
-//  ExerciseProfileCell.swift
+//  ChallengeMemberCell.swift
 //  WeFit
 //
-//  Created by Cristina Barclay on 5/8/20.
+//  Created by Irinel Bandas on 5/16/20.
 //  Copyright © 2020 Irinel Bandas. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class ExerciseProfileCell: UITableViewCell {
+
+
+class ChallengeMemberCell: UITableViewCell {
+
+    @IBOutlet weak var name: UILabel!
     
-    
-    @IBOutlet weak var workoutName: UILabel!
-    @IBOutlet weak var weightNum: UILabel!
-    @IBOutlet weak var repsNum: UILabel!
-    
+    func setName(firstName: String, lastName: String) {
+        self.name.text = "\(firstName) \(lastName)"
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,4 +30,3 @@ class ExerciseProfileCell: UITableViewCell {
     }
 
 }
-

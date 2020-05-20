@@ -11,6 +11,7 @@ target 'WeFit' do
   # https://firebase.google.com/docs/ios/setup#available-pods
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
   pod 'FBSDKLoginKit'
 
   # Pods for WeFit

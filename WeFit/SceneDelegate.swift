@@ -30,15 +30,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = UIWindow(windowScene: windowScene)
             let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             if (Auth.auth().currentUser == nil) {
+                print("LOGIN")
                 let initialViewController = storyboard.instantiateViewController(withIdentifier: "login")
                 self.window!.rootViewController = initialViewController
                 self.window!.makeKeyAndVisible()
             }
             else {
-                let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTabController") as! UITabBarController
-                
-                self.window!.rootViewController = initialViewController
-                self.window!.makeKeyAndVisible()
+                print("USER FOUND")
+                let user = User.sharedGlobal
+                user.getFirebaseUser() {
+                    print("getting user")
+                    print(user.profilePicture)
+                    let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTabController") as! UITabBarController
+                    
+                    self.window!.rootViewController = initialViewController
+                    self.window!.makeKeyAndVisible()
+                }
             }
         }
     }
