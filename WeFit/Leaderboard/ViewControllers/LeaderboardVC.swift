@@ -17,12 +17,15 @@ class Leaderboard: UIViewController {
     
     @IBOutlet weak var leaderboardTblView: UITableView!
     @IBOutlet weak var rank: UILabel!
+    @IBOutlet weak var totalGoal: UILabel!
     
     @IBAction func addMembers(_ sender: Any) {
         print("Navigated")
     }
     @IBOutlet weak var challengeDrop: UIButton!
     
+    @IBOutlet weak var daysLeftLabel: UILabel!
+    @IBOutlet weak var daysLeft: UILabel!
     @IBOutlet weak var challengeTblView: UITableView!
     
     var currentlySelectedIndex: Int = 0
@@ -38,28 +41,27 @@ class Leaderboard: UIViewController {
         if segue.destination is ChallengeAddMemberVC
         {
             let vc = segue.destination as? ChallengeAddMemberVC
-            vc?.challenge_id = challenges.challenges[0].challenge_id
+            vc?.challenge_id = challenges.challenges[self.currentlySelectedIndex].challenge_id
             vc?.already_members = leaderboard
         }
     }
     
+    
     override func viewDidLoad() {
-        let methodStart = Date()
         super.viewDidLoad()
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         self.leaderboardTblView.addSubview(refreshControl)
         self.startLoadingAlert()
         self.challenges.loadChallenges {
-            self.challenges.challenges[0].sortLeaderboard()
-            self.leaderboard = self.challenges.challenges[0].leaderboard
-            self.loadCompetitors(index: 0) {
-                self.challenges.challenges[0].loaded = true
+            self.challenges.challenges[self.currentlySelectedIndex].sortLeaderboard()
+            self.leaderboard = self.challenges.challenges[self.currentlySelectedIndex].leaderboard
+            self.loadCompetitors(index: self.currentlySelectedIndex) {
+                self.challenges.challenges[self.currentlySelectedIndex].loaded = true
+                self.setDaysLeft(days: self.challenges.challenges[self.currentlySelectedIndex].days_remaining)
+                self.setTotalGoal(totalGoal: self.challenges.challenges[self.currentlySelectedIndex].totalGoal)
                 self.leaderboardTblView.reloadData()
                 self.challengeTblView.reloadData()
                 self.dismiss(animated: true, completion: nil)
-                let methodFinish = Date()
-                let executionTime = methodFinish.timeIntervalSince(methodStart)
-                print("Execution time: \(executionTime)")
             }
         }
         self.leaderboardTblView.delegate = self
@@ -100,7 +102,11 @@ class Leaderboard: UIViewController {
                 var totalGoal: Int = 0
                 let title: String = senderVC.challengeTitle.text!
                 var exercises: [String] = []
-                let ends_at: Date = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+                var duration: Int = 1
+                if senderVC.duration.text != nil {
+                    duration = Int(senderVC.duration.text!)!
+                }
+                let ends_at: Date = Calendar.current.date(byAdding: .day, value: duration, to: Date())!
                 for exercise in senderVC.chosenExercises {
                     exercises.append(exercise.title)
                     goals[exercise.title] = exercise.goalAmount
@@ -134,6 +140,8 @@ class Leaderboard: UIViewController {
             self.challenges.challenges[self.currentlySelectedIndex].sortLeaderboard()
             self.leaderboard = self.challenges.challenges[self.currentlySelectedIndex].leaderboard
             self.loadCompetitors(index: self.currentlySelectedIndex) {
+                self.setDaysLeft(days: self.challenges.challenges[self.currentlySelectedIndex].days_remaining)
+                self.setTotalGoal(totalGoal: self.challenges.challenges[self.currentlySelectedIndex].totalGoal)
                 self.leaderboardTblView.reloadData()
                 self.challengeTblView.reloadData()
                 self.dismiss(animated: true, completion: nil)
@@ -158,10 +166,14 @@ class Leaderboard: UIViewController {
         if toggle {
             UIView.animate(withDuration: 0.3) {
                 self.challengeTblView.isHidden = false
+                self.daysLeft.isHidden = true
+                self.daysLeftLabel.isHidden = true
             }
         } else {
             UIView.animate(withDuration: 0.3) {
                 self.challengeTblView.isHidden = true
+                self.daysLeft.isHidden = false
+                self.daysLeftLabel.isHidden = false
             }
         }
     }
@@ -211,26 +223,37 @@ class Leaderboard: UIViewController {
         self.rank.text? = rank
     }
     
+    func setDaysLeft(days: Int) {
+        self.daysLeft.text? = String(days)
+    }
+    
+    func setTotalGoal(totalGoal: Int) {
+        self.totalGoal.text? = String(totalGoal)
+    }
+    
+    func daysBetween(start: Date, end: Date) -> Int {
+        return Calendar.current.dateComponents([.day], from: start, to: end).day!
+    }
+    
     func loadChallenge(selectedIndex: Int){
         if self.challenges.challenges[selectedIndex].loaded {
             self.leaderboard = self.challenges.challenges[selectedIndex].leaderboard
+            self.setDaysLeft(days: self.challenges.challenges[self.currentlySelectedIndex].days_remaining)
+            self.setTotalGoal(totalGoal: self.challenges.challenges[self.currentlySelectedIndex].totalGoal)
             self.leaderboardTblView.reloadData()
             self.challengeTblView.reloadData()
-            
         }
         else {
-            let methodStart = Date()
             self.challenges.challenges[selectedIndex].sortLeaderboard()
             self.leaderboard = self.challenges.challenges[selectedIndex].leaderboard
             self.startLoadingAlert()
             self.loadCompetitors(index: selectedIndex) {
+                self.setDaysLeft(days: self.challenges.challenges[self.currentlySelectedIndex].days_remaining)
+                self.setTotalGoal(totalGoal: self.challenges.challenges[self.currentlySelectedIndex].totalGoal)
                 self.challenges.challenges[selectedIndex].loaded = true
                 self.leaderboardTblView.reloadData()
                 self.challengeTblView.reloadData()
                 self.dismiss(animated: true, completion: nil)
-                let methodFinish = Date()
-                let executionTime = methodFinish.timeIntervalSince(methodStart)
-                print("Execution time: \(executionTime)")
             }
         }
     }

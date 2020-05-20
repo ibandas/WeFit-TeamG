@@ -16,9 +16,9 @@ class AddChallengeVC: UIViewController {
     @IBOutlet weak var metricDrop: UIButton!
     @IBOutlet weak var metricTblView: UITableView!
 
+    @IBOutlet weak var duration: UITextField!
     @IBOutlet weak var submitButton: UIButton!
-    
-    var exerciseList = ["Squat", "Pushup", "Deadlift"]
+
     var chosenExercises: [ChallengeExercise] = []
     var metricList = ["Reps"]
     var challenge: Challenge = Challenge()
@@ -26,10 +26,6 @@ class AddChallengeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         metricTblView.isHidden = true
-//        challenge.mectric = "Reps"
-//        challenge.exercise = "Pushup"
-//        challenge.group_owner = Auth.auth().currentUser!.uid
-//        challenge.group_members.append(Auth.auth().currentUser!.uid)
         
         let newLayer = CAGradientLayer()
                newLayer.colors = [UIColor.customBlue.cgColor, UIColor.customGreen.cgColor]

@@ -21,15 +21,21 @@ struct Challenge {
     var leaderboard: [Competitor] = []
     var created_at: Date = Date()
     var ends_at: Date = Date()
+    var days_remaining: Int = 0
+    var totalGoal: Int = 0
     var loaded: Bool = false
     
     mutating func sortLeaderboard() {
         self.leaderboard.sort(by: {$0.points > $1.points})
     }
+    
+    mutating func calculateDaysRemaining() {
+        self.days_remaining = Calendar.current.dateComponents([.day], from: self.created_at, to: self.ends_at).day!
+    }
 }
 
 class myChallenges {
-    let uid: String = Auth.auth().currentUser!.uid
+    let uid: String = User.sharedGlobal.uid
     let myGroup = DispatchGroup()
     var challenges: [Challenge] = []
     
@@ -60,6 +66,7 @@ class myChallenges {
                     let exercises = data["exercises"] as? [String]
                     let scores = data["scores"] as? Dictionary<String, Dictionary<String, Any>>
                     let members = data["members"] as? Array<String>
+                    let totalGoal = data["totalGoal"] as? Int
                     var competitors: [Competitor] = []
                     for (key, value) in scores! {
                         let firstName = value["firstName"] as? String
@@ -68,7 +75,8 @@ class myChallenges {
                         var competitor = Competitor(id: key, firstName: firstName!, lastName: lastName!, points: points!)
                         competitors.append(competitor)
                     }
-                    let challenge = Challenge(challenge_id: challenge_id, title: title!, exercises: exercises!, mectric: mectric!, group_owner: group_owner!, group_members: members!, leaderboard: competitors, created_at: created_at, ends_at: ends_at)
+                    var challenge = Challenge(challenge_id: challenge_id, title: title!, exercises: exercises!, mectric: mectric!, group_owner: group_owner!, group_members: members!, leaderboard: competitors, created_at: created_at, ends_at: ends_at, totalGoal: totalGoal!)
+                    challenge.calculateDaysRemaining()
                     challenge_results.append(challenge)
                     self.myGroup.leave()
                 }

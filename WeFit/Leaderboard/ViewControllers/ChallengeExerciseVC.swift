@@ -13,7 +13,18 @@ class ChallengeExerciseVC: UIViewController {
     @IBOutlet weak var addButtonOutlet: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    let exercises = ["Pushup", "Squat", "Deadlift"]
+    var exercises: [String] = ["Bench Press", "Squat", "Deadlift", "Pushup", "Crunch", "Bicycle Crunch", "Sumo Squat",
+    "Jump Squat", "Forward Lunge", "Jumping Jack", "Mountain Climber", "Spiderman Mountain Climber", "Superman",
+    "Glute Bridge", "Russian Twist", "Leg Lift Crunches", "Frog Jump", "Burpee", "Plank Dip", "Side Lunge", "Up and Down Plank",
+    "V-Up", "Reverse Crunch", "Crunch Kickback", "Leg Raise", "Scissor", "Flutter Kick", "Side Leg Raise", "Knee to Elbow",
+    "Heel Touch", "Cross Crunch", "Donkey Kick", "Fire Hydrant", "Cross Over Extension", "Leg Pulse", "Inchwork", "Tuck Jump",
+    "Bear Crawl", "Curtsy Lunge", "Single Leg Deadlift", "Step Up", "Calf Raise", "Diamond Pushup",
+    "Situp", "Sprinter Situp", "Barbell Lunge", "Bench Dip", "Bicep Curl", "Upright Row", "Tricep Kickback",
+    "Bent Over Reverse Fly", "Overhead Shoulder Press", "Hammer Curl", "Lateral Lunge", "Stutter Step", "Leaning Camel",
+    "Bird Dog", "Toe Touch Crunch", "Dumbbell Side Bend", "Shoulder Tap", "Wide Curl", "High Cable Curl", "Reverse Fly",
+    "Hip Abduction", "Windshield Wiper", "Shoulder Fly", "Pullover", "Lateral Leg Raise", "Kettlebell Swing",
+    "Oblique Leg Crunch", "Long Arm Crunch", "Vertical Leg Crunch", "Crunch Twist", "Skater Squat", "Walking Lunge",
+    "Lunge Jump", "Quadrupled Leg Lift"]
     
     var searchExercise = [String]()
     var searching = false
@@ -24,7 +35,7 @@ class ChallengeExerciseVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.exercises.sort()
         exercisesTV.delegate = self
         exercisesTV.dataSource = self
         self.searchBar.delegate = self

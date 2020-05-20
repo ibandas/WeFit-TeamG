@@ -22,7 +22,7 @@ class ChallengeAddMemberVC: UIViewController {
         self.loadUsers {
             self.tableView.reloadData()
         }
-        print(self.already_members)
+        print(self.already_members[0].firstName)
         self.tableView.delegate = self
         self.tableView.dataSource = self
 
@@ -44,6 +44,7 @@ class ChallengeAddMemberVC: UIViewController {
                     }
                     let data = document.data()
                     let firstName = data["firstName"] as! String
+                    print(firstName)
                     let lastName = data["lastName"] as! String
                     self.members.append(Member(uid: id, firstName: firstName, lastName: lastName))
                 }
