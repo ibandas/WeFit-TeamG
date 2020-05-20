@@ -7,6 +7,8 @@ import Firebase
 import FirebaseStorage
 import FBSDKLoginKit
 
+
+
 // Add this to the body
 class FacebookLoginVC: UIViewController, LoginButtonDelegate {
 
@@ -15,20 +17,27 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
         super.viewDidLoad()
 
         let loginButton = FBLoginButton()
-        loginButton.frame = CGRect(x: 16, y: 50, width: view.frame.width - 32, height: 50)
+        loginButton.frame = CGRect(x: 36, y: 360, width: view.frame.width - 80, height: 50)
         view.addSubview(loginButton)
 
         loginButton.delegate = self
         loginButton.permissions = ["email", "public_profile"]
+        
+        let newLayer = CAGradientLayer()
+        newLayer.colors = [UIColor.customBlue.cgColor, UIColor.customGreen.cgColor]
+        newLayer.frame = view.frame
+                    
+        view.layer.insertSublayer(newLayer, at: 0)
+        
 
     }
 
-//    override func viewDidAppear(_ animated: Bool) {
-//        if (AccessToken.isCurrentAccessTokenActive)
-//        {
-//            performSegue(withIdentifier: "goHome", sender: self)
-//        }
-//    }
+    override func viewDidAppear(_ animated: Bool) {
+        if (AccessToken.isCurrentAccessTokenActive)
+        {
+            performSegue(withIdentifier: "goHome", sender: self)
+        }
+    }
 
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
         print("Logged out")

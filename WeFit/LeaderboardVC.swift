@@ -17,6 +17,7 @@ class Leaderboard: UIViewController {
     
     @IBOutlet weak var leaderboardTblView: UITableView!
     @IBOutlet weak var rank: UILabel!
+    @IBOutlet weak var daysLeft: UILabel!
     
     @IBAction func addMembers(_ sender: Any) {
         print("Navigated")
@@ -52,6 +53,8 @@ class Leaderboard: UIViewController {
         self.challenges.loadChallenges {
             self.challenges.challenges[0].sortLeaderboard()
             self.leaderboard = self.challenges.challenges[0].leaderboard
+            let daysRemaining = self.daysBetween(start: self.challenges.challenges[0].created_at, end: self.challenges.challenges[0].ends_at)
+            self.setDaysLeft(days: daysRemaining)
             self.loadCompetitors(index: 0) {
                 self.challenges.challenges[0].loaded = true
                 self.leaderboardTblView.reloadData()
@@ -210,6 +213,15 @@ class Leaderboard: UIViewController {
     func setRank(rank: String) {
         self.rank.text? = rank
     }
+    
+    func setDaysLeft(days: Int){
+        self.daysLeft.text? = String(days)
+    }
+    
+    func daysBetween(start: Date, end: Date) -> Int {
+        return Calendar.current.dateComponents([.day], from: start, to: end).day!
+    }
+    
     
     func loadChallenge(selectedIndex: Int){
         if self.challenges.challenges[selectedIndex].loaded {
