@@ -17,30 +17,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        
-//        do {
-//            try Auth.auth().signOut()
-//        } catch let signOutError as Error {
-//          print ("Error signing out: %@", signOutError)
-//        }
-//        LoginManager().logOut()
-        
         // Decides what the initial view controller should be based on authentication
         if let windowScene = scene as? UIWindowScene {
             self.window = UIWindow(windowScene: windowScene)
             let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             if (Auth.auth().currentUser == nil) {
-                print("LOGIN")
                 let initialViewController = storyboard.instantiateViewController(withIdentifier: "login")
                 self.window!.rootViewController = initialViewController
                 self.window!.makeKeyAndVisible()
             }
             else {
-                print("USER FOUND")
                 let user = User.sharedGlobal
                 user.getFirebaseUser() {
-                    print("getting user")
-                    print(user.profilePicture)
                     let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTabController") as! UITabBarController
                     
                     self.window!.rootViewController = initialViewController

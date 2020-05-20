@@ -22,24 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             didFinishLaunchingWithOptions: launchOptions
         )
         
-        
-        // LoginManager().logOut()
-        
-        
-        //        let db = Firestore.firestore()
-        //
-        //        db.collection("cities").document("LA").setData([
-        //            "name": "Los Angeles",
-        //            "state": "California",
-        //            "country": "United States of America"]) {
-        //                (error: Error?) in
-        //                if let error = error {
-        //                    print("\(error.localizedDescription)")
-        //                } else {
-        //                    print("Document was successfully created and written.")
-        //                }
-        //        }
-        
         return true
     }
     
