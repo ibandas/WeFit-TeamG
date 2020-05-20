@@ -16,6 +16,7 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
 
         let loginButton = FBLoginButton()
         loginButton.frame = CGRect(x: 16, y: 50, width: view.frame.width - 32, height: 50)
+        loginButton.center = self.view.center
         view.addSubview(loginButton)
 
         loginButton.delegate = self
@@ -23,12 +24,6 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
 
     }
 
-//    override func viewDidAppear(_ animated: Bool) {
-//        if (AccessToken.isCurrentAccessTokenActive)
-//        {
-//            performSegue(withIdentifier: "goHome", sender: self)
-//        }
-//    }
 
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
         print("Logged out")
@@ -62,7 +57,6 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
             storageProfileRef.downloadURL(completion: {(url, error) in
                 if let metaImageURL = url?.absoluteString {
                     meta_pp_url = metaImageURL
-                    // Firestore.firestore().collection("users").document(uid).updateData(["profile_picture": metaImageURL])
                 }
             })
         })
