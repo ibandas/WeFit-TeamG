@@ -980,6 +980,7 @@
                     <connections>
                         <outlet property="addButtonOutlet" destination="I5Y-Ya-TUQ" id="8y7-aZ-eHg"/>
                         <outlet property="exercisesTV" destination="Vdl-MM-cPF" id="USi-p0-lPl"/>
+                        <outlet property="searchBar" destination="8hx-0N-wFW" id="m0z-bG-Io9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TDY-xz-rdF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
