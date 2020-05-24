@@ -53,8 +53,11 @@ class Leaderboard: UIViewController {
         self.leaderboardTblView.addSubview(refreshControl)
         self.startLoadingAlert()
         self.challenges.loadChallenges {
+//            self.challenges.loadPresetChallenges {
+            self.challenges.challenges.sort(by: {$0.ends_at > $1.ends_at})
             self.challenges.challenges[self.currentlySelectedIndex].sortLeaderboard()
             self.leaderboard = self.challenges.challenges[self.currentlySelectedIndex].leaderboard
+            self.challengeDrop.setTitle("  \(self.challenges.challenges[0].title)", for: .normal)
             self.loadCompetitors(index: self.currentlySelectedIndex) {
                 self.challenges.challenges[self.currentlySelectedIndex].loaded = true
                 self.setDaysLeft(days: self.challenges.challenges[self.currentlySelectedIndex].days_remaining)
@@ -63,6 +66,7 @@ class Leaderboard: UIViewController {
                 self.challengeTblView.reloadData()
                 self.dismiss(animated: true, completion: nil)
             }
+//            }
         }
         self.leaderboardTblView.delegate = self
         self.leaderboardTblView.dataSource = self
@@ -135,8 +139,8 @@ class Leaderboard: UIViewController {
     @objc func refresh(_ sender: AnyObject) {
         let methodStart = Date()
         self.challenges.loadChallenges {
-            print(self.currentlySelectedIndex)
-            print(self.challenges.challenges)
+//            self.challenges.loadPresetChallenges {
+            self.challenges.challenges.sort(by: {$0.ends_at > $1.ends_at})
             self.challenges.challenges[self.currentlySelectedIndex].sortLeaderboard()
             self.leaderboard = self.challenges.challenges[self.currentlySelectedIndex].leaderboard
             self.loadCompetitors(index: self.currentlySelectedIndex) {
@@ -150,6 +154,7 @@ class Leaderboard: UIViewController {
                 let executionTime = methodFinish.timeIntervalSince(methodStart)
                 print("Execution time: \(executionTime)")
             }
+//            }
        }
     }
     

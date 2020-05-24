@@ -16,10 +16,11 @@ class ProfileViewController: UIViewController {
     @IBAction func logoutAction(_ sender: Any) {
         do {
             try Auth.auth().signOut()
-        } catch let signOutError as Error {
+        } catch let signOutError {
           print ("Error signing out: %@", signOutError)
         }
         LoginManager().logOut()
+        AccessToken.current = nil
         if let loginVC = self.storyboard?.instantiateViewController(identifier: "login") as? FacebookLoginVC {
             present(loginVC, animated: true, completion: nil)
         }
