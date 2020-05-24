@@ -19,14 +19,18 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
         let loginManager = LoginManager()
         
         let loginButton = FBLoginButton()
-        loginButton.frame = CGRect(x: 16, y: 50, width: view.frame.width - 32, height: 50)
+        loginButton.frame = CGRect(x: 50, y: 50, width: view.frame.width - 60, height: 50)
         loginButton.center = self.view.center
         view.addSubview(loginButton)
 
         loginButton.delegate = self
         loginButton.permissions = ["email", "public_profile"]
         
-        
+        let newLayer = CAGradientLayer()
+                      newLayer.colors = [UIColor.customBlue.cgColor, UIColor.customGreen.cgColor]
+                      newLayer.frame = view.frame
+                      
+                      view.layer.insertSublayer(newLayer, at: 0)
         
 
     }
