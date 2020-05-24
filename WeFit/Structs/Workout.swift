@@ -15,10 +15,10 @@ struct Workout {
 
 struct Exercise {
     var title: String = ""
-    var sets: Array = [Set]()
+    var sets: Array = [Exercise_Set]()
 }
 
-struct Set {
+struct Exercise_Set {
     var set_id: String
     var weight: Int = 0
     var reps: Int = 0

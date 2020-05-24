@@ -16,6 +16,8 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let loginManager = LoginManager()
+        
         let loginButton = FBLoginButton()
         loginButton.frame = CGRect(x: 16, y: 50, width: view.frame.width - 32, height: 50)
         loginButton.center = self.view.center
@@ -23,6 +25,9 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
 
         loginButton.delegate = self
         loginButton.permissions = ["email", "public_profile"]
+        
+        
+        
 
     }
 
@@ -45,7 +50,6 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
             return
         }
         
-        print("SETTING REFERENCE")
         let storageRef = Storage.storage().reference(forURL: "gs://wefit-ios.appspot.com")
         let child = uid + ".jpg"
         let storageProfileRef = storageRef.child("profile").child(child)
@@ -53,7 +57,6 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
         storageProfileRef.putData(imageData, metadata: metadata, completion: {(storageMetaData, error) in
-            print("PUTTING DATA")
             if error != nil {
                 print("Error: \(String(describing: error))")
                 return
@@ -61,15 +64,32 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
             self.myGroup.leave()
         })
     }
+    
+    func downloadImage() {
+        let storageRef = Storage.storage().reference(forURL: "gs://wefit-ios.appspot.com")
+        let child = User.sharedGlobal.uid + ".jpg"
+        let storageProfileRef = storageRef.child("profile").child(child)
+        storageProfileRef.downloadURL(completion: {(url, error) in
+            do {
+                print("Downloading Image")
+                let data = try Data(contentsOf: url!)
+                User.sharedGlobal.profilePicture = UIImage(data: data as Data)!
+            } catch {
+                print("error")
+            }
+        })
+    }
 
 
     // This logins with facebook and passes the credential to firebase
     func facebookSignIn() {
+        print("FACEBOOK SIGN IN")
         self.myGroup.enter()
         let accessToken = AccessToken.current
         guard let accessTokenString = accessToken?.tokenString else {return}
         let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
         Auth.auth().signIn(with: credentials, completion: {(user, error) in
+            print("SIGNING IN")
             if error != nil {
                 print("Something went wrong with our FB User: ", error ?? "")
                 return
@@ -89,10 +109,25 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
             // Check for user in system after 2 seconds to allow for previous
             // tasks to run
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                print("Here")
                 self.checkUserExist(json: json) {
-                    let user = User.sharedGlobal
-                    user.getFirebaseUser {
-                        self.myGroup.leave()
+                    let name = json["name"] as! String
+                    var name_components = name.components(separatedBy: " ")
+                    // Conditional for first and last name
+                    User.sharedGlobal.uid = Auth.auth().currentUser!.uid
+                    if name_components.count > 0 {
+                        let firstName = name_components.removeFirst()
+                        let lastName = name_components.joined(separator: " ")
+                        User.sharedGlobal.firstName = firstName
+                        User.sharedGlobal.lastName = lastName
+                    }
+                    else {
+                        User.sharedGlobal.firstName = name
+                        User.sharedGlobal.lastName = name
+                    }
+                    self.myGroup.leave()
+                    self.setupPresetChallenges {
+                        self.downloadImage()
                         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                         let homePage = storyBoard.instantiateViewController(withIdentifier: "MainTabController") as! UITabBarController
                         UIApplication.shared.windows.first?.rootViewController = homePage
@@ -100,16 +135,6 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
                 }
             }
         }
-
-//        // After successful login, sets new root controller at homepage
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-//            let user = User.sharedGlobal
-//            user.getFirebaseUser {
-//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                let homePage = storyBoard.instantiateViewController(withIdentifier: "MainTabController") as! UITabBarController
-//                UIApplication.shared.windows.first?.rootViewController = homePage
-//            }
-//        }
     }
     // Creates a user document in "users" collection in Firestore if it doesn't exist
     func checkUserExist(json: Dictionary<String, Any>, completion: @escaping () -> ()){
@@ -156,8 +181,34 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
                     ])
                 }
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                 self.myGroup.leave()
+                completion()
+            }
+        })
+    }
+    
+    
+    // Sets up a new user with all current preset challenges
+    func setupPresetChallenges(completion: @escaping () -> ()) {
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+        let start = Calendar.current.date(from: components)!
+        let challenge_ref = Firestore.firestore().collection("challenges").whereField("preset", isEqualTo: true).whereField("ends_at", isGreaterThanOrEqualTo: start)
+        let scores_field_path = FieldPath(["scores", User.sharedGlobal.uid])
+        let scores_user_info: Dictionary<String, Any> = [
+            "firstName": User.sharedGlobal.firstName,
+            "lastName": User.sharedGlobal.lastName,
+            "points": 0]
+        challenge_ref.getDocuments(completion: {(snapshot, error) in
+            if error != nil {
+                print("Error")
+            } else {
+                guard let snap = snapshot else {return}
+                for document in snap.documents {
+                    document.reference.updateData(
+                        [scores_field_path: scores_user_info,
+                         "members": FieldValue.arrayUnion([User.sharedGlobal.uid])])
+                }
                 completion()
             }
         })
