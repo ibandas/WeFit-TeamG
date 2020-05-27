@@ -27,7 +27,6 @@ class Leaderboard: UIViewController {
     @IBOutlet weak var daysLeftLabel: UILabel!
     @IBOutlet weak var daysLeft: UILabel!
     @IBOutlet weak var challengeTblView: UITableView!
-    
     var currentlySelectedIndex: Int = 0
     var leaderboard: [Competitor] = []
     var challenges: myChallenges = myChallenges()
@@ -73,6 +72,7 @@ class Leaderboard: UIViewController {
         self.challengeTblView.delegate = self
         self.challengeTblView.dataSource = self
         challengeTblView.isHidden = true
+        self.view.bringSubviewToFront(challengeTblView)
     }
     
     
