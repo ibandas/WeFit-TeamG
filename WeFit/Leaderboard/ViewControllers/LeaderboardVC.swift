@@ -18,7 +18,9 @@ class Leaderboard: UIViewController {
     @IBOutlet weak var leaderboardTblView: UITableView!
     @IBOutlet weak var rank: UILabel!
     @IBOutlet weak var totalGoal: UILabel!
+    @IBOutlet weak var yourRankLabel: UILabel!
     
+    @IBOutlet weak var rankAndDaysLeftView: UIView!
     @IBAction func addMembers(_ sender: Any) {
         print("Navigated")
     }
@@ -27,7 +29,6 @@ class Leaderboard: UIViewController {
     @IBOutlet weak var daysLeftLabel: UILabel!
     @IBOutlet weak var daysLeft: UILabel!
     @IBOutlet weak var challengeTblView: UITableView!
-    
     var currentlySelectedIndex: Int = 0
     var leaderboard: [Competitor] = []
     var challenges: myChallenges = myChallenges()
@@ -73,6 +74,7 @@ class Leaderboard: UIViewController {
         self.challengeTblView.delegate = self
         self.challengeTblView.dataSource = self
         challengeTblView.isHidden = true
+        self.view.bringSubviewToFront(challengeTblView)
     }
     
     
@@ -173,12 +175,18 @@ class Leaderboard: UIViewController {
                 self.challengeTblView.isHidden = false
                 self.daysLeft.isHidden = true
                 self.daysLeftLabel.isHidden = true
+                self.rank.isHidden = true
+                self.yourRankLabel.isHidden = true
+                self.rankAndDaysLeftView.isHidden = true
             }
         } else {
             UIView.animate(withDuration: 0.3) {
                 self.challengeTblView.isHidden = true
                 self.daysLeft.isHidden = false
                 self.daysLeftLabel.isHidden = false
+                self.rank.isHidden = false
+                self.yourRankLabel.isHidden = false
+                self.rankAndDaysLeftView.isHidden = false
             }
         }
     }
