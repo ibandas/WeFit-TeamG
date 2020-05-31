@@ -15,9 +15,9 @@ class EmailSignin : UIViewController {
     
     
     @IBOutlet weak var email: UITextField!
-
-       @IBOutlet weak var password: UITextField!
-@IBAction func emailLogin (_ sender: Any){
+    @IBOutlet weak var password: UITextField!
+    
+@IBAction func emailLogin ( sender: Any){
     Auth.auth().signIn(withEmail: email.text!, password: password.text!) { (user, error) in
        if error == nil{
          self.performSegue(withIdentifier: "loginToHome", sender: self)
