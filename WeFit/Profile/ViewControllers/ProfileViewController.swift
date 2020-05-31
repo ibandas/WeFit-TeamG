@@ -45,7 +45,7 @@ class ProfileViewController: UIViewController {
 
     // do something interesting here!
     User.sharedGlobal.profilePicture = newImage;
-
+    FacebookLoginVC().uploadImage(image: newImage, uid: User.sharedGlobal.uid);
     dismiss(animated: true)
     viewDidLoad();
     }
