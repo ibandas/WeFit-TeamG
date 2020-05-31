@@ -13,11 +13,23 @@ import FBSDKLoginKit
 
 class EmailSignin : UIViewController {
     
-@IBAction func emailLogin (_ sender: Any){
     
-    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-    let homePage = storyBoard.instantiateViewController(withIdentifier: "MainTabController") as! UITabBarController
-    UIApplication.shared.windows.first?.rootViewController = homePage
+    @IBOutlet weak var email: UITextField!
+
+       @IBOutlet weak var password: UITextField!
+@IBAction func emailLogin (_ sender: Any){
+    Auth.auth().signIn(withEmail: email.text!, password: password.text!) { (user, error) in
+       if error == nil{
+         self.performSegue(withIdentifier: "loginToHome", sender: self)
+                      }
+        else{
+         let alertController = UIAlertController(title: "Error during Login", message: error?.localizedDescription, preferredStyle: .alert)
+         let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                        
+          alertController.addAction(defaultAction)
+          self.present(alertController, animated: true, completion: nil)
+             }
+    }
 }
     
 }
