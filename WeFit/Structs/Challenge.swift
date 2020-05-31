@@ -30,7 +30,7 @@ struct Challenge {
     }
     
     mutating func calculateDaysRemaining() {
-        self.days_remaining = Calendar.current.dateComponents([.day], from: self.created_at, to: self.ends_at).day!
+        self.days_remaining = Calendar.current.dateComponents([.day], from: Date(), to: self.ends_at).day!
     }
 }
 

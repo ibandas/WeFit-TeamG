@@ -17,12 +17,25 @@ class WorkoutLog: UIViewController {
     var exercises: [Exercise] = []
     var sectionsCount: Int = 0
     let uid = Auth.auth().currentUser!.uid
+    let toolBar = UIToolbar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.loadWorkouts()
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
+//        self.view.addGestureRecognizer(tapGesture)
+        
+        // Done Toolbar
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(self.doneClicked))
+        toolBar.setItems([doneButton], animated: false)
+    }
+    
+    @objc func doneClicked() {
+        view.endEditing(true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -33,6 +46,10 @@ class WorkoutLog: UIViewController {
             }
         }
     }
+//    
+//    @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+//
+//    }
     
     func loadWorkouts() {
         let ref = Firestore.firestore().collection("users/\(self.uid)/workouts").whereField("created_at", isDateInToday: Date()).order(by: "created_at")
@@ -281,6 +298,9 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
                 let setCell = self.tableView.dequeueReusableCell(withIdentifier: "SetCell", for: indexPath) as! SetCell
                 setCell.setSets(set: exercises[indexPath.section].sets[indexPath.row - 1])
                 setCell.setCompletion(completion: exercises[indexPath.section].sets[indexPath.row - 1].completion)
+                
+                setCell.RepEntry.inputAccessoryView = self.toolBar
+                setCell.WeightEntry.inputAccessoryView = self.toolBar
                 setCell.delegate = self
                 return setCell
             }
