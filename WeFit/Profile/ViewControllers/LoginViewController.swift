@@ -23,7 +23,6 @@ class LoginViewController : UIViewController{
         present(mainTabController, animated: true, completion: nil)
     }
     
-        
     
     
 }

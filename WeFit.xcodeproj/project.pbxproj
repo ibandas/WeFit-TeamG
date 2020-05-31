@@ -39,6 +39,8 @@
 		99D2C7982462216600C5273B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D2C7972462216600C5273B /* LoginViewController.swift */; };
 		99D2C79A2462237400C5273B /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D2C7992462237400C5273B /* MainTabController.swift */; };
 		99F6B8D32470F8DC002582C4 /* AddChallengeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F6B8D22470F8DC002582C4 /* AddChallengeVC.swift */; };
+		B2EBA79824842CF4002BFA12 /* EmailSignin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EBA79724842CF4002BFA12 /* EmailSignin.swift */; };
+		B2EBA79A24842D15002BFA12 /* CreateNewAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EBA79924842D15002BFA12 /* CreateNewAccount.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +81,8 @@
 		99D2C7972462216600C5273B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		99D2C7992462237400C5273B /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		99F6B8D22470F8DC002582C4 /* AddChallengeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChallengeVC.swift; sourceTree = "<group>"; };
+		B2EBA79724842CF4002BFA12 /* EmailSignin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSignin.swift; sourceTree = "<group>"; };
+		B2EBA79924842D15002BFA12 /* CreateNewAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewAccount.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +164,8 @@
 				99D2C7972462216600C5273B /* LoginViewController.swift */,
 				1AFE50E424623858004C560A /* FacebookLoginVC.swift */,
 				99B1E12E24661D6C0005D8A7 /* ProfileViewController.swift */,
+				B2EBA79724842CF4002BFA12 /* EmailSignin.swift */,
+				B2EBA79924842D15002BFA12 /* CreateNewAccount.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -368,9 +374,11 @@
 				1A6BD40A2470C6A200D75268 /* Member.swift in Sources */,
 				1A7E1AFD2454D03900AA6568 /* WorkoutLogVC.swift in Sources */,
 				99B1E12F24661D6C0005D8A7 /* ProfileViewController.swift in Sources */,
+				B2EBA79824842CF4002BFA12 /* EmailSignin.swift in Sources */,
 				99B1E12B246347990005D8A7 /* LeaderboardVC.swift in Sources */,
 				99D2C79A2462237400C5273B /* MainTabController.swift in Sources */,
 				99B1E12D24661C910005D8A7 /* Profile.swift in Sources */,
+				B2EBA79A24842D15002BFA12 /* CreateNewAccount.swift in Sources */,
 				1ABEA27E2454BF5000BA97A6 /* AppDelegate.swift in Sources */,
 				1A2242792474814B00D9658C /* ChallengePossibleExerciseCell.swift in Sources */,
 				1ABEA2802454BF5000BA97A6 /* SceneDelegate.swift in Sources */,
