@@ -31,7 +31,6 @@ class User {
                 
                 storageRef.downloadURL(completion: {(url, error) in
                     do {
-                        print("HERE")
                         let data = try Data(contentsOf: url!)
                         self.profilePicture = UIImage(data: data as Data)!
                     } catch {

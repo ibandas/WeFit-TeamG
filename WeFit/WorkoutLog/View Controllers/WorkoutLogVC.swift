@@ -17,12 +17,25 @@ class WorkoutLog: UIViewController {
     var exercises: [Exercise] = []
     var sectionsCount: Int = 0
     let uid = Auth.auth().currentUser!.uid
+    let toolBar = UIToolbar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.loadWorkouts()
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
+//        self.view.addGestureRecognizer(tapGesture)
+        
+        // Done Toolbar
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(self.doneClicked))
+        toolBar.setItems([doneButton], animated: false)
+    }
+    
+    @objc func doneClicked() {
+        view.endEditing(true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -33,6 +46,10 @@ class WorkoutLog: UIViewController {
             }
         }
     }
+//    
+//    @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+//
+//    }
     
     func loadWorkouts() {
         let ref = Firestore.firestore().collection("users/\(self.uid)/workouts").whereField("created_at", isDateInToday: Date()).order(by: "created_at")
@@ -42,7 +59,7 @@ class WorkoutLog: UIViewController {
                 print("Error")
             }
             else {
-                var workoutDict = [String: [Set]]()
+                var workoutDict = [String: [Exercise_Set]]()
                 guard let snap = snapshot else {return}
                 for document in snap.documents {
                     let id = document.documentID
@@ -54,7 +71,7 @@ class WorkoutLog: UIViewController {
                     let reps = data["reps"] as? Int
                     let completion = data["completion"] as? Bool
                     var exercise_sets = workoutDict[exercise_title]
-                    let set = Set(set_id: id, weight: weight!, reps: reps!, created_at: created_at!, completion: completion!)
+                    let set = Exercise_Set(set_id: id, weight: weight!, reps: reps!, created_at: created_at!, completion: completion!)
                     if exercise_sets == nil {
                         workoutDict[exercise_title] = [set]
                     }
@@ -85,7 +102,7 @@ class WorkoutLog: UIViewController {
             "reps": reps,
             "created_at": created_at,
             "completion": false])
-        let set = Set(set_id: set_id.documentID, weight: 0, reps: 0, created_at: created_at, completion: false)
+        let set = Exercise_Set(set_id: set_id.documentID, weight: 0, reps: 0, created_at: created_at, completion: false)
         exercises[indexPath.section].sets.append(set)
 
         let indexPath = IndexPath(row: exercises[indexPath.section].sets.count, section: indexPath.section)
@@ -114,7 +131,7 @@ class WorkoutLog: UIViewController {
     func updateWeight(indexPath: IndexPath, cell: SetCell) {
         if let weightNum = Int(cell.WeightEntry.text!) {
             exercises[indexPath.section].sets[indexPath.row - 1].weight = weightNum
-            let setTemp: Set = exercises[indexPath.section].sets[indexPath.row - 1]
+            let setTemp: Exercise_Set = exercises[indexPath.section].sets[indexPath.row - 1]
             self.updateExerciseinFirestore(set_id: setTemp.set_id,
                                            weight: weightNum,
                                            reps: setTemp.reps)
@@ -125,7 +142,7 @@ class WorkoutLog: UIViewController {
     func updateReps(indexPath: IndexPath, cell: SetCell) {
         if let repsNum = Int(cell.RepEntry.text!) {
             exercises[indexPath.section].sets[indexPath.row - 1].reps = repsNum
-            let setTemp: Set = exercises[indexPath.section].sets[indexPath.row - 1]
+            let setTemp: Exercise_Set = exercises[indexPath.section].sets[indexPath.row - 1]
             self.updateExerciseinFirestore(set_id: setTemp.set_id,
                                            weight: setTemp.weight,
                                            reps: repsNum)
@@ -153,7 +170,7 @@ class WorkoutLog: UIViewController {
                         "weight": 0,
                         "reps": 0,
                         "completion": false])
-                    self.exercises.append(Exercise(title: exercise, sets: [Set(set_id: exercise_doc.documentID, weight: 0, reps: 0, created_at: created_at, completion: false)]))
+                    self.exercises.append(Exercise(title: exercise, sets: [Exercise_Set(set_id: exercise_doc.documentID, weight: 0, reps: 0, created_at: created_at, completion: false)]))
                 }
             }
             setSectionsCount()
@@ -281,6 +298,9 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
                 let setCell = self.tableView.dequeueReusableCell(withIdentifier: "SetCell", for: indexPath) as! SetCell
                 setCell.setSets(set: exercises[indexPath.section].sets[indexPath.row - 1])
                 setCell.setCompletion(completion: exercises[indexPath.section].sets[indexPath.row - 1].completion)
+                
+                setCell.RepEntry.inputAccessoryView = self.toolBar
+                setCell.WeightEntry.inputAccessoryView = self.toolBar
                 setCell.delegate = self
                 return setCell
             }
@@ -323,7 +343,7 @@ extension WorkoutLog:  UITableViewDataSource, UITableViewDelegate {
         tableView.endUpdates()
     }
     
-    func deleteExerciseFromFirestore(sets: [Set]) {
+    func deleteExerciseFromFirestore(sets: [Exercise_Set]) {
         for set in sets {
             Firestore.firestore().collection("users/\(self.uid)/workouts").document(set.set_id).delete()
         }

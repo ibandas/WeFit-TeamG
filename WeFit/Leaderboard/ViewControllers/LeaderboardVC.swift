@@ -18,7 +18,9 @@ class Leaderboard: UIViewController {
     @IBOutlet weak var leaderboardTblView: UITableView!
     @IBOutlet weak var rank: UILabel!
     @IBOutlet weak var totalGoal: UILabel!
+    @IBOutlet weak var yourRankLabel: UILabel!
     
+    @IBOutlet weak var rankAndDaysLeftView: UIView!
     @IBAction func addMembers(_ sender: Any) {
         print("Navigated")
     }
@@ -27,7 +29,6 @@ class Leaderboard: UIViewController {
     @IBOutlet weak var daysLeftLabel: UILabel!
     @IBOutlet weak var daysLeft: UILabel!
     @IBOutlet weak var challengeTblView: UITableView!
-    
     var currentlySelectedIndex: Int = 0
     var leaderboard: [Competitor] = []
     var challenges: myChallenges = myChallenges()
@@ -53,8 +54,11 @@ class Leaderboard: UIViewController {
         self.leaderboardTblView.addSubview(refreshControl)
         self.startLoadingAlert()
         self.challenges.loadChallenges {
+//            self.challenges.loadPresetChallenges {
+            self.challenges.challenges.sort(by: {$0.ends_at > $1.ends_at})
             self.challenges.challenges[self.currentlySelectedIndex].sortLeaderboard()
             self.leaderboard = self.challenges.challenges[self.currentlySelectedIndex].leaderboard
+            self.challengeDrop.setTitle("  \(self.challenges.challenges[0].title)", for: .normal)
             self.loadCompetitors(index: self.currentlySelectedIndex) {
                 self.challenges.challenges[self.currentlySelectedIndex].loaded = true
                 self.setDaysLeft(days: self.challenges.challenges[self.currentlySelectedIndex].days_remaining)
@@ -63,12 +67,14 @@ class Leaderboard: UIViewController {
                 self.challengeTblView.reloadData()
                 self.dismiss(animated: true, completion: nil)
             }
+//            }
         }
         self.leaderboardTblView.delegate = self
         self.leaderboardTblView.dataSource = self
         self.challengeTblView.delegate = self
         self.challengeTblView.dataSource = self
         challengeTblView.isHidden = true
+        self.view.bringSubviewToFront(challengeTblView)
     }
     
     
@@ -135,8 +141,8 @@ class Leaderboard: UIViewController {
     @objc func refresh(_ sender: AnyObject) {
         let methodStart = Date()
         self.challenges.loadChallenges {
-            print(self.currentlySelectedIndex)
-            print(self.challenges.challenges)
+//            self.challenges.loadPresetChallenges {
+            self.challenges.challenges.sort(by: {$0.ends_at > $1.ends_at})
             self.challenges.challenges[self.currentlySelectedIndex].sortLeaderboard()
             self.leaderboard = self.challenges.challenges[self.currentlySelectedIndex].leaderboard
             self.loadCompetitors(index: self.currentlySelectedIndex) {
@@ -150,6 +156,7 @@ class Leaderboard: UIViewController {
                 let executionTime = methodFinish.timeIntervalSince(methodStart)
                 print("Execution time: \(executionTime)")
             }
+//            }
        }
     }
     
@@ -168,12 +175,18 @@ class Leaderboard: UIViewController {
                 self.challengeTblView.isHidden = false
                 self.daysLeft.isHidden = true
                 self.daysLeftLabel.isHidden = true
+                self.rank.isHidden = true
+                self.yourRankLabel.isHidden = true
+                self.rankAndDaysLeftView.isHidden = true
             }
         } else {
             UIView.animate(withDuration: 0.3) {
                 self.challengeTblView.isHidden = true
                 self.daysLeft.isHidden = false
                 self.daysLeftLabel.isHidden = false
+                self.rank.isHidden = false
+                self.yourRankLabel.isHidden = false
+                self.rankAndDaysLeftView.isHidden = false
             }
         }
     }

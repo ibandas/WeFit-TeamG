@@ -18,13 +18,25 @@ class AddChallengeVC: UIViewController {
 
     @IBOutlet weak var duration: UITextField!
     @IBOutlet weak var submitButton: UIButton!
-
+    
+    let toolBar = UIToolbar()
     var chosenExercises: [ChallengeExercise] = []
     var metricList = ["Reps"]
     var challenge: Challenge = Challenge()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Done Toolbar
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(self.doneClicked))
+        toolBar.setItems([doneButton], animated: false)
+        
+        self.challengeTitle.inputAccessoryView = self.toolBar
+        
+        self.duration.inputAccessoryView = self.toolBar
+        
         metricTblView.isHidden = true
         
         let newLayer = CAGradientLayer()
@@ -35,6 +47,10 @@ class AddChallengeVC: UIViewController {
         
         submitButton.layer.borderColor = UIColor.white.cgColor
         submitButton.layer.borderWidth = 1.5
+    }
+    
+    @objc func doneClicked() {
+        view.endEditing(true)
     }
     
     @IBAction func unwindFromChallengeExerciseVC(_ sender: UIStoryboardSegue) {

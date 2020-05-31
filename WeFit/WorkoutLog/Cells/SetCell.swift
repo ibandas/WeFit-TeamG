@@ -52,7 +52,7 @@ class SetCell: UITableViewCell {
         delegate?.updateReps(cell: self)
     }
     
-    func setSets(set: Set) {
+    func setSets(set: Exercise_Set) {
         WeightEntry.text = String(set.weight)
         RepEntry.text = String(set.reps)
     }
