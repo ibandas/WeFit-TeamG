@@ -288,7 +288,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.46274509800000002" green="0.70196078429999997" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.38208848237991333" green="0.70825046300888062" blue="0.83796608448028564" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="dTa-On-IfQ"/>
                     </view>
                 </viewController>
@@ -390,7 +390,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue2,0" translatesAutoresizingMaskIntoConstraints="NO" id="4Ow-vF-mxR">
-                                <rect key="frame" x="-261.5" y="279" width="937" height="64"/>
+                                <rect key="frame" x="-261.5" y="215" width="937" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="937" id="xFH-bt-QG9"/>
                                 </constraints>
@@ -927,17 +927,23 @@
                                 <textInputTraits key="textInputTraits" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G7V-oa-efB">
-                                <rect key="frame" x="127" y="716" width="162" height="30"/>
+                                <rect key="frame" x="101" y="714" width="216" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Don't have an Account?"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Don't have an Account?">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
                                 <connections>
                                     <segue destination="Y0W-sA-1m5" kind="show" id="Cew-Cs-u00"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="siZ-yr-Jo8">
-                                <rect key="frame" x="188" y="392" width="38" height="30"/>
+                                <rect key="frame" x="183" y="391" width="49" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Login"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
                                 <connections>
                                     <action selector="emailLogin:" destination="9tr-ta-qWx" eventType="touchUpInside" id="U0A-hM-VYl"/>
                                 </connections>
@@ -946,11 +952,11 @@
                                 <rect key="frame" x="155" y="55" width="105" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="51"/>
-                                <color key="textColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.35487467050552368" green="0.7854425311088562" blue="0.98154765367507935" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="bn6-rG-IEJ"/>
                     </view>
                     <navigationItem key="navigationItem" id="fCh-Mj-ZKi"/>
@@ -985,9 +991,12 @@
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w3l-WG-23M">
-                                <rect key="frame" x="119" y="709" width="176" height="30"/>
+                                <rect key="frame" x="96" y="708" width="224" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Already have an account?"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Already have an account?">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
                                 <connections>
                                     <segue destination="9tr-ta-qWx" kind="show" id="bKj-ee-Wb5"/>
                                 </connections>
@@ -1008,19 +1017,22 @@
                                 <rect key="frame" x="155" y="60" width="105" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="51"/>
-                                <color key="textColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4UI-Hl-5YL">
-                                <rect key="frame" x="183" y="409" width="48" height="42"/>
+                                <rect key="frame" x="155" y="409" width="105" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Signup"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Signup">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
                                 <connections>
                                     <action selector="createAccount:" destination="Y0W-sA-1m5" eventType="touchUpInside" id="qyX-W2-Xe4"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.36514720320701599" green="0.70809906721115112" blue="0.84611302614212036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="UxL-w1-7kt"/>
                     </view>
                     <navigationItem key="navigationItem" id="2PA-kt-8Rn"/>
@@ -1034,7 +1046,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ne-4X-bmj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3146" y="-641"/>
+            <point key="canvasLocation" x="-3381.1594202898555" y="-528.34821428571422"/>
         </scene>
         <!--Facebook LoginVC-->
         <scene sceneID="xmb-v2-qKv">
@@ -1181,7 +1193,7 @@
         <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aFx-1g-u4c"/>
-        <segue reference="avh-Ze-O0O"/>
+        <segue reference="bKj-ee-Wb5"/>
+        <segue reference="RR9-Kl-yHo"/>
     </inferredMetricsTieBreakers>
 </document>
