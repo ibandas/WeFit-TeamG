@@ -390,7 +390,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue2,0" translatesAutoresizingMaskIntoConstraints="NO" id="4Ow-vF-mxR">
-                                <rect key="frame" x="-261.5" y="215" width="937" height="128"/>
+                                <rect key="frame" x="-261.5" y="279" width="937" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="937" id="xFH-bt-QG9"/>
                                 </constraints>
@@ -1021,7 +1021,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4UI-Hl-5YL">
-                                <rect key="frame" x="155" y="409" width="105" height="42"/>
+                                <rect key="frame" x="156" y="486" width="105" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Signup">
@@ -1029,6 +1029,17 @@
                                 </state>
                                 <connections>
                                     <action selector="createAccount:" destination="Y0W-sA-1m5" eventType="touchUpInside" id="qyX-W2-Xe4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xu-gZ-OMX">
+                                <rect key="frame" x="96" y="427" width="224" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Add Profile Picture">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="addImage:" destination="Y0W-sA-1m5" eventType="touchUpInside" id="J1E-Pd-y8L"/>
                                 </connections>
                             </button>
                         </subviews>
