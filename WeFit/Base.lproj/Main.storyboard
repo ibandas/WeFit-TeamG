@@ -1026,7 +1026,6 @@
                                                 </state>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" cyan="0.55000000000000004" magenta="0.050000000000000003" yellow="0.0" black="0.040464527030000003" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="C2n-JT-7Wv" firstAttribute="top" secondItem="MKd-BB-apq" secondAttribute="bottom" constant="27" id="1NE-m1-qw6"/>
                                             <constraint firstItem="H9i-QP-j08" firstAttribute="leading" secondItem="H04-WQ-hXl" secondAttribute="leading" constant="20" symbolic="YES" id="1zB-lm-U54"/>
@@ -1072,7 +1071,6 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="UQR-ux-hCZ"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" cyan="0.55000000000000004" magenta="0.050000000000000003" yellow="0.0" black="0.040464527030000003" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                         <constraints>
                             <constraint firstItem="uOU-NI-4Gs" firstAttribute="top" secondItem="tMr-Iv-ZOE" secondAttribute="top" id="T5q-JI-CGh"/>
                             <constraint firstItem="tMr-Iv-ZOE" firstAttribute="trailing" secondItem="uOU-NI-4Gs" secondAttribute="trailing" id="gjC-ao-n4S"/>
