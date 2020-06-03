@@ -27,8 +27,6 @@ class ProfileViewController: UIViewController {
     }
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var profileName: UILabel!
-    
-    
     @IBOutlet weak var pastChallengesTblView: UITableView!
     
     override func viewDidLoad() {

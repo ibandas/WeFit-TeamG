@@ -1087,6 +1087,9 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="42" id="Lyk-X9-WAl"/>
                                                 </constraints>
+                                                <connections>
+                                                    <action selector="startDatePickerChanged:" destination="Vrg-TG-z3s" eventType="valueChanged" id="Hg8-oQ-a9X"/>
+                                                </connections>
                                             </datePicker>
                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ARN-Kw-QUL">
                                                 <rect key="frame" x="20" y="556" width="335" height="42"/>
@@ -1096,6 +1099,9 @@
                                                     <constraint firstAttribute="height" constant="42" id="Mji-kV-UCx"/>
                                                     <constraint firstAttribute="width" constant="335" id="onJ-aa-kbc"/>
                                                 </constraints>
+                                                <connections>
+                                                    <action selector="endDatePickerChanged:" destination="Vrg-TG-z3s" eventType="valueChanged" id="29p-5K-gd4"/>
+                                                </connections>
                                             </datePicker>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5LC-QQ-TaM">
                                                 <rect key="frame" x="156.5" y="658" width="62" height="30"/>

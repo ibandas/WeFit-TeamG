@@ -20,6 +20,18 @@ class AddChallengeVC: UIViewController {
     @IBOutlet weak var endDate: UIDatePicker!
     @IBOutlet weak var submitButton: UIButton!
     
+    var start_date = Date()
+    var end_date = Date()
+    
+
+    @IBAction func startDatePickerChanged(_ sender: Any) {
+        start_date = startDate.date
+    }
+    
+    @IBAction func endDatePickerChanged(_ sender: Any) {
+        end_date = endDate.date
+    }
+    
     let toolBar = UIToolbar()
     var chosenExercises: [ChallengeExercise] = []
     var metricList = ["Reps"]
@@ -36,8 +48,6 @@ class AddChallengeVC: UIViewController {
         
         self.challengeTitle.inputAccessoryView = self.toolBar
         
-        ///CHANGE FOR DATE PICKER
-        //self.duration.inputAccessoryView = self.toolBar
         
         metricTblView.isHidden = true
         
