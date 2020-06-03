@@ -25,10 +25,10 @@ class Leaderboard: UIViewController {
         print("Navigated")
     }
     @IBOutlet weak var challengeDrop: UIButton!
-    
     @IBOutlet weak var daysLeftLabel: UILabel!
     @IBOutlet weak var daysLeft: UILabel!
     @IBOutlet weak var challengeTblView: UITableView!
+    
     var currentlySelectedIndex: Int = 0
     var leaderboard: [Competitor] = []
     var challenges: myChallenges = myChallenges()

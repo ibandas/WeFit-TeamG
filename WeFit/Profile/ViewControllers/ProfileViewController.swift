@@ -30,10 +30,6 @@ class ProfileViewController: UIViewController {
     
     
     @IBOutlet weak var pastChallengesTblView: UITableView!
-    @IBOutlet weak var challengeName: UILabel!
-    @IBOutlet weak var rank: UILabel!
-    @IBOutlet weak var points: UILabel!
-    @IBOutlet weak var pointsOutOf: UILabel!
     
     override func viewDidLoad() {
         
@@ -48,17 +44,13 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return metricList.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "metriccell", for: indexPath)
-            cell.textLabel?.text = metricList[indexPath.row]
-            return cell
+        let cell = self.pastChallengesTblView.dequeueReusableCell(withIdentifier: "pastChallenfesCell", for: indexPath) as! PastChallengeCell
+        cell.setPastChallenge(challenge: challenges.challenges[indexPath.row], uid: self.uid, indexPath: indexPath)
+        return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            metricDrop.setTitle("\(metricList[indexPath.row])", for: .normal)
-            animate(toggle: false, type: metricDrop)
-        }
 }

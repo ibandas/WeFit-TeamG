@@ -372,14 +372,14 @@
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChallengeMemberCell" id="ttj-N2-T1G" customClass="ChallengeMemberCell" customModule="WeFit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="43"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ttj-N2-T1G" id="jT4-Mk-lMz">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0o-Hy-M3W">
-                                                    <rect key="frame" x="15" y="11" width="45" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="45" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -467,7 +467,7 @@
                                 <rect key="frame" x="0.0" y="295" width="375" height="166"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="pastChallengeCell" id="0dg-eN-32b">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="pastChallengeCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="pastChallengeCell" id="0dg-eN-32b" customClass="PastChallengeCell" customModule="WeFit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0dg-eN-32b" id="IUC-3o-lSm">
@@ -511,6 +511,12 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="name" destination="JQv-2c-j9U" id="PaX-0f-QcQ"/>
+                                            <outlet property="points" destination="4lc-0T-nhz" id="G6C-B1-PYX"/>
+                                            <outlet property="pointsOutOf" destination="KVd-jN-f8J" id="yxg-tF-2Hp"/>
+                                            <outlet property="rank" destination="wCt-QF-olG" id="pmk-ul-3uJ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -560,13 +566,8 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="challengeName" destination="JQv-2c-j9U" id="AtS-iH-xcR"/>
-                        <outlet property="pastChallengesTblView" destination="edr-Le-7cb" id="eBE-Zl-lAy"/>
-                        <outlet property="points" destination="4lc-0T-nhz" id="fx3-ur-Kpe"/>
-                        <outlet property="pointsOutOf" destination="KVd-jN-f8J" id="5id-nD-tv3"/>
                         <outlet property="profileName" destination="UyS-4E-sTB" id="QXj-Fo-2eK"/>
                         <outlet property="profilePic" destination="7zm-6l-eZZ" id="qsH-Vs-mJq"/>
-                        <outlet property="rank" destination="wCt-QF-olG" id="hF1-74-zdb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FHq-eM-cWD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
