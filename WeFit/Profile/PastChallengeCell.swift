@@ -35,9 +35,10 @@ class PastChallengeCell: UITableViewCell {
             self.pointsOutOf.text = String(pointsOutOf)
         }
         
-    func setPastChallenge(challenge: Challenge, uid: Int, indexPath: IndexPath) {
+    func setPastChallenge(challenge: Challenge, uid: String, indexPath: IndexPath) {
         self.setName(name: challenge.title)
-        if challenge.leaderboard[indexPath.row].id == uid {
+        let user_id: String = challenge.leaderboard[indexPath.row].id
+        if user_id == uid {
             self.setRank(rank: indexPath.row + 1)
             self.setPoints(points: challenge.leaderboard[indexPath.row].points )
         }
