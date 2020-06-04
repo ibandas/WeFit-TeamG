@@ -17,7 +17,7 @@ class CreateNewAccount : UIViewController {
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var passwordConfirm: UITextField!
-    var pictureSet: bool = false;
+    var pictureSet: Bool = false;
     
     @IBAction func addImage(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     var newImage: UIImage
