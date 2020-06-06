@@ -18,13 +18,17 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
 
         let loginManager = LoginManager()
         
+        
         let loginButton = FBLoginButton()
+        
+        loginButton.delegate = self
+        loginButton.permissions = ["email", "public_profile"]
+        
         loginButton.frame = CGRect(x: 50, y: 50, width: view.frame.width - 60, height: 50)
         loginButton.center = self.view.center
         view.addSubview(loginButton)
-
-        loginButton.delegate = self
-        loginButton.permissions = ["email", "public_profile"]
+        
+        
         
         let newLayer = CAGradientLayer()
                       newLayer.colors = [UIColor.customBlue.cgColor, UIColor.customGreen.cgColor]
@@ -197,7 +201,7 @@ class FacebookLoginVC: UIViewController, LoginButtonDelegate {
     func setupPresetChallenges(completion: @escaping () -> ()) {
         let components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         let start = Calendar.current.date(from: components)!
-        let challenge_ref = Firestore.firestore().collection("challenges").whereField("preset", isEqualTo: true).whereField("ends_at", isGreaterThanOrEqualTo: start)
+        let challenge_ref = Firestore.firestore().collection("challenges").whereField("preset", isEqualTo: true).whereField("created_at", isGreaterThanOrEqualTo: start)
         let scores_field_path = FieldPath(["scores", User.sharedGlobal.uid])
         let scores_user_info: Dictionary<String, Any> = [
             "firstName": User.sharedGlobal.firstName,

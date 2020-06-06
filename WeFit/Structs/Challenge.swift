@@ -60,6 +60,15 @@ class myChallenges {
                     let created_at_ts = data["created_at"] as? Timestamp
                     let ends_at_ts = data["ends_at"] as? Timestamp
                     let created_at = created_at_ts!.dateValue() as Date
+                    print(title)
+                    print(created_at)
+                    print(start)
+                    let created_at_components = Calendar.current.dateComponents([.year, .month, .day], from: created_at)
+                    let created_at_mod = Calendar.current.date(from: created_at_components)!
+                    if (created_at_mod > start) {
+                        self.myGroup.leave()
+                        continue
+                    }
                     let ends_at = ends_at_ts!.dateValue() as Date
                     let group_owner = data["group_owner"] as? String
                     let mectric = data["mectric"] as? String
@@ -94,7 +103,7 @@ class myChallenges {
         var challenge_results: [Challenge] = []
         let components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         let start = Calendar.current.date(from: components)!
-        let ref = Firestore.firestore().collection("challenges").whereField("preset", isEqualTo: true).whereField("ends_at", isGreaterThanOrEqualTo: start).order(by: "ends_at")
+        let ref = Firestore.firestore().collection("challenges").whereField("preset", isEqualTo: true).whereField("created_at", isGreaterThanOrEqualTo: start).order(by: "created_at")
         ref.getDocuments(completion: {(snapshot, error) in
             if error != nil {
                 print("Error: \(error)")
