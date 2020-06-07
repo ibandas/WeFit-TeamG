@@ -33,6 +33,7 @@
 		1AC04ADE2470B5E4002E8A40 /* ChallengeAddMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC04ADD2470B5E4002E8A40 /* ChallengeAddMemberVC.swift */; };
 		1AC04AE02470B755002E8A40 /* ChallengeMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC04ADF2470B755002E8A40 /* ChallengeMemberCell.swift */; };
 		1AFE50E524623858004C560A /* FacebookLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE50E424623858004C560A /* FacebookLoginVC.swift */; };
+		9969E40C248720C700ED1DCC /* PastChallengeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9969E40B248720C700ED1DCC /* PastChallengeCell.swift */; };
 		999FFA8B24663D24002AA407 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 999FFA8A24663D24002AA407 /* Assets.xcassets */; };
 		99B1E12B246347990005D8A7 /* LeaderboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B1E12A246347990005D8A7 /* LeaderboardVC.swift */; };
 		99B1E12D24661C910005D8A7 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B1E12C24661C910005D8A7 /* Profile.swift */; };
@@ -74,6 +75,7 @@
 		1AFE50E424623858004C560A /* FacebookLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FacebookLoginVC.swift; path = WeFit/Profile/ViewControllers/FacebookLoginVC.swift; sourceTree = SOURCE_ROOT; };
 		239DCFAA1DD9A860441A5F7E /* Pods_WeFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F41BD77EB61A337DC227591 /* Pods-WeFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeFit.release.xcconfig"; path = "Target Support Files/Pods-WeFit/Pods-WeFit.release.xcconfig"; sourceTree = "<group>"; };
+		9969E40B248720C700ED1DCC /* PastChallengeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastChallengeCell.swift; sourceTree = "<group>"; };
 		999FFA8A24663D24002AA407 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		99B1E12A246347990005D8A7 /* LeaderboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardVC.swift; sourceTree = "<group>"; };
 		99B1E12C24661C910005D8A7 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 		1A5A20B724750A9E00FCF1E9 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				9969E40B248720C700ED1DCC /* PastChallengeCell.swift */,
 				1A5A20BB24750AF900FCF1E9 /* ViewControllers */,
 			);
 			path = Profile;
@@ -369,6 +372,7 @@
 				1A7E1B03245768B100AA6568 /* AddSetCell.swift in Sources */,
 				1A7E1B0124564BB400AA6568 /* SetCell.swift in Sources */,
 				1AC04AE02470B755002E8A40 /* ChallengeMemberCell.swift in Sources */,
+				9969E40C248720C700ED1DCC /* PastChallengeCell.swift in Sources */,
 				1A6BD40A2470C6A200D75268 /* Member.swift in Sources */,
 				1A7E1AFD2454D03900AA6568 /* WorkoutLogVC.swift in Sources */,
 				99B1E12F24661D6C0005D8A7 /* ProfileViewController.swift in Sources */,
