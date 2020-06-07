@@ -70,18 +70,23 @@ extension ChallengeExerciseVC: ChallengePossibleExerciseCellDelegate {
     
     func updateGoalAmount(cell: ChallengePossibleExerciseCell) {
         if let indexPath = exercisesTV.indexPath(for: cell) {
-            if searching {
-                let tempExerciseTitle = self.searchExercise[indexPath.row].title
-                let idx: Int = self.exercises.firstIndex(where: {$0.title == tempExerciseTitle})!
-                self.searchExercise[indexPath.row].goalAmount = Int(cell.goalAmountInput.text!)!
-                self.exercises[idx].goalAmount = Int(cell.goalAmountInput.text!)!
+            if let fieldGoalAmount = Int(cell.goalAmountInput.text!) {
+                if searching {
+                    let tempExerciseTitle = self.searchExercise[indexPath.row].title
+                    let idx: Int = self.exercises.firstIndex(where: {$0.title == tempExerciseTitle})!
+                    self.searchExercise[indexPath.row].goalAmount = fieldGoalAmount
+                    self.exercises[idx].goalAmount = fieldGoalAmount
+                }
+                else {
+                    self.exercises[indexPath.row].goalAmount = Int(cell.goalAmountInput.text!)!
+                }
             }
             else {
-                self.exercises[indexPath.row].goalAmount = Int(cell.goalAmountInput.text!)!
+                print("Error in updating the goal amount due to nil amount")
             }
         }
         else {
-            print("Error in updating the goal amount")
+            print("Error in updating the goal amount due to index path")
         }
     }
 }
@@ -122,6 +127,8 @@ extension ChallengeExerciseVC: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searching = false
         searchBar.text = ""
-        self.exercisesTV.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.exercisesTV.reloadData()
+        }
     }
 }
