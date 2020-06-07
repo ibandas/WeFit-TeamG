@@ -92,13 +92,29 @@ extension AddExercisesVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (self.exercises[indexPath.row].added) {
-            possibleExercisesTV.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
-            self.exercises[indexPath.row].added = false
+        if searching {
+            let tempExerciseTitle = self.searchExercise[indexPath.row].title
+            let idx: Int = self.exercises.firstIndex(where: {$0.title == tempExerciseTitle})!
+            if (self.searchExercise[indexPath.row].added) {
+                possibleExercisesTV.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
+                self.searchExercise[indexPath.row].added = false
+                self.exercises[idx].added = false
+            }
+            else {
+                possibleExercisesTV.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+                self.searchExercise[indexPath.row].added = true
+                self.exercises[idx].added = true
+            }
         }
         else {
-            possibleExercisesTV.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
-            self.exercises[indexPath.row].added = true
+            if (self.exercises[indexPath.row].added) {
+                possibleExercisesTV.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
+                self.exercises[indexPath.row].added = false
+            }
+            else {
+                possibleExercisesTV.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+                self.exercises[indexPath.row].added = true
+            }
         }
     }
 }

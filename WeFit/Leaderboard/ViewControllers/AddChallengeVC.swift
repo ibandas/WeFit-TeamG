@@ -57,6 +57,7 @@ class AddChallengeVC: UIViewController {
         if sender.source is ChallengeExerciseVC {
             if let senderVC = sender.source as? ChallengeExerciseVC {
                 self.chosenExercises = senderVC.chosenExercises
+                print(self.chosenExercises)
             }
         }
     }
