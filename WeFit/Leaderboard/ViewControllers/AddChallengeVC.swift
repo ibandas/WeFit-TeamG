@@ -12,11 +12,12 @@ import Firebase
 class AddChallengeVC: UIViewController {
 
     
+    
     @IBOutlet weak var challengeTitle: UITextField!
     @IBOutlet weak var metricDrop: UIButton!
     @IBOutlet weak var metricTblView: UITableView!
-
-    @IBOutlet weak var duration: UITextField!
+    @IBOutlet weak var startDate: UIDatePicker!
+    @IBOutlet weak var endDate: UIDatePicker!
     @IBOutlet weak var submitButton: UIButton!
     
     let toolBar = UIToolbar()
@@ -35,10 +36,12 @@ class AddChallengeVC: UIViewController {
         
         self.challengeTitle.inputAccessoryView = self.toolBar
         
-        self.duration.inputAccessoryView = self.toolBar
+        ///CHANGE FOR DATE PICKER
+        //self.duration.inputAccessoryView = self.toolBar
         
         metricTblView.isHidden = true
         
+        //STYLING
         let newLayer = CAGradientLayer()
                newLayer.colors = [UIColor.customBlue.cgColor, UIColor.customGreen.cgColor]
                newLayer.frame = view.frame
@@ -47,6 +50,12 @@ class AddChallengeVC: UIViewController {
         
         submitButton.layer.borderColor = UIColor.white.cgColor
         submitButton.layer.borderWidth = 1.5
+        
+        startDate.datePickerMode = UIDatePicker.Mode.date
+        endDate.datePickerMode = UIDatePicker.Mode.date
+        startDate.setValue(UIColor.white, forKeyPath: "textColor")
+        endDate.setValue(UIColor.white, forKeyPath: "textColor")
+        
     }
     
     @objc func doneClicked() {

@@ -108,11 +108,11 @@ class Leaderboard: UIViewController {
                 var totalGoal: Int = 0
                 let title: String = senderVC.challengeTitle.text!
                 var exercises: [String] = []
-                var duration: Int = 1
-                if senderVC.duration.text != nil {
-                    duration = Int(senderVC.duration.text!)!
-                }
-                let ends_at: Date = Calendar.current.date(byAdding: .day, value: duration, to: Date())!
+                //var duration: Int = 1
+                //if senderVC.duration.text != nil {
+                 //   duration = Int(senderVC.duration.text!)!
+                //}
+                //let ends_at: Date = Calendar.current.date(byAdding: .day, value: duration, to: Date())!
                 for exercise in senderVC.chosenExercises {
                     exercises.append(exercise.title)
                     goals[exercise.title] = exercise.goalAmount
@@ -121,7 +121,7 @@ class Leaderboard: UIViewController {
                 
                 Firestore.firestore().collection("challenges").addDocument(data: [
                     "created_at": Date(),
-                    "ends_at": ends_at,
+                    //"ends_at": ends_at,
                     "exercises": exercises,
                     "goals": goals,
                     "group_owner": Auth.auth().currentUser!.uid,
