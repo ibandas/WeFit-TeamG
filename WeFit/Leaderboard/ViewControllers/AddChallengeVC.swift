@@ -65,7 +65,8 @@ class AddChallengeVC: UIViewController {
         endDate.datePickerMode = UIDatePicker.Mode.date
         startDate.setValue(UIColor.white, forKeyPath: "textColor")
         endDate.setValue(UIColor.white, forKeyPath: "textColor")
-        
+        self.metricTblView.delegate = self
+        self.metricTblView.dataSource = self
     }
     
     @objc func doneClicked() {
@@ -97,30 +98,33 @@ class AddChallengeVC: UIViewController {
                self.metricTblView.isHidden = false
            }
        } else {
-           UIView.animate(withDuration: 0.3) {
-               self.metricTblView.isHidden = true
-           }
+            UIView.animate(withDuration: 0.3) {
+                self.metricTblView.isHidden = true
+            }
        }
    }
-    }
+}
 
 
 extension AddChallengeVC: UITableViewDelegate, UITableViewDataSource {
   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(metricList.count)
         return metricList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "metriccell", for: indexPath)
-            cell.textLabel?.text = metricList[indexPath.row]
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "metriccell", for: indexPath) as! MetricCell
+        cell.setTitle(title: metricList[indexPath.row])
+//        cell.textLabel?.text = metricList[indexPath.row]
+//        print(metricList[indexPath.row])
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            metricDrop.setTitle("\(metricList[indexPath.row])", for: .normal)
-            animate(toggle: false, type: metricDrop)
-        }
+        metricDrop.setTitle("\(metricList[indexPath.row])", for: .normal)
+        animate(toggle: false, type: metricDrop)
+    }
 }
 
 extension UIColor {

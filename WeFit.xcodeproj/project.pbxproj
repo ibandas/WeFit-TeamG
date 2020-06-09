@@ -14,6 +14,7 @@
 		1A38947D245DEF7A006DA20B /* AddExercisesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38947C245DEF7A006DA20B /* AddExercisesVC.swift */; };
 		1A38947F245DEFF1006DA20B /* PossibleExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38947E245DEFF1006DA20B /* PossibleExerciseCell.swift */; };
 		1A527801248C64D000191ECA /* AddExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A527800248C64D000191ECA /* AddExercise.swift */; };
+		1A5278032490088C00191ECA /* MetricCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5278022490088C00191ECA /* MetricCell.swift */; };
 		1A6BD4082470BE1300D75268 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6BD4072470BE1300D75268 /* User.swift */; };
 		1A6BD40A2470C6A200D75268 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6BD4092470C6A200D75268 /* Member.swift */; };
 		1A7E1AFD2454D03900AA6568 /* WorkoutLogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7E1AFC2454D03900AA6568 /* WorkoutLogVC.swift */; };
@@ -51,6 +52,7 @@
 		1A38947C245DEF7A006DA20B /* AddExercisesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExercisesVC.swift; sourceTree = "<group>"; };
 		1A38947E245DEFF1006DA20B /* PossibleExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PossibleExerciseCell.swift; sourceTree = "<group>"; };
 		1A527800248C64D000191ECA /* AddExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExercise.swift; sourceTree = "<group>"; };
+		1A5278022490088C00191ECA /* MetricCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricCell.swift; sourceTree = "<group>"; };
 		1A6BD4072470BE1300D75268 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1A6BD4092470C6A200D75268 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		1A7E1AFC2454D03900AA6568 /* WorkoutLogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLogVC.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				1A2242782474814B00D9658C /* ChallengePossibleExerciseCell.swift */,
 				1AC04AD72469BE39002E8A40 /* RankCell.swift */,
 				1AC04ADF2470B755002E8A40 /* ChallengeMemberCell.swift */,
+				1A5278022490088C00191ECA /* MetricCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				1A38947F245DEFF1006DA20B /* PossibleExerciseCell.swift in Sources */,
 				1ABEA2922454C49100BA97A6 /* Workout.swift in Sources */,
 				1AC04AD82469BE39002E8A40 /* RankCell.swift in Sources */,
+				1A5278032490088C00191ECA /* MetricCell.swift in Sources */,
 				1A7E1B05245769EB00AA6568 /* AddExerciseCell.swift in Sources */,
 				1A22427B24748C4400D9658C /* ChallengeExercise.swift in Sources */,
 				1AC04ADA246A08DF002E8A40 /* Competitor.swift in Sources */,
