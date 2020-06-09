@@ -25,10 +25,10 @@ class Leaderboard: UIViewController {
         print("Navigated")
     }
     @IBOutlet weak var challengeDrop: UIButton!
-    
     @IBOutlet weak var daysLeftLabel: UILabel!
     @IBOutlet weak var daysLeft: UILabel!
     @IBOutlet weak var challengeTblView: UITableView!
+    
     var currentlySelectedIndex: Int = 0
     var leaderboard: [Competitor] = []
     var challenges: myChallenges = myChallenges()
@@ -108,11 +108,8 @@ class Leaderboard: UIViewController {
                 var totalGoal: Int = 0
                 let title: String = senderVC.challengeTitle.text!
                 var exercises: [String] = []
-                var duration: Int = 1
-                if senderVC.duration.text != nil {
-                    duration = Int(senderVC.duration.text!)!
-                }
-                let ends_at: Date = Calendar.current.date(byAdding: .day, value: duration, to: Date())!
+                let created_at: Date = senderVC.start_date
+                let ends_at: Date = senderVC.end_date
                 for exercise in senderVC.chosenExercises {
                     exercises.append(exercise.title)
                     goals[exercise.title] = exercise.goalAmount
@@ -120,7 +117,7 @@ class Leaderboard: UIViewController {
                 }
                 
                 Firestore.firestore().collection("challenges").addDocument(data: [
-                    "created_at": Date(),
+                    "created_at": created_at,
                     "ends_at": ends_at,
                     "exercises": exercises,
                     "goals": goals,

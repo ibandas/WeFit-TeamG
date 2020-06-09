@@ -10,6 +10,7 @@ import UIKit
 
 protocol ChallengePossibleExerciseCellDelegate {
     func didTapAddButtonAction(cell: ChallengePossibleExerciseCell)
+    func updateGoalAmount(cell: ChallengePossibleExerciseCell)
 }
 
 class ChallengePossibleExerciseCell: UITableViewCell {
@@ -19,6 +20,9 @@ class ChallengePossibleExerciseCell: UITableViewCell {
     
     @IBOutlet weak var addButton: UIButton!
     
+    @IBAction func goalAmountButton(_ sender: Any) {
+        delegate?.updateGoalAmount(cell: self)
+    }
     
     var delegate: ChallengePossibleExerciseCellDelegate?
     var added: Bool = false
@@ -37,6 +41,21 @@ class ChallengePossibleExerciseCell: UITableViewCell {
     
     func setExerciseTitle(title: String) {
         self.exerciseTitle?.text = title
+    }
+    
+    func setGoalAmount(goal: Int) {
+        self.goalAmountInput?.text = String(goal)
+    }
+    
+    func setAddButton(added: Bool) {
+        if added {
+            addButton.setImage(UIImage(systemName: "minus.circle.fill"), for: .normal)
+            addButton.tintColor = UIColor.red
+        }
+        else {
+            addButton.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
+            addButton.tintColor = UIColor.green
+        }
     }
     
     @IBAction func addButtonAction(_ sender: Any) {
