@@ -30,12 +30,12 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var profileName: UILabel!
     @IBOutlet weak var pastChallengesTblView: UITableView!
     
-    var leaderboard: [Competitor] = []
-    var challenges: myChallenges = myChallenges()
-    let myGroup = DispatchGroup()
-    var refreshControl = UIRefreshControl()
-    let uid = Auth.auth().currentUser!.uid
-    let opQueue: OperationQueue = OperationQueue()
+    var challenges_titles = ["Do 50 pushups", "Do 100 squats", "Run 20 miles", "Do 75 Donkey Kicks", "Do 50 Burpees"]
+    var ranks = ["1", "4", "6", "3","4"]
+    var your_points = ["50", "81", "5", "53", "38"]
+    var points = ["50", "100", "20", "75", "50"]
+    
+ 
     
     override func viewDidLoad() {
         
@@ -43,27 +43,28 @@ class ProfileViewController: UIViewController {
         self.profileName.text = User.sharedGlobal.firstName
         super.viewDidLoad()
         self.view.bringSubviewToFront(profilePic)
-
-    
+        self.pastChallengesTblView.delegate = self
+        self.pastChallengesTblView.dataSource = self
     }
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return challenges.challenges.count
+        return challenges_titles.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if challenges.challenges[indexPath.row].created_at.timeIntervalSinceNow < 0{
+        let cell = self.pastChallengesTblView.dequeueReusableCell(withIdentifier: "pastChallengesCell", for: indexPath) as! PastChallengeTableViewCell
             
-        let cell = self.pastChallengesTblView.dequeueReusableCell(withIdentifier: "pastChallengesCell", for: indexPath) as! PastChallengeCell
-        cell.setPastChallenge(challenge: challenges.challenges[indexPath.row], uid: self.uid, indexPath: indexPath)
+        cell.indexPath = indexPath
+        cell.challengeTitle.text = challenges_titles[indexPath.row]
+        cell.rank.text = ranks[indexPath.row]
+        cell.pointsUser.text = your_points[indexPath.row]
+        cell.pointsOut.text = points[indexPath.row]
         return cell
-        }
-    return UITableViewCell()
     }
     
 }
