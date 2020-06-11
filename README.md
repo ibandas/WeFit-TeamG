@@ -19,15 +19,27 @@ All feature branches developed by developers will be cut from the latest test br
 1. Xcode 11.3.1
 2. Firebase / Firestore
 3. Mac OS
+4. Facebook Account (Can only login with a facebook account)
 
 ----
 ## Set Up Instructions
 1. Clone the repo
-2. Switch to the test branch
-3. Fetch and pull latest from remote test branch
+2. Switch to the master branch
+3. Fetch and pull latest from remote master branch
 4. If developing, checkout a new branch from test and switch to it.
 5. Open the .xcworkspace and NOT the .xcodeproj (This is so all firebase pods are used properly).
 6. Press the "Play" button on the top left of Xcode while also making sure its for the "iPhone 11 Pro Max" simulator.
+
+
+----
+## Debugging
+1. Any errors might be able to be fixed with a simple command of "pod install" in the directory of the Podfile.
+   This will ensure that all dependencies are installed correctly.
+   
+----
+## Beta Test
+1. Feel free to test the app on your iPhone by accessing beta through this link: https://testflight.apple.com/join/SlvYrevG
+2. You can download our beta app from Testflight with the link above.
 
 ----
 ## .gitignore
